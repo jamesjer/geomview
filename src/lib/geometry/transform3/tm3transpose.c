@@ -44,8 +44,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Notes:	
  */
 void
-Tm3Transpose( T, Ttrans )
-    Transform3 T, Ttrans;
+Tm3Transpose( Transform3 T, Transform3 Ttrans )
 {
     int i, j;
     double t;

@@ -1090,7 +1090,7 @@ int ui_sgisnapshot(char *fname, int id, DView *dv, WnWindow *wn, WnPosition *wp)
 {
   int pid, wpid, unset;
   char x0[12], x1[12], y0[12], y1[12];
-  void (*oldchld)();
+  void (*oldchld)(int);
   int failed = 1;
   int status;
 

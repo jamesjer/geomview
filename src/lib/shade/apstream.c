@@ -41,6 +41,7 @@ HandleOps AppearanceOps = {
   (void ((*)(Ref *rp)))ApDelete,
   NULL,
   NULL,
+  {NULL, NULL}, {NULL, NULL}
 };
 
 static struct {

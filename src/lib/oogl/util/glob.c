@@ -71,7 +71,7 @@ char **ooglglob(char *s)
   char *c;
 #ifdef SIGCHLD
 	/* Avoid NeXT pclose() bug: don't catch subprocess' SIGCHLD */
-  void (*oldsigchld)() = signal(SIGCHLD, SIG_DFL);
+  void (*oldsigchld)(int) = signal(SIGCHLD, SIG_DFL);
 #endif
 
   sprintf(cmd, GLOB_SHELL"\"echo %s\" 2>&1", s);
@@ -96,8 +96,7 @@ char **ooglglob(char *s)
 }
 
 void
-ooglblkfree(av0)
-     char **av0;
+ooglblkfree(char **av0)
 {
   char **av = av0;
   while (*av)

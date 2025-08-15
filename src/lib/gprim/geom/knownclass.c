@@ -153,8 +153,7 @@ GeomKnownClassInit()
  * centralized table, but there's no mechanism for that yet.
  */
 GeomClass *
-GeomFName2Class(str)
-	char *str;
+GeomFName2Class(char *str)
 {
 	char *p;
 	struct knownclass *k;

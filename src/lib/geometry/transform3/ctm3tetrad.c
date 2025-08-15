@@ -49,9 +49,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  *		  columns x, y, z, w.
  */
 void
-Ctm3Tetrad( T, x, y, z, w )
-    Transform3 T;
-    HPoint3 *x, *y, *z, *w;
+Ctm3Tetrad( Transform3 T, HPoint3 *x, HPoint3 *y, HPoint3 *z, HPoint3 *w )
 {
     Transform3 Ta;
 

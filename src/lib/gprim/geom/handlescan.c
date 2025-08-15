@@ -34,7 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "geomclass.h"
 
 void
-GeomHandleScan(Geom *g, int (*func)(), void *arg)
+GeomHandleScan(Geom *g, int (*func)(Handle **, Geom *, void *), void *arg)
 {
     if(g == NULL)
 	return;

@@ -34,9 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "meshP.h"
 
 Mesh *
-MeshDice(m, proc)
-    Mesh           *m;
-    int             (*proc) ();
+MeshDice(Mesh *m, int (*proc)(float, float, HPoint3 *, Point3 *))
 {
 	int             u, v;
 	int             nu, nv;

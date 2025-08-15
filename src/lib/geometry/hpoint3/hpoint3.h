@@ -96,7 +96,7 @@ static inline void HPt3R31Normalize(HPoint3 *a);
 static inline void HPt3R30Normalize(HPoint3 *a);
 static inline void HPt3SpaceNormalize(HPoint3 *a, int space);
 static inline HPt3Coord HPt3HypDistance(HPoint3 *a, HPoint3 *b);
-static inline HPt3Coord HPt3Distance(HPoint3 *a, HPoint3 *b);
+static inline HPt3Coord HPt3Distance(const HPoint3 *a, const HPoint3 *b);
 static inline HPt3Coord HPt3SphDistance(HPoint3 *a, HPoint3 *b);
 static inline HPt3Coord HPt3SpaceDistance(HPoint3 *a, HPoint3 *b, int space);
 static inline void HPt3Sub(HPoint3 *a, HPoint3 *b, HPoint3 *aminusb);
@@ -548,7 +548,7 @@ HPt3HypDistance(HPoint3 *a, HPoint3 *b)
 }
 
 static inline HPt3Coord
-HPt3Distance(HPoint3 *a, HPoint3 *b)
+HPt3Distance(const HPoint3 *a, const HPoint3 *b)
 {
   float dx, dy, dz;
   float w1w2;

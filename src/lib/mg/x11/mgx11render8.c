@@ -49,7 +49,7 @@ extern int colorlevels;
 extern int mgx11divN[256];
 extern int mgx11modN[256];
 extern int mgx11magic[16][16];
-extern unsigned long mgx11colors[216];
+extern unsigned long mgx11colors[217];
 extern int mgx11multab[256];
 
 #define DMAP(v,x,y)  (mgx11modN[v]>mgx11magic[x][y] ? mgx11divN[v] + 1 : mgx11divN[v])

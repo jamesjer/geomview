@@ -53,6 +53,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #endif
 
 #include <signal.h>
+#include <stdlib.h>
 
 /* xgv main - global variables */
 /*****************************************************************************/
@@ -117,7 +118,6 @@ int main(int argc, char **argv)
 
 void env_init()
 {
-  extern char *getenv();
   extern void set_load_path(char **);
   extern void set_emodule_path(char **);
 #define MAXDIRS 100

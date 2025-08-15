@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "color.h"
 
 void
-MergeOver( f, b, t )
-    ColorA *f, *b, *t;
+MergeOver( ColorA *f, ColorA *b, ColorA *t )
 {
     float a = 1.0 - f->a;
 
@@ -46,9 +45,7 @@ MergeOver( f, b, t )
 }
 
 void
-MergeOverN( f, b, t, n )
-    ColorA *f, *b, *t;
-    int n;
+MergeOverN( ColorA *f, ColorA *b, ColorA *t, int n )
 {
     float a;
     

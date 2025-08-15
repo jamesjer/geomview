@@ -39,8 +39,7 @@ static int maxstack = 0;
 static Transform3 stack[MAXSTACK];
 
 void
-Tm3Push( T )
-    Transform3 T;
+Tm3Push( Transform3 T )
 {
     if( maxstack < MAXSTACK )
         Tm3Copy( T, stack[maxstack++] );
@@ -49,8 +48,7 @@ Tm3Push( T )
 }
 
 void
-Tm3Pop( T )
-    Transform3 T;
+Tm3Pop( Transform3 T )
 {
     if( maxstack > 0 ) 
         Tm3Copy( stack[--maxstack], T );

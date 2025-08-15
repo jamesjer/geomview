@@ -106,10 +106,10 @@ mgopengl_polygon(int nv,  HPoint3 *V,
     glEnable(GL_COLOR_MATERIAL);
     glBegin(GL_POLYGON);
     if (nc <= 1) {
-      D4F(&(_mgc->astk->ap.mat->diffuse));
+      D4F(&(_mgc->astk->ap.mat->diffuse.r));
     }
     for (n = N, c = C, v = V, i = 0; i < nv; ++i, ++v) {
-      if (nc-- > 0) { D4F(c); c++; }
+      if (nc-- > 0) { D4F(&c->r); c++; }
       if (nn-- > 0) { N3F(n, v); n++; }
       glVertex4fv((float *)v);
     }
@@ -196,10 +196,10 @@ mgopengl_quads(int count, HPoint3 *V, Point3 *N, ColorA *C, int qflags)
 	  }
 	  glBegin(GL_QUADS);
 	  if (n) {
-	    QUAD( (D4F(c++), N3F(n++,v), glVertex4fv((float*)v++)) );
+	    QUAD( (D4F(&(c++)->r), N3F(n++,v), glVertex4fv((float*)v++)) );
 	  } else {
 	    /* Colors, no normals */
-	    QUAD( (D4F(c++), glVertex4fv((float*)v++)) );
+	    QUAD( (D4F(&(c++)->r), glVertex4fv((float*)v++)) );
 	  }
 	  glEnd();
 	} while(--i > 0);
@@ -207,12 +207,12 @@ mgopengl_quads(int count, HPoint3 *V, Point3 *N, ColorA *C, int qflags)
 	glBegin(GL_QUADS);
 	if (n) {
 	  do {
-	    QUAD( (D4F(c++), N3F(n++,v), glVertex4fv((float*)v++)) );
+	    QUAD( (D4F(&(c++)->r), N3F(n++,v), glVertex4fv((float*)v++)) );
 	  } while(--i > 0);
 	} else {
 	  /* Colors, no normals */
 	  do {
-	    QUAD( (D4F(c++), glVertex4fv((float*)v++)) );
+	    QUAD( (D4F(&(c++)->r), glVertex4fv((float*)v++)) );
 	  } while(--i > 0);
 	}
 	glEnd();
@@ -230,12 +230,12 @@ mgopengl_quads(int count, HPoint3 *V, Point3 *N, ColorA *C, int qflags)
       }
       glBegin(GL_QUADS);
       if (n) {
-	D4F(c);
+	D4F(&c->r);
 	do {
 	  QUAD( (N3F(n++, v), glVertex4fv((float*)v++)) );
 	} while(--i > 0);
       } else {
-	D4F(c);
+	D4F(&c->r);
 	do {
 	  QUAD( (glVertex4fv((float*)v++)) );
 	} while(--i > 0);
@@ -382,7 +382,7 @@ struct tess_data
 
 static void tess_vertex_data(Vertex *vp, struct tess_data *data)
 {
-  if (data->plflags & PL_HASVCOL) D4F(&vp->vcol);
+  if (data->plflags & PL_HASVCOL) D4F(&vp->vcol.r);
   if (data->plflags & PL_HASVN) N3F(&vp->vn, &vp->pt);
   if (data->plflags & PL_HASST) glTexCoord2fv((GLfloat *)&vp->st);
   glVertex4fv(&vp->pt.x);
@@ -734,11 +734,11 @@ static void mgopengl_bsptree_recursive(BSPTreeNode *tree,
 
     /* reestablish correct drawing color if necessary*/
     if (!(plflags & (PL_HASPCOL|PL_HASVCOL))) {
-      D4F(&(mat->diffuse));
+      D4F(&(mat->diffuse.r));
     }
 
     if (plflags & PL_HASPCOL) {
-      D4F(&p->pcol);
+      D4F(&p->pcol.r);
     }
     if (plflags & PL_HASPN) {
       N3F(&p->pn, &(*p->v)->pt);
@@ -756,7 +756,7 @@ static void mgopengl_bsptree_recursive(BSPTreeNode *tree,
       break;
     case PL_HASVCOL:
       do {
-	D4F(&(*v)->vcol);
+	D4F(&(*v)->vcol.r);
 	glVertex4fv((float *)&(*v)->pt);
 	v++;
       } while(--j > 0);
@@ -770,7 +770,7 @@ static void mgopengl_bsptree_recursive(BSPTreeNode *tree,
       break;
     case PL_HASVCOL|PL_HASVN:
       do {
-	D4F(&(*v)->vcol);
+	D4F(&(*v)->vcol.r);
 	N3F(&(*v)->vn, &(*v)->pt);
 	glVertex4fv((float *)&(*v)->pt);
 	v++;
@@ -778,7 +778,7 @@ static void mgopengl_bsptree_recursive(BSPTreeNode *tree,
       break;
     default:
       do {
-	if (plflags & PL_HASVCOL) D4F(&(*v)->vcol);
+	if (plflags & PL_HASVCOL) D4F(&(*v)->vcol.r);
 	if (plflags & PL_HASVN) N3F(&(*v)->vn, &(*v)->pt);
 	if (plflags & PL_HASST) glTexCoord2fv((GLfloat *)&(*v)->st);
 	glVertex4fv((float *)&(*v)->pt);
@@ -910,7 +910,7 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
     MAY_LIGHT();
     /* reestablish correct drawing color if necessary*/
     if (!(plflags & (PL_HASPCOL | PL_HASVCOL))) {
-      D4F(&(ma->ap.mat->diffuse));
+      D4F(&(ma->ap.mat->diffuse.r));
     }
     if (!(plflags & COLOR_ALPHA) && stippled) {
       alpha = ma->ap.mat->diffuse.a;
@@ -932,7 +932,7 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
 
     for (p = _p, i = 0; i < np; i++, p++) {
       if (plflags & PL_HASPCOL) {
-	D4F(&p->pcol);
+	D4F(&p->pcol.r);
       }
       if (change_stipple) {
 	glPolygonStipple(mgopengl_get_polygon_stipple(alpha));
@@ -1015,7 +1015,7 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
 	  break;
 	case PL_HASVCOL:
 	  do {
-	    D4F(&(*v)->vcol);
+	    D4F(&(*v)->vcol.r);
 	    glVertex4fv((float *)&(*v)->pt);
 	    v++;
 	  } while(--j > 0);
@@ -1029,7 +1029,7 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
 	  break;
 	case PL_HASVCOL|PL_HASVN:
 	  do {
-	    D4F(&(*v)->vcol);
+	    D4F(&(*v)->vcol.r);
 	    N3F(&(*v)->vn, &(*v)->pt);
 	    glVertex4fv((float *)&(*v)->pt);
 	    v++;
@@ -1037,7 +1037,7 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
 	  break;
 	default:
 	  do {
-	    if (plflags & PL_HASVCOL) D4F(&(*v)->vcol);
+	    if (plflags & PL_HASVCOL) D4F(&(*v)->vcol.r);
 	    if (plflags & PL_HASVN) N3F(&(*v)->vn, &(*v)->pt);
 	    if (plflags & PL_HASST) glTexCoord2fv((GLfloat *)&(*v)->st);
 	    glVertex4fv((float *)&(*v)->pt);
@@ -1091,11 +1091,11 @@ void mgopengl_polylist(int np, Poly *_p, int nv, Vertex *V, int plflags)
     if (nonsurf >= 0) {
       /* reestablish correct drawing color if necessary*/
       if (!(plflags & (PL_HASPCOL | PL_HASVCOL)))
-	D4F(&(ma->ap.mat->diffuse));
+	D4F(&(ma->ap.mat->diffuse.r));
       
       for (p = _p, i = 0; i <= nonsurf; p++, i++) {
 	if (plflags & PL_HASPCOL)
-	  D4F(&p->pcol);
+	  D4F(&p->pcol.r);
 	v = p->v;
 	switch(j = p->n_vertices) {
 	case 1:

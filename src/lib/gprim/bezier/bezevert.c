@@ -39,8 +39,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Next time mesh is computed, its normals will be correct.
  */
 Bezier *
-BezierEvert( bezier )
-Bezier *bezier;
+BezierEvert( Bezier *bezier )
 {
 #ifdef FOO
     int index0, index1, i,j,k;

@@ -37,9 +37,7 @@ an explanation provided by Craig Hodgson of a program written by
 Diane Hoffoss which in turn was based on an algorithm explained to her
 by Bill Thurston.  */
 
-void sl2c_to_proj(s, p)
-sl2c_matrix	s;
-proj_matrix	p;
+void sl2c_to_proj(sl2c_matrix s, proj_matrix p)
 {
 	int			j;		/* which column of p	*/
 	sl2c_matrix	ad_s,	/* s* = adjoint of s	*/
@@ -71,9 +69,7 @@ proj_matrix	p;
 }
 
 
-void proj_to_sl2c(p, s)
-proj_matrix	p;
-sl2c_matrix	s;
+void proj_to_sl2c(proj_matrix p, sl2c_matrix s)
 {
 	double	t2,
 			t3,
@@ -128,10 +124,7 @@ sl2c_matrix	s;
 }
 
 
-void proj_mult(a, b, product)
-proj_matrix	a,
-			b,
-			product;
+void proj_mult(proj_matrix a, proj_matrix b, proj_matrix product)
 {
 	int	i,
 					j,
@@ -155,9 +148,7 @@ proj_matrix	a,
 }
 
 
-void proj_copy(a, b)
-proj_matrix	a,
-			b;
+void proj_copy(proj_matrix a, proj_matrix b)
 {
 	int	i,
 					j;
@@ -173,9 +164,7 @@ proj_matrix	a,
 /* proj_invert() assumes the matrix a is nonsingular, as will always	*/
 /* be the case for matrices representing isometries of H^3.				*/
 
-void proj_invert(m, m_inv)
-proj_matrix	m,
-			m_inv;
+void proj_invert(proj_matrix m, proj_matrix m_inv)
 {
 	int			i, j, k;
 	double		scratch[4][8],

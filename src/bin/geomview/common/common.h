@@ -31,8 +31,8 @@
 #include "lispext.h"
 #include "clang.h"
 
-typedef int (*PFI)();
-typedef void (*PFV)();
+typedef int (*PFI)(void *);
+typedef void (*PFV)(void *);
 
 typedef struct Event {
   int dev;

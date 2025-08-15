@@ -116,12 +116,12 @@ void cui_init()
    * The order of these calls must be the same as the declared integers
    * in ui.h!! 
    */
-  ui_install_mode(OBJROTATE,	minterp_rotate,		T_NONE);
-  ui_install_mode(OBJZOOM,	minterp_zoom, 		T_CAM);
-  ui_install_mode(OBJTRANSLATE,	minterp_translate,	T_NONE);
-  ui_install_mode(OBJFLY,	minterp_fly,		T_CAM);
-  ui_install_mode(OBJORBIT,	minterp_orbit,		T_CAM);
-  ui_install_mode(OBJSCALE,	minterp_scale, 		T_GEOM);
+  ui_install_mode(OBJROTATE,	(PFI)minterp_rotate,		T_NONE);
+  ui_install_mode(OBJZOOM,	(PFI)minterp_zoom, 		T_CAM);
+  ui_install_mode(OBJTRANSLATE,	(PFI)minterp_translate,		T_NONE);
+  ui_install_mode(OBJFLY,	(PFI)minterp_fly,		T_CAM);
+  ui_install_mode(OBJORBIT,	(PFI)minterp_orbit,		T_CAM);
+  ui_install_mode(OBJSCALE,	(PFI)minterp_scale, 		T_GEOM);
   VVINIT(uistate.emod, emodule, 10);
   vvzero(&uistate.emod);
   uistate.savewhat = NOID;

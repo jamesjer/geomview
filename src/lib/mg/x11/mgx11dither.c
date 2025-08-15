@@ -34,13 +34,9 @@
 
 #include <math.h>
 
-#ifdef USE_PROTOTYPES
 void	make_square( double );
-#else
-void	make_square();
-#endif
 
-extern unsigned long mgx11colors[216];
+extern unsigned long mgx11colors[217];
 int mgx11divN[256];
 int mgx11modN[256];
 int mgx11magic[16][16];

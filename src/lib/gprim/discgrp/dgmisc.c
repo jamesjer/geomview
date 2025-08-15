@@ -31,7 +31,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "discgrpP.h"
 
 void
-DiscGrpHandleScan( DiscGrp *dg, int (*func)(), void *arg )
+DiscGrpHandleScan( DiscGrp *dg, int (*func)(Handle **, DiscGrp *, void *), void *arg )
 {
     if(dg == NULL)
 	return;
@@ -44,11 +44,11 @@ DiscGrpHandleScan( DiscGrp *dg, int (*func)(), void *arg )
 	(*func)(&dg->camgeomhandle, dg, arg);
 
     if(dg->geom)
-	GeomHandleScan(dg->geom, func, arg);
+	GeomHandleScan(dg->geom, (int (*)(Handle **, Geom *, void *))func, arg);
     if(dg->ddgeom)
-	GeomHandleScan(dg->ddgeom, func, arg);
+	GeomHandleScan(dg->ddgeom, (int (*)(Handle **, Geom *, void *))func, arg);
     if(dg->camgeom)
-	GeomHandleScan(dg->camgeom, func, arg);
+	GeomHandleScan(dg->camgeom, (int (*)(Handle **, Geom *, void *))func, arg);
 }
 
 

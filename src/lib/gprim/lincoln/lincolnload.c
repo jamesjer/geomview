@@ -89,7 +89,7 @@ LincolnFLoad(IOBFILE *inf)
 
 	new = OOGLNewE(PolyList, "Lincoln");
 	/* should do a PolyListCreate here but time's short...*/
-	GGeomInit(new, PolyListMethods(), PLMAGIC, NULL);
+	GGeomInit((Geom *)new, PolyListMethods(), PLMAGIC, NULL);
 	v_list = new->vl = OOGLNewNE(Vertex, header.nvertices, "Lincoln verts");
 	new->p = OOGLNewNE(Poly, header.nfaces, "Lincoln faces");
 

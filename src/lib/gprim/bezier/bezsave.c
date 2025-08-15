@@ -35,9 +35,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "listP.h"
 
 List *
-BezierListSave(bezierlist, fname)
-    List *bezierlist;
-    char *fname;
+BezierListSave(List *bezierlist, char *fname)
 {
     List *q;
     FILE *f;
@@ -50,9 +48,7 @@ BezierListSave(bezierlist, fname)
 }
 
 List *
-BezierListFSave(bezierlist, f)
-    List *bezierlist;
-    FILE *f;
+BezierListFSave(List *bezierlist, FILE *f)
 {
     List *bl;
     Bezier *bez;

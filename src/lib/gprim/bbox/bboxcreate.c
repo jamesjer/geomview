@@ -100,7 +100,7 @@ int BBoxGet(BBox *bbox, int attr, void *attrp)
 
 BBox *BBoxCreate (BBox *exist, GeomClass *classp, va_list *a_list)
 {
-  HPoint3 min3, max3;
+  HPoint3 min3 = {0.0f, 0.0f, 0.0f, 0.0f}, max3 = {0.0f, 0.0f, 0.0f, 0.0f};
   int min3p = 0, max3p = 0;
   HPointN *minN = NULL, *maxN = NULL;
   int minNp = 0, maxNp = 0;
@@ -109,7 +109,7 @@ BBox *BBoxCreate (BBox *exist, GeomClass *classp, va_list *a_list)
 
   if (exist == NULL) {
     FREELIST_NEW(BBox, bbox);
-    GGeomInit(bbox, classp, BBOXMAGIC, NULL);
+    GGeomInit((Geom *)bbox, classp, BBOXMAGIC, NULL);
     bbox->freelisthead = &BBoxFreeList;
     bbox->min = HPtNCreate(4, NULL);
     bbox->max = HPtNCreate(4, NULL);
@@ -172,7 +172,7 @@ BBox *BBoxCreate (BBox *exist, GeomClass *classp, va_list *a_list)
       maxNp = need_update = 1;
       break;
     default:
-      if (GeomDecorate (bbox, &copy, attr, a_list) && exist == NULL) {
+      if (GeomDecorate ((Geom *)bbox, &copy, attr, a_list) && exist == NULL) {
 	OOGLError(0, "BBoxCreate: Undefined attribute: %d", attr);
 	HPtNDelete(bbox->min);
 	HPtNDelete(bbox->max);

@@ -111,7 +111,7 @@ static void	draw_view(DView *dv);
 static void	really_draw_view(DView *dv);
 static void	reconfigure_view(DView *dv);
 static char *	new_object_name(int type);
-static void	object_changed(Handle **hp, DObject *obj, void *seqno);
+static void	object_changed(Handle **hp, Ref *obj, void *seqno);
 static int	object_register(Handle **hp, Ref *ignored, DObject *obj);
 static void	update_dgeom(DGeom *);
 static void	update_view(DView *);
@@ -3026,11 +3026,12 @@ new_object_name(int type)
 */
 
 static void
-object_changed(Handle **hp, DObject *obj, void *seqno)
+object_changed(Handle **hp, Ref *parent, void *seqno)
 {
+  DObject *obj = (DObject *)parent;
   if(obj->seqno != (long)seqno) {
     /* Obsolete reference -- remove this Handle callback */
-    HandleUnregisterJust(hp, (Ref*)obj, seqno, object_changed);
+    HandleUnregisterJust(hp, parent, seqno, object_changed);
   } else {
     obj->changed = CH_GEOMETRY;
   }
@@ -3061,7 +3062,7 @@ update_dgeom(DGeom *dg)
     /*
      * Find all Handles in this DGeom, and a callback for each.
      */
-    GeomHandleScan(dg->Item, object_register, dg);
+    GeomHandleScan(dg->Item, (int (*)(Handle **, Geom *, void *))object_register, dg);
   }
   if(dg->bboxdraw || dg->normalization != NONE) {
     drawer_make_bbox(dg, dg->normalization == ALL);
@@ -3077,8 +3078,8 @@ update_view(DView *v)
 {
   v->seqno++;
   if(v->Item != drawerstate.universe)
-    GeomHandleScan(v->Item, object_register, v);
-  CamHandleScan(v->cam, object_register, v);
+    GeomHandleScan(v->Item, (int (*)(Handle **, Geom *, void *))object_register, v);
+  CamHandleScan(v->cam, (int (*)(Handle **, Camera *, void *))object_register, v);
 }
 
 static void

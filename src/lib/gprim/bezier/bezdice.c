@@ -37,7 +37,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "bezierP.h"
 #include "bsptreeP.h"
 
-void bezier_interp();
+void bezier_interp(float *in, float *out, int deg, int n, int dimn);
 
 Bezier *
 BezierDice(Bezier *bezier, int nu, int nv)

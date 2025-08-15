@@ -43,9 +43,9 @@ extern Pixmap   geomicon;
 /*****************************************************************************/
 
 static void revert_appearance(Widget, XtPointer, XmAnyCallbackStruct *);
-void ap_toggle(Widget, XtPointer, XmToggleButtonCallbackStruct *);
+void ap_toggle(Widget, XtPointer, XmAnyCallbackStruct *);
 static void ap_color(Widget, XtPointer, XmAnyCallbackStruct *);
-static void list_callbacks(Widget, XtPointer, XmListCallbackStruct *);
+static void list_callbacks(Widget, XtPointer, XmAnyCallbackStruct *);
 static void text_callbacks(Widget, XtPointer, XmAnyCallbackStruct *);
 static Widget NormalList,
   ShadeList,
@@ -76,7 +76,7 @@ static struct awid {
   enum what { TOG, BTN, TXT, LST } type; 
   char *name;
   Widget *widp;
-  void (*callback)();
+  void (*callback)(Widget, XtPointer, XmAnyCallbackStruct *);
   XtPointer cbdata;
 } awidgets[] = {
   {BTN, "HideButton", NULL, ui_hide, AppearancE },
@@ -180,8 +180,9 @@ static void ap_color(Widget w, XtPointer data, XmAnyCallbackStruct *cbs)
 /*****************************************************************************/
 
 void ap_toggle(Widget w, XtPointer data,
-	       XmToggleButtonCallbackStruct *cbs)
+	       XmAnyCallbackStruct *cb)
 {
+  XmToggleButtonCallbackStruct *cbs = (XmToggleButtonCallbackStruct *)cb;
   drawer_int(GEOMID(uistate.targetgeom), (DrawerKeyword)(long)data, cbs->set);
 }
 
@@ -250,8 +251,9 @@ void ui_target_appearancepanel(int id)
 
 /*****************************************************************************/
 
-static void list_callbacks(Widget w, XtPointer data, XmListCallbackStruct *cbs)
+static void list_callbacks(Widget w, XtPointer data, XmAnyCallbackStruct *cb)
 {
+  XmListCallbackStruct *cbs = (XmListCallbackStruct *)cb;
   DrawerKeyword val = (DrawerKeyword)(long)data;
   int offset = 0;
 

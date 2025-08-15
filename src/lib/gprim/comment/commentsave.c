@@ -66,9 +66,7 @@ Comment *CommentFSave(Comment *comment, FILE *file, char *fname)
 }
 
 Comment *
-CommentSave( comment, name )
-    Comment *comment;
-    char *name;
+CommentSave( Comment *comment, char *name )
 {
     FILE *file;
 

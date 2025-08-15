@@ -271,7 +271,7 @@ LDEFINE(shell, LVOID,
 {
   char *cmd;
   int status;
-  void (*oldsigchld)();
+  void (*oldsigchld)(int);
   LDECLARE(("shell", LBEGIN,
 	    LSTRINGS, &cmd,
 	    LEND));

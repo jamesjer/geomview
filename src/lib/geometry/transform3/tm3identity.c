@@ -51,8 +51,7 @@ Transform3 TM3_IDENTITY = {
  *       ( 0 0 0 1 )
  */
 void
-Tm3Identity( T )
-    Transform3 T;
+Tm3Identity( Transform3 T )
 {
     Tm3Copy( TM3_IDENTITY, T );
 }

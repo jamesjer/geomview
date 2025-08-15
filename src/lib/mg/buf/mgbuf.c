@@ -65,11 +65,14 @@ static unsigned char *createRGB( void );
 /* probably not here */
 int         mgdevice_BUF();
 
-extern void mgbuf_polygon();
-extern void mgbuf_mesh();
-extern void mgbuf_line();
-extern void mgbuf_polyline();
-extern void mgbuf_polylist();
+struct Poly;
+struct Vertex;
+
+extern void mgbuf_polygon(int nv, HPoint3 *V, int nn, Point3 *N, int nc, ColorA *C);
+extern void mgbuf_mesh(int wrap, int nu, int nv, HPoint3 *p, Point3 *n, Point3 *nq, ColorA *c, TxST *ST, int mflags);
+extern void mgbuf_line(HPoint3 *p1, HPoint3 *p2);
+extern void mgbuf_polyline(int nv, HPoint3 *v, int nc, ColorA *c, int wrapped);
+extern void mgbuf_polylist(int np, struct Poly *_p, int nv, struct Vertex *V, int pl_flags);
 extern void mgbuf_quads();
 
 int _mgbuf_ctxset(int a1, va_list *alist);
@@ -80,9 +83,9 @@ struct mgfuncs mgbuffuncs = {
   MGD_BUF,
   mgdevice_BUF,
   mgbuf_feature,
-  (mgcontext *(*)())mgbuf_ctxcreate,
+  mgbuf_ctxcreate,
   mgbuf_ctxdelete,
-  (int (*)())mgbuf_ctxset,
+  mgbuf_ctxset,
   mgbuf_ctxget,
   mgbuf_ctxselect,
   mgbuf_sync,

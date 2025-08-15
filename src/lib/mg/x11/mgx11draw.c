@@ -39,7 +39,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 void	mgx11_polygon( int nv, HPoint3 *v, int nn, Point3 *n,
 	      	          int nc, ColorA *c );
 void	mgx11_mesh(int wrap, int nu, int nv, HPoint3 *p, Point3 *n, Point3 *nq,
-		   ColorA *c );
+		   ColorA *c, TxST *ST, int mflags );
 void	mgx11_line( HPoint3 *p1, HPoint3 *p2 );
 void	mgx11_polyline( int nv, HPoint3 *verts, int nc, ColorA *colors,
 			int wrap );
@@ -673,7 +673,7 @@ void mgx11submesh(int wrap, int nu, int nv, int umin, int umax, int vmin,
  *
  */
 void mgx11_mesh(int wrap, int nu, int nv, HPoint3 *P, Point3 *N, Point3 *NQ,
-		ColorA *C )
+		ColorA *C, TxST *ST, int mflags)
 {
   mgx11submesh( wrap, nu, nv, 0, nu-1, 0, nv-1, P, N, C);
 }

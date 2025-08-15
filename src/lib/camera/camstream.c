@@ -38,11 +38,12 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 
 HandleOps CamOps = {
   "cam",
-  (int ((*)()))CamStreamIn,
-  (int ((*)()))CamStreamOut,
-  (void ((*)()))CamDelete,
+  (int ((*)(Pool *, Handle **, Ref **)))CamStreamIn,
+  (int ((*)(Pool *, Handle *, Ref *)))CamStreamOut,
+  (void ((*)(Ref *)))CamDelete,
   NULL,		/* Resync */
-  NULL		/* close pool */
+  NULL,		/* close pool */
+  {NULL, NULL}, {NULL, NULL}
 };
 
 
@@ -369,7 +370,7 @@ CamStreamOut(Pool *p, Handle *h, Camera *cam)
 }
  
 void
-CamHandleScan( Camera *cam, int (*func)(), void *arg )
+CamHandleScan( Camera *cam, int (*func)(Handle **, Camera *, void *), void *arg )
 {
   if (cam) {
     if (cam->c2whandle)
@@ -379,9 +380,10 @@ CamHandleScan( Camera *cam, int (*func)(), void *arg )
   }
 }
 
-void CamTransUpdate(Handle **hp, Camera *cam, Transform T)
+void CamTransUpdate(Handle **hp, Ref *parent, void *T)
 {
-  TransUpdate(hp, (Ref *)cam, T);
+  Camera *cam = (Camera *)parent;
+  TransUpdate(hp, parent, T);
 
   if (hp == &cam->c2whandle) {
     TmInvert(cam->camtoworld, cam->worldtocam);

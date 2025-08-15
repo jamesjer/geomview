@@ -105,8 +105,7 @@ Tm3Adjoint(Transform3 T, Transform3 Tadj)
  */
 static
 float
-determinant( T, Tadj )
-    Transform3 T, Tadj;
+determinant( Transform3 T, Transform3 Tadj )
 {
     return T[0][0]*Tadj[0][0] 
         + T[0][1]*Tadj[1][0] 

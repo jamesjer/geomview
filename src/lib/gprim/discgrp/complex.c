@@ -35,8 +35,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 complex one		= {1.0, 0.0};
 complex zero	= {0.0, 0.0};
 
-complex cplx_plus(z0, z1)
-complex z0, z1;
+complex cplx_plus(complex z0, complex z1)
 {
 	complex sum;
 	
@@ -46,8 +45,7 @@ complex z0, z1;
 }
 
 
-complex cplx_minus(z0, z1)
-complex z0, z1;
+complex cplx_minus(complex z0, complex z1)
 {
 	complex diff;
 	
@@ -57,8 +55,7 @@ complex z0, z1;
 }
 
 
-complex cplx_div(z0, z1)
-complex z0, z1;
+complex cplx_div(complex z0, complex z1)
 {
 	double	mod_sq;
 	complex	quotient;
@@ -70,8 +67,7 @@ complex z0, z1;
 }
 
 
-complex cplx_mult(z0, z1)
-complex z0, z1;
+complex cplx_mult(complex z0, complex z1)
 {
 	complex product;
 
@@ -81,15 +77,13 @@ complex z0, z1;
 }
 
 
-double modulus(z0)
-complex z0;
+double modulus(complex z0)
 {
 	return( sqrt(z0.real * z0.real  +  z0.imag * z0.imag) );
 }
 
 
-complex cplx_sqrt(z)
-complex z;
+complex cplx_sqrt(complex z)
 {
 	double	mod,
 			arg;
@@ -106,10 +100,7 @@ complex z;
 
 
 
-void sl2c_mult(a, b, product)
-sl2c_matrix	a,
-			b,
-			product;
+void sl2c_mult(sl2c_matrix a, sl2c_matrix b, sl2c_matrix product)
 {
 	sl2c_matrix	temp;
 
@@ -125,9 +116,7 @@ sl2c_matrix	a,
 }
 
 
-void sl2c_copy(a, b)
-sl2c_matrix	a,
-			b;
+void sl2c_copy(sl2c_matrix a, sl2c_matrix b)
 {
 	a[0][0] = b[0][0];
 	a[0][1] = b[0][1];
@@ -138,8 +127,7 @@ sl2c_matrix	a,
 
 
 /* normalizes a matrix to have determinant one */
-void sl2c_normalize(a)
-sl2c_matrix a;
+void sl2c_normalize(sl2c_matrix a)
 {
 	complex det,
 			factor;
@@ -180,9 +168,7 @@ sl2c_matrix a;
 
 
 /* inverts a matrix;  assumes determinant is already one */
-void sl2c_invert(a, a_inv)
-sl2c_matrix a,
-			a_inv;
+void sl2c_invert(sl2c_matrix a, sl2c_matrix a_inv)
 {
 	complex	temp;
 
@@ -203,8 +189,7 @@ sl2c_matrix a,
 /* computes the square of the norm of a matrix */
 /* relies on the assumption that the sl2c matrix is stored in memory as 8 consecutive doubles */
 /* IS THIS RELIABLE? */
-double sl2c_norm_squared(a)
-sl2c_matrix a;
+double sl2c_norm_squared(sl2c_matrix a)
 {
 	int	i;
 	double	*p;
@@ -220,9 +205,7 @@ sl2c_matrix a;
 }
 
 
-void sl2c_adjoint(a, ad_a)
-sl2c_matrix	a,
-			ad_a;
+void sl2c_adjoint(sl2c_matrix a, sl2c_matrix ad_a)
 {
 	complex	temp;
 

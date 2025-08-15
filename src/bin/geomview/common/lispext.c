@@ -95,21 +95,24 @@ static CameraStruct *camcopy(CameraStruct *old)
   return newc;
 }
 
-static bool camfromobj(LObject *obj, CameraStruct **x)
+static bool camfromobj(LObject *obj, void *cam)
 {
+  CameraStruct **x = (CameraStruct **)cam;
   if (obj->type != LCAMERA) return 0;
   *x = LCAMERAVAL(obj);
   return 1;
 }
 
-static LObject *cam2obj(CameraStruct **x)
+static LObject *cam2obj(void *cam)
 {
+  CameraStruct **x = (CameraStruct **)cam;
   CameraStruct *copy = camcopy(*x);
   return LNew( LCAMERA, &copy );
 }
 
-static void camfree(CameraStruct **x)
+static void camfree(void *cam)
 {
+  CameraStruct **x = (CameraStruct **)cam;
   if (*x) {
     if ((*x)->cam) CamDelete( (*x)->cam );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -117,20 +120,24 @@ static void camfree(CameraStruct **x)
   }
 }
 
-static bool cammatch(CameraStruct **a, CameraStruct **b)
+static bool cammatch(void *cam1, void *cam2)
 { 
+  CameraStruct **a = (CameraStruct **)cam1;
+  CameraStruct **b = (CameraStruct **)cam2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->cam && ((*a)->cam == (*b)->cam)) return 1;
   return 0;
 }
 
-static void camwrite(FILE *fp, CameraStruct **x)
+static void camwrite(FILE *fp, void *cam)
 {
+  CameraStruct **x = (CameraStruct **)cam;
   CamFSave( (*x)->cam, fp, "lisp output stream" );
 }
 
-static void campull(va_list *a_list, CameraStruct **x)
+static void campull(va_list *a_list, void *cam)
 {
+  CameraStruct **x = (CameraStruct **)cam;
   *x = va_arg(*a_list, CameraStruct*);
 }
 
@@ -182,21 +189,24 @@ static WindowStruct *wncopy(WindowStruct *old)
   return neww;
 }
 
-static bool wnfromobj(LObject *obj, WindowStruct **x)
+static bool wnfromobj(LObject *obj, void *win)
 {
+  WindowStruct **x = (WindowStruct **)win;
   if (obj->type != LWINDOW) return 0;
   *x = LWINDOWVAL(obj);
   return 1;
 }
 
-static LObject *wn2obj(WindowStruct **x)
+static LObject *wn2obj(void *win)
 {
+  WindowStruct **x = (WindowStruct **)win;
   WindowStruct *copy = wncopy(*x);
   return LNew( LWINDOW, &copy );
 }
 
-static void wnfree(WindowStruct **x)
+static void wnfree(void *win)
 {
+  WindowStruct **x = (WindowStruct **)win;
   if (*x) {
     if ((*x)->wn) WnDelete( (*x)->wn );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -204,15 +214,18 @@ static void wnfree(WindowStruct **x)
   }
 }
 
-static bool wnmatch(WindowStruct **a, WindowStruct **b)
+static bool wnmatch(void *win1, void *win2)
 { 
+  WindowStruct **a = (WindowStruct **)win1;
+  WindowStruct **b = (WindowStruct **)win2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->wn && ((*a)->wn == (*b)->wn)) return 1;
   return 0;
 }
 
-static void wnwrite(FILE *fp, WindowStruct * *x)
+static void wnwrite(FILE *fp, void *win)
 {
+  WindowStruct **x = (WindowStruct **)win;
   Pool *p = PoolStreamTemp("", NULL, fp, 1, &WindowOps);
   if(p == NULL)
     return;
@@ -220,8 +233,9 @@ static void wnwrite(FILE *fp, WindowStruct * *x)
   PoolDelete(p);
 }
 
-static void wnpull(va_list *a_list, WindowStruct **x)
+static void wnpull(va_list *a_list, void *win)
 {
+  WindowStruct **x = (WindowStruct **)win;
   *x = va_arg(*a_list, WindowStruct*);
 }
 
@@ -272,21 +286,24 @@ static GeomStruct *geomcopy(GeomStruct *old)
   return newg;
 }
 
-static bool geomfromobj(LObject *obj, GeomStruct **x)
+static bool geomfromobj(LObject *obj, void *geom)
 {
+  GeomStruct **x = (GeomStruct **)geom;
   if (obj->type != LGEOM) return 0;
   *x = LGEOMVAL(obj);
   return 1;
 }
 
-static LObject *geom2obj(GeomStruct **x)
+static LObject *geom2obj(void *geom)
 {
+  GeomStruct **x = (GeomStruct **)geom;
   GeomStruct *copy = geomcopy(*x);
   return LNew( LGEOM, &copy );
 }
 
-static void geomfree(GeomStruct **x)
+static void geomfree(void *geom)
 {
+  GeomStruct **x = (GeomStruct **)geom;
   if (*x) {
     if ((*x)->geom) GeomDelete( (*x)->geom );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -294,20 +311,24 @@ static void geomfree(GeomStruct **x)
   }
 }
 
-static bool geommatch(GeomStruct **a, GeomStruct **b)
+static bool geommatch(void *geom1, void *geom2)
 { 
+  GeomStruct **a = (GeomStruct **)geom1;
+  GeomStruct **b = (GeomStruct **)geom2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->geom && ((*a)->geom == (*b)->geom)) return 1;
   return 0;
 }
 
-static void geomwrite(FILE *fp, GeomStruct **x)
+static void geomwrite(FILE *fp, void *geom)
 {
+  GeomStruct **x = (GeomStruct **)geom;
   GeomFSave( (*x)->geom, fp, "lisp output stream" );
 }
 
-static void geompull(va_list *a_list, GeomStruct **x)
+static void geompull(va_list *a_list, void *geom)
 {
+  GeomStruct **x = (GeomStruct **)geom;
   *x = va_arg(*a_list, GeomStruct*);
 }
 
@@ -359,21 +380,24 @@ static ApStruct *apcopy(ApStruct *old)
   return newap;
 }
 
-static bool apfromobj(LObject *obj, ApStruct **x)
+static bool apfromobj(LObject *obj, void *ap)
 {
+  ApStruct **x = (ApStruct **)ap;
   if (obj->type != LAP) return 0;
   *x = LAPVAL(obj);
   return 1;
 }
 
-static LObject *ap2obj(ApStruct **x)
+static LObject *ap2obj(void *ap)
 {
+  ApStruct **x = (ApStruct **)ap;
   ApStruct *copy = apcopy(*x);
   return LNew( LAP, &copy );
 }
 
-static void apfree(ApStruct **x)
+static void apfree(void *ap)
 {
+  ApStruct **x = (ApStruct **)ap;
   if (*x) {
     if ((*x)->ap) ApDelete( (*x)->ap );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -381,20 +405,24 @@ static void apfree(ApStruct **x)
   }
 }
 
-static bool apmatch(ApStruct **a, ApStruct **b)
+static bool apmatch(void *ap1, void *ap2)
 { 
+  ApStruct **a = (ApStruct **)ap1;
+  ApStruct **b = (ApStruct **)ap2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->ap && ((*a)->ap == (*b)->ap)) return 1;
   return 0;
 }
 
-static void apwrite(FILE *fp, ApStruct * *x)
+static void apwrite(FILE *fp, void *ap)
 {
+  ApStruct **x = (ApStruct **)ap;
   ApFSave((*x)->ap, fp, "lisp output stream");
 }
 
-static void appull(va_list *a_list, ApStruct **x)
+static void appull(va_list *a_list, void *ap)
 {
+  ApStruct **x = (ApStruct **)ap;
   *x = va_arg(*a_list, ApStruct*);
 }
 
@@ -445,41 +473,48 @@ static TransformStruct *tmcopy(TransformStruct *old)
   return newt;
 }
 
-static bool tmfromobj(LObject *obj, TransformStruct **x)
+static bool tmfromobj(LObject *obj, void *transform)
 {
+  TransformStruct **x = (TransformStruct **)transform;
   if (obj->type != LTRANSFORM) return 0;
   *x = LTRANSFORMVAL(obj);
   return 1;
 }
 
-static LObject *tm2obj(TransformStruct **x)
+static LObject *tm2obj(void *transform)
 {
+  TransformStruct **x = (TransformStruct **)transform;
   TransformStruct *copy = tmcopy(*x);
   return LNew(LTRANSFORM, &copy);
 }
 
-static void tmfree(TransformStruct **x)
+static void tmfree(void *transform)
 {
+  TransformStruct **x = (TransformStruct **)transform;
   if (*x) {
     if ((*x)->h) HandleDelete((*x)->h);
     FREELIST_FREE(TransformStruct, *x);
   }
 }
 
-static bool tmmatch(TransformStruct **a, TransformStruct **b)
+static bool tmmatch(void *transform1, void *transform2)
 { 
+  TransformStruct **a = (TransformStruct **)transform1;
+  TransformStruct **b = (TransformStruct **)transform2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->tm && ((*a)->tm == (*b)->tm)) return 1;
   return TmCompare((*a)->tm, (*b)->tm, (float)0.0);
 }
 
-static void tmwrite(FILE *fp, TransformStruct **x)
+static void tmwrite(FILE *fp, void *transform)
 {
+  TransformStruct **x = (TransformStruct **)transform;
   TransFSave((*x)->tm, fp, "lisp output stream");
 }
 
-static void tmpull(va_list *a_list, TransformStruct **x)
+static void tmpull(va_list *a_list, void *transform)
 {
+  TransformStruct **x = (TransformStruct **)transform;
   *x = va_arg(*a_list, TransformStruct*);
 }
 
@@ -530,21 +565,24 @@ static TmNStruct *tmncopy(TmNStruct *old)
   return newt;
 }
 
-static bool tmnfromobj(LObject *obj, TmNStruct **x)
+static bool tmnfromobj(LObject *obj, void *tmn)
 {
+  TmNStruct **x = (TmNStruct **)tmn;
   if (obj->type != LTRANSFORMN) return 0;
   *x = LTRANSFORMNVAL(obj);
   return 1;
 }
 
-static LObject *tmn2obj( TmNStruct **x )
+static LObject *tmn2obj( void *tmn )
 {
+  TmNStruct **x = (TmNStruct **)tmn;
   TmNStruct *copy = tmncopy(*x);
   return LNew( LTRANSFORMN, &copy );
 }
 
-static void tmnfree(TmNStruct **x)
+static void tmnfree(void *tmn)
 {
+  TmNStruct **x = (TmNStruct **)tmn;
   if (*x) {
     if ((*x)->tm) TmNDelete( (*x)->tm );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -552,20 +590,24 @@ static void tmnfree(TmNStruct **x)
   }
 }
 
-static bool tmnmatch(TmNStruct **a, TmNStruct **b)
+static bool tmnmatch(void *tmn1, void *tmn2)
 { 
+  TmNStruct **a = (TmNStruct **)tmn1;
+  TmNStruct **b = (TmNStruct **)tmn2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return 1;
   if ((*a)->tm && ((*a)->tm == (*b)->tm)) return 1;
   return 0;
 }
 
-static void tmnwrite(FILE *fp, TmNStruct **x)
+static void tmnwrite(FILE *fp, void *tmn)
 {
+  TmNStruct **x = (TmNStruct **)tmn;
   TmNPrint( fp, (*x)->tm );
 }
 
-static void tmnpull(va_list *a_list, TmNStruct **x)
+static void tmnpull(va_list *a_list, void *tmn)
 {
+  TmNStruct **x = (TmNStruct **)tmn;
   *x = va_arg(*a_list, TmNStruct*);
 }
 
@@ -619,21 +661,24 @@ static ImgStruct *imgcopy(ImgStruct *old)
   return newi;
 }
 
-static bool imgfromobj(LObject *obj, ImgStruct **x)
+static bool imgfromobj(LObject *obj, void *img)
 {
+  ImgStruct **x = (ImgStruct **)img;
   if (obj->type != LIMAGE) return 0;
   *x = LIMAGEVAL(obj);
   return 1;
 }
 
-static LObject *img2obj( ImgStruct **x )
+static LObject *img2obj( void *img )
 {
+  ImgStruct **x = (ImgStruct **)img;
   ImgStruct *copy = imgcopy(*x);
   return LNew( LIMAGE, &copy );
 }
 
-static void imgfree(ImgStruct **x)
+static void imgfree(void *img)
 {
+  ImgStruct **x = (ImgStruct **)img;
   if (*x) {
     if ((*x)->img) ImgDelete( (*x)->img );
     if ((*x)->h) HandleDelete( (*x)->h );
@@ -641,20 +686,24 @@ static void imgfree(ImgStruct **x)
   }
 }
 
-static bool imgmatch(ImgStruct **a, ImgStruct **b)
+static bool imgmatch(void *img1, void *img2)
 { 
+  ImgStruct **a = (ImgStruct **)img1;
+  ImgStruct **b = (ImgStruct **)img2;
   if ((*a)->h && ((*a)->h == (*b)->h)) return true;
   if ((*a)->img && ((*a)->img == (*b)->img)) return true;
   return false;
 }
 
-static void imgwrite(FILE *fp, ImgStruct **x)
+static void imgwrite(FILE *fp, void *img)
 {
+  ImgStruct **x = (ImgStruct **)img;
   ImgFSave((*x)->img, fp, "lisp output stream");
 }
 
-static void imgpull(va_list *a_list, ImgStruct **x)
+static void imgpull(va_list *a_list, void *img)
 {
+  ImgStruct **x = (ImgStruct **)img;
   *x = va_arg(*a_list, ImgStruct*);
 }
 
@@ -695,10 +744,11 @@ LType LImagep = {
  * ID LISP OBJECT							*
  ************************************************************************/
 
-static bool idfromobj(LObject *obj, int *x)
+static bool idfromobj(LObject *obj, void *i)
 {
   char *tmp;
   
+  int *x = (int *)i;
   if (LSTRINGFROMOBJ(obj, &tmp)) {
     *x = drawer_idbyname(tmp);
     if (*x == NOID) return 0;
@@ -708,21 +758,25 @@ static bool idfromobj(LObject *obj, int *x)
   return 1;
 }
 
-static LObject *id2obj(int *x)
+static LObject *id2obj(void *i)
 {
+  int *x = (int *)i;
   return LNew( LID, x );
 }
 
-static void idfree(int *x)
+static void idfree(void *x)
 {}
 
-static bool idmatch(int *a, int *b)
+static bool idmatch(void *i, void *j)
 {
+  int *a = (int *)i;
+  int *b = (int *)j;
   return drawer_idmatch(*a,*b);
 }
 
-static void idwrite(FILE *fp, int *x)
+static void idwrite(FILE *fp, void *i)
 {
+  int *x = (int *)i;
   fprintf(fp, "\"%s\"", drawer_id2name(*x));
 }
 
@@ -745,10 +799,9 @@ static LObject *idparse(Lake *lake)
 }
 #endif
     
-static void idpull(a_list, x)
-    va_list *a_list;
-    int *x;
+static void idpull(va_list *a_list, void *i)
 {
+  int *x = (int *)i;
   *x = va_arg(*a_list, int);
 }
 
@@ -770,10 +823,11 @@ LType LIdp = {
  * KEYWORD LISP OBJECT							*
  ************************************************************************/
 
-static bool keywordfromobj(LObject *obj, int *x)
+static bool keywordfromobj(LObject *obj, void *kwd)
 {
   char *tmp;
   
+  int *x = (int *)kwd;
   if (LSTRINGFROMOBJ(obj, &tmp)) {
     *x = (int)(long)fsa_parse(lang_fsa, tmp);
     if (*x == REJECT) {
@@ -787,28 +841,31 @@ static bool keywordfromobj(LObject *obj, int *x)
   return true;
 }
 
-static LObject *keyword2obj(int *x)
+static LObject *keyword2obj(void *kwd)
 {
+  int *x = (int *)kwd;
   return LNew( LKEYWORD, x );
 }
 
-static bool keywordmatch(int *a, int *b)
+static bool keywordmatch(void *kwd1, void *kwd2)
 {
+  int *a = (int *)kwd1;
+  int *b = (int *)kwd2;
   return *a == *b;
 }
 
-static void keywordwrite(FILE *fp, Keyword *x)
+static void keywordwrite(FILE *fp, void *kwd)
 {
+  Keyword *x = (Keyword *)kwd;
   fprintf(fp, "%s", keywordname(*x));
 }
 
 static void keywordfree(void *value)
 {}
 
-static void keywordpull(a_list, x)
-    va_list *a_list;
-    int *x;
+static void keywordpull(va_list *a_list, void *kwd)
 {
+  int *x = (int *)kwd;
   *x = va_arg(*a_list, int);
 }
 
@@ -853,8 +910,9 @@ LType LKeywordp = {
  * paren is found. We now also take care of quoting and embedded parens *
  ************************************************************************/
 
-static bool stringsfromobj(LObject *obj, char * *x)
+static bool stringsfromobj(LObject *obj, void *str)
 {
+  char **x = (char **)str;
   if (LSTRINGFROMOBJ(obj, x)) {
     return true;
   } else if (obj->type == LSTRINGS) {

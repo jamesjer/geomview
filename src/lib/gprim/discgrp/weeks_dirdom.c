@@ -161,13 +161,13 @@ static int metric, debug;
 static WEpolyhedron the_polyhedron;
 
 /* we'd use the geometry library routines here if they were double precision */
-extern double		DHPt3Dot3();
-extern double		DHPt3Dot();
+extern double		DHPt3Dot3(point4 v0, point4 v1, int metric);
+extern double		DHPt3Dot(point4 v0, point4 v1, int metric);
 
 static WEedge edgeheap[1024];
 static int heapcount = 0;
 
-int proj_same_matrix();
+int proj_same_matrix(proj_matrix m0, proj_matrix m1);
 
 void
 do_weeks_code(WEpolyhedron **wepolyhedron, point oo, proj_matrix *gen_list,
@@ -195,8 +195,7 @@ do_weeks_code(WEpolyhedron **wepolyhedron, point oo, proj_matrix *gen_list,
 
 #define MAGIC_SCALE .99
 static void
-slice_off_cusps(poly)
-WEpolyhedron *poly;
+slice_off_cusps(WEpolyhedron *poly)
 {
   WEvertex *vptr, *vlist;
   Transform tlate;
@@ -372,8 +371,7 @@ WEpolyhedron	*polyhedron;
 }
 #endif
 
-static void make_cube(polyhedron)
-WEpolyhedron	*polyhedron;
+static void make_cube(WEpolyhedron *polyhedron)
 {
 	int			i;
 	WEvertex	*initial_vertices[8];
@@ -468,10 +466,7 @@ WEpolyhedron	*polyhedron;
 }
 
 
-static void initialize_polyhedron(polyhedron, proj_generators, num_generators)
-WEpolyhedron	*polyhedron;
-proj_matrix		*proj_generators;
-int				num_generators;
+static void initialize_polyhedron(WEpolyhedron *polyhedron, proj_matrix *proj_generators, int num_generators)
 {
 	int		i;
 	WEface	*face;
@@ -497,9 +492,7 @@ int				num_generators;
 	return;
 }
 
-static int check_face(polyhedron, face)
-WEpolyhedron	*polyhedron;
-WEface			*face;
+static int check_face(WEpolyhedron *polyhedron, WEface *face)
 {
 	/* We want to see whether the image of the matching face	*/
 	/* is entirely contained within the given face.  To do this	*/
@@ -681,8 +674,7 @@ WEface			*face;
 	return(1);
 }
 
-static int find_Dirichlet_domain(polyhedron)
-WEpolyhedron	*polyhedron;
+static int find_Dirichlet_domain(WEpolyhedron *polyhedron)
 {
 	/* By the time this routine is called the faces			*/
 	/* corresponding to the initial generators should all	*/
@@ -732,8 +724,7 @@ WEpolyhedron	*polyhedron;
 
 
 
-static int all_dirty_faces_unmatched(polyhedron)
-WEpolyhedron *polyhedron;
+static int all_dirty_faces_unmatched(WEpolyhedron *polyhedron)
 {
 	WEface	*face;
 	int realdirty = 0;
@@ -762,8 +753,7 @@ WEpolyhedron *polyhedron;
 /* unsophisticated_search() returns 1 if it		*/
 /* manages to add a new face, 0 if it doesn't.	*/					
 
-static int unsophisticated_search(polyhedron)
-WEpolyhedron *polyhedron;
+static int unsophisticated_search(WEpolyhedron *polyhedron)
 {
 	/* This routine serves as a backup for the more efficient	*/
 	/* algorithm which is normally used.  On rare occasions		*/
@@ -795,9 +785,7 @@ WEpolyhedron *polyhedron;
 
 /* add_element() returns 1 if it adds a face, 0 if it doesn't */
 
-static int add_element(polyhedron, m0)
-WEpolyhedron	*polyhedron;
-proj_matrix		m0;
+static int add_element(WEpolyhedron *polyhedron, proj_matrix m0)
 {
 	proj_matrix	m1;
 	WEface		*new_face0,
@@ -840,10 +828,7 @@ proj_matrix		m0;
 
 /* add_face() returns 1 if it adds a face, 0 if it doesn't */
 
-static int add_face(polyhedron, matrix, new_face)
-WEpolyhedron	*polyhedron;
-proj_matrix		matrix;
-WEface			*new_face;
+static int add_face(WEpolyhedron *polyhedron, proj_matrix matrix, WEface *new_face)
 {
 	vector		planne, gorigin;
 	WEvertex	*vertex;
@@ -909,8 +894,7 @@ WEface			*new_face;
 }
 
 
-static void cut_edges(polyhedron)
-WEpolyhedron	*polyhedron;
+static void cut_edges(WEpolyhedron *polyhedron)
 {
 	int			i;
 	double		d0,
@@ -976,8 +960,7 @@ WEpolyhedron	*polyhedron;
 }
 
 
-static void adjust_f_e_ptrs(polyhedron)
-WEpolyhedron *polyhedron;
+static void adjust_f_e_ptrs(WEpolyhedron *polyhedron)
 {
 	WEedge	*edge;
 
@@ -1007,9 +990,7 @@ WEpolyhedron *polyhedron;
 /*	   make sure the new edge "sees" the new new face	*/
 /*	   and the old face "sees" a valid edge				*/
 
-static void cut_faces(polyhedron, new_face)
-WEpolyhedron	*polyhedron;
-WEface			*new_face;
+static void cut_faces(WEpolyhedron *polyhedron, WEface *new_face)
 {
 	int			zero_count,
 				count,
@@ -1181,8 +1162,7 @@ WEface			*new_face;
 }
 
 
-static void remove_dead_edges(polyhedron)
-WEpolyhedron *polyhedron;
+static void remove_dead_edges(WEpolyhedron *polyhedron)
 {
 	WEedge	*e_list,
 			*edge;
@@ -1238,8 +1218,7 @@ WEpolyhedron *polyhedron;
 }
 
 
-static void remove_dead_vertices(polyhedron)
-WEpolyhedron *polyhedron;
+static void remove_dead_vertices(WEpolyhedron *polyhedron)
 {
 	WEvertex	*v_list,
 				*vertex;
@@ -1269,8 +1248,7 @@ WEpolyhedron *polyhedron;
 }
 
 
-static void number_faces(polyhedron)
-WEpolyhedron *polyhedron;
+static void number_faces(WEpolyhedron *polyhedron)
 {
 	int			count;
 	WEface		*face;
@@ -1328,8 +1306,7 @@ double	(*v)[3];
 }
 #endif
 
-static void print_poly(polyhedron)
-WEpolyhedron *polyhedron;
+static void print_poly(WEpolyhedron *polyhedron)
 {
 	print_vef(polyhedron);	
 	print_vertices(polyhedron);
@@ -1347,8 +1324,7 @@ WEpolyhedron *polyhedron;
 }
 #endif
 
-static void print_vef(polyhedron)
-WEpolyhedron *polyhedron;
+static void print_vef(WEpolyhedron *polyhedron)
 {
 	if (debug) fprintf(stderr, "%d vertices, %d edges, %d faces\n",
 		polyhedron->num_vertices,
@@ -1373,8 +1349,7 @@ WEpolyhedron *polyhedron;
 }
 #endif
 
-static void print_vertices(polyhedron)
-WEpolyhedron *polyhedron;
+static void print_vertices(WEpolyhedron *polyhedron)
 {
 	WEvertex	*vertex;
 	fprintf(stderr, "Vertices:\n");
@@ -1545,8 +1520,7 @@ WEpolyhedron *polyhedron;
 }
 #endif
 
-static void roundoff_message(epsilon_name)
-char *epsilon_name;
+static void roundoff_message(char *epsilon_name)
 {
 #if PRECISE_GENERATORS
 	fprintf(stderr,"\nWARNING:  roundoff error is getting a bit large.  (%s)\n", epsilon_name);
@@ -1563,9 +1537,7 @@ char *epsilon_name;
 	return;
 }
 
-int proj_same_matrix(m0, m1)
-proj_matrix	m0,
-			m1;
+int proj_same_matrix(proj_matrix m0, proj_matrix m1)
 {
 	int		i, j;
 	double	diff;

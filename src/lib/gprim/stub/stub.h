@@ -27,8 +27,8 @@
 
 #include "geomclass.h"
 
-extern GeomClass *StubMethods();
-void StubRoutine();
+extern GeomClass *StubMethods(char *prefix, char *lib);
+void StubRoutine(char *prefix, char *rest, char *lib);
 
 
 /*

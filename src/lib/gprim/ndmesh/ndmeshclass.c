@@ -39,7 +39,7 @@ int NDMeshPresent = 1;
 
 static char ndmeshName[] = "ndmesh";
 
-extern NDMesh *NDMeshCreate( va_list );
+extern NDMesh *NDMeshCreate( NDMesh *, GeomClass *, va_list * );
 extern NDMesh *NDMeshDelete( NDMesh * );
 extern NDMesh *NDMeshCopy( NDMesh * );
 extern NDMesh *NDMeshBSPTree(NDMesh *mesh, BSPTree *tree, int action);

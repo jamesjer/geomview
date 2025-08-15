@@ -34,9 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "color.h"
 
 void
-PaintOver( f, b, t, m )
-    ColorA *f, *b, *t;
-    float *m;
+PaintOver( ColorA *f, ColorA *b, ColorA *t, float *m )
 {
     float a = 1.0 - *m * f->a;
 
@@ -47,10 +45,7 @@ PaintOver( f, b, t, m )
 }
 
 void
-PaintOverN( f, b, t, m, n )
-    ColorA *f, *b, *t;
-    float *m;
-    int n;
+PaintOverN( ColorA *f, ColorA *b, ColorA *t, float *m, int n )
 {
     float a;
     

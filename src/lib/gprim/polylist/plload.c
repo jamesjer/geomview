@@ -118,7 +118,7 @@ PolyListFLoad(IOBFILE *file, char *fname)
   }
 
   pl = OOGLNewE(PolyList, "PolyListFLoad PolyList");
-  GGeomInit(pl, PolyListMethods(), PLMAGIC, NULL);
+  GGeomInit((Geom *)pl, PolyListMethods(), PLMAGIC, NULL);
   pl->p = NULL;
   pl->vl = NULL;
   pl->n_verts = preread;  /* In case prefetched token was our vert count */

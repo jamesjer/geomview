@@ -66,9 +66,7 @@ int make_tform(HPoint3 *p1, HPoint3 *p2, HPoint3 *p3, Transform m)
 /* make rotation that takes (1,0,0) to v1; and (0,1,0) to the orthog. proj of v2 onto
    the perpendicular subspace of v1.  Return (0) if v1 and v2 are collinear. 
 */
-int make_rotation(v1, v2, m)
-HPoint3 *v1, *v2;
-Transform m;
+int make_rotation(HPoint3 *v1, HPoint3 *v2, Transform m)
 {
     double a;
     HPoint3  t1, t2;

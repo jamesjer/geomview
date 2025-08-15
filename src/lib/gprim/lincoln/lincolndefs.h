@@ -37,5 +37,5 @@
 
 /* FUNCTION DECLARATIONS */
 extern	GeomClass *LincolnMethods();
-extern	PolyList  *LincolnFLoad();
+extern	PolyList  *LincolnFLoad(IOBFILE *inf);
 #endif	/*LINCOLNDEFS*/

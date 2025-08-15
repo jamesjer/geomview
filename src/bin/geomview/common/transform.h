@@ -29,7 +29,7 @@ typedef struct Motion {
   int moving_id;
   int center_id;
   int frame_id;
-  void (*transform)();
+  void (*transform)(float amount[3], Point *pt, Transform T, int space, int frame);
   float amount[3];
   float timeunit;
   float timeleft;	/* Nonzero if bounded animation */

@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "discgrpP.h"
 
 DiscGrp *
-DiscGrpCopy(obj)
-    DiscGrp *obj;
+DiscGrpCopy(DiscGrp *obj)
 {
 	DiscGrp  *m;
 	DiscGrp  *om = obj;

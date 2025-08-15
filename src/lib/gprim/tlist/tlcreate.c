@@ -76,7 +76,7 @@ Tlist *TlistCopy(Tlist *t)
   int i;
 
   FREELIST_NEW(Tlist, nt);
-  GGeomInit(nt, t->Class, t->magic, NULL);
+  GGeomInit((Geom *)nt, t->Class, t->magic, NULL);
   nt->freelisthead = &TlistFreeList;
   nt->nelements = t->nelements;
   if (nt->nallocated < nt->nelements) {
@@ -131,7 +131,7 @@ TlistCreate(Tlist *exist, GeomClass *Classp, va_list *a_list)
 
     if (exist == NULL) {
 	FREELIST_NEW(Tlist, tlist);
-	GGeomInit (tlist, Classp, TLISTMAGIC, NULL);
+	GGeomInit ((Geom *)tlist, Classp, TLISTMAGIC, NULL);
 	tlist->freelisthead = &TlistFreeList;
 	tlist->tlisthandle = NULL;
 	tlist->tlist = NULL;
@@ -186,7 +186,7 @@ TlistCreate(Tlist *exist, GeomClass *Classp, va_list *a_list)
 	    doinit = true;
 	    break;
 	default:
-	    if(GeomDecorate(tlist, &copy, attr, a_list)) {
+	    if(GeomDecorate((Geom *)tlist, &copy, attr, a_list)) {
 		OOGLError (0, "TlistCreate: undefined option: %d", attr);
 		if (exist == NULL) {
 		    GeomDelete ((Geom *) tlist);

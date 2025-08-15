@@ -38,11 +38,12 @@ int WnStreamOut( Pool *, Handle *, WnWindow * );
 
 HandleOps WindowOps = {
 	"window",
-	(int ((*)()))WnStreamIn,
-	(int ((*)()))WnStreamOut,
-	(void ((*)()))WnDelete,
+	(int ((*)(Pool *, Handle **, Ref **)))WnStreamIn,
+	(int ((*)(Pool *, Handle *, Ref *)))WnStreamOut,
+	(void ((*)(Ref *)))WnDelete,
 	NULL,
-	NULL
+	NULL,
+	{NULL, NULL}, {NULL, NULL}
 };
 
 static struct winkeyword {

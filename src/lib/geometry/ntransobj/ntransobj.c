@@ -84,11 +84,12 @@ NTransCreate(TransformN *T)
 
 HandleOps NTransOps = {
 	"ntrans",
-	(int ((*)()))NTransStreamIn,
-	(int ((*)()))NTransStreamOut,
-	(void ((*)()))NTransDelete,
+	(int ((*)(Pool *, Handle **, Ref **)))NTransStreamIn,
+	(int ((*)(Pool *, Handle *, Ref *)))NTransStreamOut,
+	(void ((*)(Ref *)))NTransDelete,
 	NULL,
-	NULL
+	NULL,
+	{NULL, NULL}, {NULL, NULL}
 };
 
 int

@@ -44,7 +44,7 @@ char *ListName(void)
     return listName;
 }
 
-extern void ListHandleScan( List *, int (*func)(), void *arg );
+extern void ListHandleScan( List *, int (*func)(Handle **, List *, void *), void *arg );
 
 GeomClass *ListMethods(void)
 {

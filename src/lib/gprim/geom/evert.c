@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "geomclass.h"
 
 Geom *
-GeomEvert( object )
-    Geom *object;
+GeomEvert( Geom *object )
 {
     if( object && object->Class->evert )
 	(*object->Class->evert)(object);

@@ -219,8 +219,8 @@ int mib_load_Menu(mib_Widget *, mib_Buffer *);
 
 typedef struct _mib_widget_funcs {
   char		*name;
-  mib_Widget	*(*mib_create)();
-  void		 (*mib_delete)();
-  void		 (*mib_save)();
-  int		 (*mib_load)();
+  mib_Widget	*(*mib_create)(mib_Widget *, char *, char *, int, int, int, int, int);
+  void		 (*mib_delete)(mib_Widget *);
+  void		 (*mib_save)(mib_Widget *, FILE *);
+  int		 (*mib_load)(mib_Widget *, mib_Buffer *);
 } mib_widget_funcs;

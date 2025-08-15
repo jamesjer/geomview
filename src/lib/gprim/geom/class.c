@@ -41,8 +41,7 @@ static struct classtable {
 } *table = NULL;
 
 GeomClass *
-GeomClassLookup( name )
-    char *name;
+GeomClassLookup( char *name )
 {
     static char done = 0;
     struct classtable *cp;
@@ -58,9 +57,7 @@ GeomClassLookup( name )
 }
 
 static void
-GeomClassInstall( name, Class )
-    char *name;
-    GeomClass *Class;
+GeomClassInstall( char *name, GeomClass *Class )
 {
     struct classtable *cp;
 
@@ -72,8 +69,7 @@ GeomClassInstall( name, Class )
 }
 
 GeomClass *
-GeomSubClassCreate( classname, subclassname )
-    char *classname, *subclassname;
+GeomSubClassCreate( char *classname, char *subclassname )
 {
     GeomClass *Class, *subclass;
 
@@ -92,15 +88,13 @@ GeomSubClassCreate( classname, subclassname )
 }
 
 GeomClass *
-GeomClassCreate( name )
-    char *name;
+GeomClassCreate( char *name )
 {
     return GeomSubClassCreate( "geom", name );
 }
 
 GeomClass *
-GeomMethods( object )
-Geom *object;
+GeomMethods( Geom *object )
 {
     return object ? object->Class : NULL;
 }
@@ -115,8 +109,7 @@ GeomClassIterate( )
 }
 
 GeomClass *
-GeomNextClass( it )
-    void *it;
+GeomNextClass( void *it )
 {
     GeomClass *c;
 #define  iter  ((struct classtable **)it)

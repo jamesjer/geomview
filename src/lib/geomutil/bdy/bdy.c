@@ -55,8 +55,10 @@ static char msg[] = "bdy.c";
  * qsort. */
 static float precision;
 
-int EdgeCmp(HPoint3 **a, HPoint3 **b)
+int EdgeCmp(const void *p, const void *q)
 {
+  const HPoint3 **a = (const HPoint3 **)p;
+  const HPoint3 **b = (const HPoint3 **)q;
   int d;
   float dist00, dist01, dist11, dist10;
 
@@ -119,7 +121,7 @@ Geom *Bdy(Geom *g, float prec) {
   }
   n_edges = k;
   precision = 0.0;
-  qsort(edges, n_edges, 2 * sizeof(HPoint3 *), (int (*)())EdgeCmp);
+  qsort(edges, n_edges, 2 * sizeof(HPoint3 *), EdgeCmp);
   precision = prec;
 
   /* Eliminate everything mentioned more than once */

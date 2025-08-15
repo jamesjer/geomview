@@ -60,7 +60,7 @@ BezierCopy(Bezier *ob)
     b = OOGLNewE(Bezier, "new Bezier");
 
     *b = *ob;	/* Copy all fields */
-    GGeomInit(b, BezierMethods(), BEZIERMAGIC, NULL);
+    GGeomInit((Geom *)b, BezierMethods(), BEZIERMAGIC, NULL);
 
     if (ob->CtrlPnts != NULL) {
 	n = (b->degree_u + 1) * (b->degree_v + 1) * b->dimn;
@@ -109,7 +109,7 @@ BezierCreate( Bezier *exist, GeomClass *classp, va_list *a_list )
     if (exist == NULL) {
 	bezier = OOGLNewE(Bezier, "BezierCreate Bezier");
 	memset(bezier, 0, sizeof(Bezier));
-        GGeomInit (bezier, classp, BEZIERMAGIC, NULL);
+        GGeomInit ((Geom *)bezier, classp, BEZIERMAGIC, NULL);
 	bezier->CtrlPnts = NULL;
 	bezier->nu = bezier->nv = 0;	/* no mesh yet */
 	bezier->mesh = NULL;
@@ -157,7 +157,7 @@ BezierCreate( Bezier *exist, GeomClass *classp, va_list *a_list )
 	if (color != NULL) for (i=0; i<4; i++) bezier->c[i] = color[i];
 	break;
     default:
-	if (GeomDecorate (bezier, &copy, attr, a_list)) {
+	if (GeomDecorate ((Geom *)bezier, &copy, attr, a_list)) {
 	    OOGLError (0, "BezierCreate: undefined option: %d", attr);
 	    OOGLFree (bezier);
 	    return NULL;

@@ -47,7 +47,7 @@ InstName()
 	return instName;
 }
 
-extern Geom *InstPick( Geom *, Pick *, Appearance *, Transform );
+extern Geom *InstPick( Geom *, Pick *, Appearance *, Transform, TransformN *, int * );
 extern GeomScanFunc InstHandleScan;
 
 GeomClass *

@@ -37,8 +37,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Note: Calling QuadNormal will undo this!
  */
 Quad *
-QuadEvert( q )
-    Quad *q;
+QuadEvert( Quad *q )
 {
     int i;
     Point3 *np;

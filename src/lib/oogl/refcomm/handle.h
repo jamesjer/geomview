@@ -146,7 +146,7 @@ extern Handle *HandleAssign( char *name, HandleOps *ops, Ref *obj );
 	 * The update procedure is automatically called once when
 	 * registration is done.
 	 */
-extern int HandleRegister( Handle **hp, Ref *parent, void *info, void (*update)());
+extern int HandleRegister( Handle **hp, Ref *parent, void *info, void (*update)(Handle **, Ref *, void *));
 
 	/*
 	 * Un(all callbacks on) a reference to a Handle's value.
@@ -161,20 +161,20 @@ extern void HandleUnregister(Handle **hp);
 	 * The viewer needs this to keep track of callbacks it plants
 	 * throughout Geom trees, which trigger e.g. BBox recomputation.
 	 */
-extern void HandleUnregisterJust(Handle **hp, Ref *par, void *info, void (*upd)());
+extern void HandleUnregisterJust(Handle **hp, Ref *par, void *info, void (*upd)(Handle **, Ref *, void *));
 
 	/*
 	 * Unall callbacks matching a given pattern, no matter
 	 * which Handle they're associated with.  Another routine needed
 	 * for the viewer, called whenever a Geom tree is replaced.
 	 */
-extern void HandleUnregisterAll(Ref *par, void *info, void (*upd)());
+extern void HandleUnregisterAll(Ref *par, void *info, void (*upd)(Handle **, Ref *, void *));
 
 	/*
 	 * Suitable update() func for HandleRegister in many cases.
 	 * Just deletes *objp then assigns *objp = (*hp)->object when called.
 	 */
-extern void HandleUpdRef(Handle **hp, Ref *parent, Ref **objp);
+extern void HandleUpdRef(Handle **hp, Ref *parent, void *objp);
 
 #endif /*_HANDLE_*/
 

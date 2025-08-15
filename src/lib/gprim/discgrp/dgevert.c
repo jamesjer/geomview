@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "discgrpP.h"
 
 DiscGrp           *
-DiscGrpEvert(dg)
-DiscGrp           *dg;
+DiscGrpEvert(DiscGrp *dg)
 {
 	return dg;
 }

@@ -46,7 +46,7 @@ extern TransformPtr TransFSave(Transform T, FILE *outf, char *fname);
 extern int TransObjStreamIn(Pool *p, Handle **hp, TransObj **tobjp);
 extern int TransObjStreamOut(Pool *, Handle *, TransObj *tobj);
 extern TransObj *TransObjFSave(TransObj *t, FILE *outf, char *fname);
-extern void TransUpdate(Handle **hp, Ref *ignored, Transform Tfixme);
+extern void TransUpdate(Handle **hp, Ref *ignored, void *Tfixme);
 
 extern TransObj *TransCreate(Transform);
 

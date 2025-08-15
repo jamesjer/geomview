@@ -51,8 +51,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Notes:	Sets Ta to Ta * Tb.
  */
 void
-Tm3PostConcat( Ta, Tb )
-     Transform3 Ta, Tb;
+Tm3PostConcat( Transform3 Ta, Transform3 Tb )
 {
   fprintf(stderr, "WARNING: obsolete function Tm3PostConcat called.  Use\n\
 Tm3Concat instead.\n");
@@ -70,8 +69,7 @@ Tm3Concat instead.\n");
  * Notes:	Sets Tb to Ta * Tb.
  */
 void
-Tm3PreConcat( Ta, Tb )
-    Transform3 Ta, Tb;
+Tm3PreConcat( Transform3 Ta, Transform3 Tb )
 {
   fprintf(stderr, "WARNING: obsolete function Tm3PreConcat called.  Use\n\
 Tm3Concat instead.\n");
@@ -94,8 +92,7 @@ Tm3Concat instead.\n");
  *		product is allowed.
  */
 void
-Tm3Concat( Ta, Tb, Tprod )
-  Transform3 Ta, Tb, Tprod;
+Tm3Concat( Transform3 Ta, Transform3 Tb, Transform3 Tprod )
 {
   int i;
   

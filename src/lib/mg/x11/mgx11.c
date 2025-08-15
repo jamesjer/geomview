@@ -58,11 +58,14 @@ int         mgx11_setcamera( Camera* cam );
 int         mgx11_setwindow( WnWindow *win, int final );
 mgx11context *mgx11_newcontext( mgx11context *ctx );
 
-extern void mgx11_polygon();
-extern void mgx11_mesh();
-extern void mgx11_line();
-extern void mgx11_polyline();
-extern void mgx11_polylist();
+struct Poly;
+struct Vertex;
+
+extern void mgx11_polygon(int nv, HPoint3 *v, int nn, Point3 *n, int nc, ColorA *c);
+extern void mgx11_mesh(int wrap, int nu, int nv, HPoint3 *P, Point3 *N, Point3 *NQ, ColorA *C, TxST *ST, int mflags);
+extern void mgx11_line(HPoint3 *p1, HPoint3 *p2);
+extern void mgx11_polyline(int nv, HPoint3 *verts, int nc, ColorA *colors, int wrap);
+extern void mgx11_polylist(int np, struct Poly *p, int nv, struct Vertex *v, int pl_flags);
 extern void mgx11_quads();
 extern void mgx11_setshader(mgshadefunc shader);
 extern void mgx11_appearance( struct mgastk *ma, int mask );
@@ -76,9 +79,9 @@ struct mgfuncs mgx11funcs = {
   MGD_X11,
   mgdevice_X11,
   mgx11_feature,
-  (mgcontext *(*)())mgx11_ctxcreate,
+  mgx11_ctxcreate,
   mgx11_ctxdelete,
-  (int (*)())mgx11_ctxset,
+  mgx11_ctxset,
   mgx11_ctxget,
   mgx11_ctxselect,
   mgx11_sync,

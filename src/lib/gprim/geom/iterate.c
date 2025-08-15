@@ -305,8 +305,7 @@ int _NextTransform(GeomIter *it, Transform T)
 }
 
 void
-DestroyIter(it)
-    GeomIter *it;
+DestroyIter(GeomIter *it)
 {
     if((it->flags & 0xfffffff0) == VALID) {
 	it->flags = 0;

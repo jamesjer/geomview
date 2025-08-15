@@ -113,7 +113,7 @@ NPolyListFLoad(IOBFILE *file, char *fname)
 
   pl = OOGLNewE(NPolyList, "NPolyListFLoad NPolyList");
   memset(pl, 0, sizeof(NPolyList));
-  GGeomInit(pl, NPolyListMethods(), NPLMAGIC, NULL);
+  GGeomInit((Geom *)pl, NPolyListMethods(), NPLMAGIC, NULL);
 
   pl->geomflags = flags | ((dimn == 4) ? VERT_4D : 0);
 

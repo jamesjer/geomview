@@ -51,7 +51,7 @@ extern Mesh	*MeshFSave( Mesh *, FILE * );
 extern BBox	*MeshBound( Mesh *, Transform T, TransformN *TN);
 extern Geom	*MeshBoundSphere( Mesh *,
 				  Transform T, TransformN *TN, int *axes, int );
-extern Mesh	*MeshDice( Mesh *, int (*proc)() );
+extern Mesh	*MeshDice( Mesh *, int (*proc)(float, float, HPoint3 *, Point3 *) );
 extern Mesh	*MeshEvert( Mesh * );
 extern Mesh	*MeshDraw( Mesh * );
 extern Mesh     *MeshBSPTree(Mesh *mesh, BSPTree *bsptree, int action);

@@ -43,9 +43,7 @@ DiscGrpTransform(DiscGrp *dg, Transform T)
 }
 
 DiscGrp *
-DiscGrpTransformTo( dg, T )
-     DiscGrp *dg;
-     Transform T;
+DiscGrpTransformTo( DiscGrp *dg, Transform T )
 {
   return(DiscGrpTransform(dg, T));
 }

@@ -50,7 +50,7 @@ InstEvert( Inst *inst )
 }
 
 void
-InstHandleScan( Inst *inst, int (*func)(), void *arg )
+InstHandleScan( Inst *inst, int (*func)(Handle **, Inst *, void *), void *arg )
 {
     if(inst == NULL)
 	return;
@@ -63,9 +63,9 @@ InstHandleScan( Inst *inst, int (*func)(), void *arg )
 	(*func)(&inst->geomhandle, inst, arg);
 
     if(inst->geom)
-	GeomHandleScan(inst->geom, func, arg);
+	GeomHandleScan(inst->geom, (int (*)(Handle **, Geom *, void *))func, arg);
     if(inst->tlist)
-	GeomHandleScan(inst->tlist, func, arg);
+	GeomHandleScan(inst->tlist, (int (*)(Handle **, Geom *, void *))func, arg);
 }
 
 

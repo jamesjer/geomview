@@ -80,7 +80,7 @@ NDMeshCreate (NDMesh *exist, GeomClass *classp, va_list *a_list)
     if (exist == NULL) {
 	m = OOGLNewE(NDMesh, "NDMeshCreate mesh");
 	memset(m, 0, sizeof(NDMesh));
-	GGeomInit (m, classp, NDMESHMAGIC, NULL);
+	GGeomInit ((Geom *)m, classp, NDMESHMAGIC, NULL);
 	m->geomflags = 0;
 	m->meshd = 2;
 	m->mdim = OOGLNewNE(int, m->meshd, "NDMesh dim");
@@ -151,7 +151,7 @@ NDMeshCreate (NDMesh *exist, GeomClass *classp, va_list *a_list)
 	    break;
 
 	default:
-	    if (GeomDecorate (m, &copy, attr, a_list)) {
+	    if (GeomDecorate ((Geom *)m, &copy, attr, a_list)) {
 		GeomError (0, "NDMeshCreate: Undefined option: %d", attr);
 		OOGLFree (m);
 		return NULL;

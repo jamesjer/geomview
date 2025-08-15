@@ -217,7 +217,7 @@ Sphere *SphereCreate(Geom *exist, GeomClass *classp, va_list *a_list)
 
   if (exist == NULL) {
     FREELIST_NEW(Sphere, sphere);
-    GGeomInit(sphere, classp, SPHEREMAGIC, NULL);
+    GGeomInit((Geom *)sphere, classp, SPHEREMAGIC, NULL);
     sphere->freelisthead = &SphereFreeList;
     TmIdentity(sphere->axis);
     sphere->NDaxis = NULL;
@@ -278,7 +278,7 @@ Sphere *SphereCreate(Geom *exist, GeomClass *classp, va_list *a_list)
     axis = va_arg(*a_list, Transform *);
     break;
   default:
-    if (GeomDecorate(sphere, &copy, attr, a_list)) {
+    if (GeomDecorate((Geom *)sphere, &copy, attr, a_list)) {
       OOGLError (0, "ListCreate: Undefined attribute: %d", attr);
 
       if(exist == NULL)

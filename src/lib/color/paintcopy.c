@@ -34,9 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "color.h"
 
 void
-PaintCopy( f, b, t, m )
-    ColorA *f, *b, *t;
-    float *m;
+PaintCopy( ColorA *f, ColorA *b, ColorA *t, float *m )
 {
     float a = 1.0 - *m;
 
@@ -47,10 +45,7 @@ PaintCopy( f, b, t, m )
 }
 
 void
-PaintCopyN( f, b, t, m, n )
-    ColorA *f, *b, *t;
-    float *m;
-    int n;
+PaintCopyN( ColorA *f, ColorA *b, ColorA *t, float *m, int n )
 {
     float a;
     

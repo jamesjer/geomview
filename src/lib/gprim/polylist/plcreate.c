@@ -86,7 +86,7 @@ PolyListCreate(PolyList *exist, GeomClass *classp, va_list *a_list)
 
   if (exist == NULL) {
     pl = OOGLNewE(PolyList,"PolyListCreate polylist");
-    GGeomInit(pl, classp, PLMAGIC, NULL);
+    GGeomInit((Geom *)pl, classp, PLMAGIC, NULL);
     pl->geomflags = pl->n_polys = pl->n_verts = 0;
     pl->pdim = 4;
     pl->p = (Poly *)NULL; pl->vl = (Vertex *)NULL;
@@ -174,7 +174,7 @@ PolyListCreate(PolyList *exist, GeomClass *classp, va_list *a_list)
       break;
 
     default:
-      if (GeomDecorate(pl, &copy, attr, a_list)) {
+      if (GeomDecorate((Geom *)pl, &copy, attr, a_list)) {
 	OOGLError(0,"Undefined PolyList option: %d", attr);
 	if (!exist) GeomDelete((Geom *)pl);
 	return NULL;

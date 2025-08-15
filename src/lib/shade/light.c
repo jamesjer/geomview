@@ -492,7 +492,7 @@ LmMerge(LmLighting *src, LmLighting *dst, int mergeflags)
 		src->valid : src->valid & ~(dst->override &~ src->override)
 	: 0;
 
-    if(src == NULL || (mask == 0 && src->lights == NULL)) {
+    if(src == NULL || (mask == 0 && src->lights[0] == NULL)) {
 	RefIncr((Ref *)dst);
 	return dst;
     }

@@ -59,6 +59,7 @@ HandleOps ImageOps = {
   (void ((*)(Ref *rp)))ImgDelete,
   NULL,
   NULL,
+  {NULL, NULL}, {NULL, NULL}
 };
 
 struct imgheader {

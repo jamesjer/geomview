@@ -76,9 +76,9 @@ int	    mgopengl_setwindow( WnWindow *win, int final );
 mgopenglcontext *mgopengl_newcontext( mgopenglcontext *ctx );
 void mgopengl_taggedappearance(const void *tag);
 
-extern void mgopengl_polygon();
-extern void mgopengl_line();
-extern void mgopengl_polyline();
+extern void mgopengl_polygon(int nv, HPoint3 *V, int nn, Point3 *N, int nc, ColorA *C);
+extern void mgopengl_line(HPoint3 *p1, HPoint3 *p2);
+extern void mgopengl_polyline(int nv, HPoint3 *verts, int nc, ColorA *colors, int wrap);
 extern void mgopengl_polylist(int np, Poly *p, int nv, Vertex *v, int plflags);
 extern void mgopengl_mesh(int wrap, int nu, int nv,
 			  HPoint3 *meshP, Point3 *meshN, Point3 *meshNQ,
@@ -102,9 +102,9 @@ struct mgfuncs mgopenglfuncs = {
   MGD_OPENGL,
   mgdevice_OPENGL,
   mgopengl_feature,
-  (mgcontext *(*)())mgopengl_ctxcreate,
+  mgopengl_ctxcreate,
   mgopengl_ctxdelete,
-  (int (*)())mgopengl_ctxset,
+  mgopengl_ctxset,
   mgopengl_ctxget,
   mgopengl_ctxselect,
   mgopengl_sync,
@@ -152,6 +152,12 @@ mgdevice_OPENGL()
   if (_mgc != NULL && _mgc->devno != MGD_OPENGL)
     _mgc = NULL;
   return(0);
+}
+
+void
+mgopengl_glNormal3fv(Point3 *n, HPoint3 *p)
+{
+  glNormal3fv(&n->x);
 }
 
 /*-----------------------------------------------------------------------

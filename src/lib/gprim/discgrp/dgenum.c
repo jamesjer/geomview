@@ -44,7 +44,7 @@ static DiscGrp *mydg;
 static ColorA white = {1,1,1,.75};
 /*static DiscGrpEl grpel;*/
 static Transform mlist[128];
-static int (*constraintfn)();
+static int (*constraintfn)(DiscGrpEl *);
 int check_big = 1, 	/* this is currently never non-zero */
 	check_new = 1, 	/* ditto */
 	have_matrices = 1,
@@ -63,8 +63,7 @@ static char symbollist[64];
 static void get_matrices();
 
 int
-getindex(c)
-char c;
+getindex(char c)
 {
     int i;
     for (i=0; i<ngens; ++i)
@@ -73,9 +72,7 @@ char c;
 }
 
 static void
-word_to_mat(word, mat1)
-char *word;
-Transform mat1;
+word_to_mat(char *word, Transform mat1)
 {
     int i, index;
     /*printf("# %s\n",word); */
@@ -192,7 +189,7 @@ dumb_enumerate(int depth, DiscGrpEl *dgel)
  */
 
 DiscGrpElList *
-DiscGrpEnum(DiscGrp *discgrp, int (* constraint)(void) )
+DiscGrpEnum(DiscGrp *discgrp, int (* constraint)(DiscGrpEl *) )
 {
     DiscGrpElList *enum_list = OOGLNewE(DiscGrpElList, "DiscGrpEnum");
     extern DiscGrpEl *enumgetstack();

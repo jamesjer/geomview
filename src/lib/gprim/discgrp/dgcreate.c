@@ -34,7 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "discgrpP.h"
 
 DiscGrp *
-DiscGrpSetPreDraw( DiscGrp *dg, void (*predraw)() )
+DiscGrpSetPreDraw( DiscGrp *dg, void (*predraw)(DiscGrp *) )
 {
     dg->predraw = predraw;
     return (dg);
@@ -115,7 +115,7 @@ DiscGrpElListCreate (DiscGrpElList *exist, ...)
 	    break;
 
 	default:
-	    if (GeomDecorate (dgellist, &copy, attr, &a_list)) {
+	    if (GeomDecorate ((Geom *)dgellist, &copy, attr, &a_list)) {
 		GeomError (0, "DiscGrpElListCreate: Undefined option: %d", attr);
 		OOGLFree (dgellist);
 		return NULL;
@@ -163,7 +163,7 @@ DiscGrpCreate (DiscGrp *exist, GeomClass *classp, va_list *a_list)
     if (exist == NULL) {
 	discgrp = OOGLNewE(DiscGrp, "DiscGrpCreate discgrp");
 	memset(discgrp, 0, sizeof(DiscGrp));
-	GGeomInit (discgrp, classp, DISCGRPMAGIC, NULL);
+	GGeomInit ((Geom *)discgrp, classp, DISCGRPMAGIC, NULL);
 	discgrp->flag = DG_DDSLICE;  /* default is to slice off cusps */
 	discgrp->name = NULL;
 	discgrp->comment = NULL;
@@ -388,7 +388,7 @@ DiscGrpCreate (DiscGrp *exist, GeomClass *classp, va_list *a_list)
 
 
     default:
-	if (GeomDecorate (discgrp, &copy, attr, a_list)) {
+	if (GeomDecorate ((Geom *)discgrp, &copy, attr, a_list)) {
 	    GeomError (0, "DiscGrpCreate: Undefined option: %d", attr);
 	    OOGLFree (discgrp);
 	    return NULL;

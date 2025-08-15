@@ -132,7 +132,7 @@ static E *advance_geodesic(Geod *g, E *avoid);
 static void add_geodesic(Geod *g, char *str);
 static void reflectline(P *axis, P *vector, P *result);
 static void rotation(P *va, P *vb, float T[3][3]);
-static int vcmp(V **p, V **q);
+static int vcmp(const void *a, const void *b);
 static void deface(F *f);
 static void normal_ize(F *f);
 /*static E *echeck(int v0, int v1);*/
@@ -831,9 +831,11 @@ static void deface(F *f)
     tossedf++;
 }
 
-static int vcmp(V **p, V **q)
+static int vcmp(const void *a, const void *b)
 {
-    V *vp, *vq;
+    const V **p = (const V **)a;
+    const V **q = (const V **)b;
+    const V *vp, *vq;
     float d;
 
     vp = *p;
@@ -863,7 +865,7 @@ static void vmerge(void)
 	a->ref = 0;
 	vp[i] = a++;
     }
-    qsort(vp, nv, sizeof(V *), (int (*)())vcmp);
+    qsort(vp, nv, sizeof(V *), vcmp);
 
     /*
      * Now all matches will occur within X-runs

@@ -104,7 +104,7 @@ struct DiscGrp {
 	int		enumdepth;	/* max word length for big_list */
 	float 		enumdist;	/* max distance grp el moves cpoint */
 	float 		drawdist;	/* max distance grp el moves cpoint for drawing purposes (generally less than enumdist)_ */
-	void		(*predraw)();
+	void		(*predraw)(struct DiscGrp *);
 	dgviewinfo	viewinfo;	/* camera position, etc */
 	} ;
 
@@ -119,20 +119,21 @@ extern DiscGrpElList *DiscGrpExtractNhbrs( WEpolyhedron *wepoly );
 extern Geom *DiscGrpDirDom( DiscGrp *dg);
 extern Geom *WEPolyhedronToBeams( WEpolyhedron *poly, float alpha);
 extern WEpolyhedron *DiscGrpMakeDirdom( DiscGrp *dg, HPoint3 *pt0, int slice);
-extern DiscGrpElList *DiscGrpEnum( DiscGrp *dg, int (*constraintfn)());
+extern DiscGrpElList *DiscGrpEnum( DiscGrp *dg, int (*constraintfn)(DiscGrpEl *));
 extern void DiscGrpInitStandardConstraint( int depth, float d0, float d1);
 extern int DiscGrpStandardConstraint( DiscGrpEl *dgel);
 extern DiscGrpElList *DiscGrpElListDelete (DiscGrpElList *exist);
 extern void DiscGrpAddInverses(DiscGrp *discgrp);
 
-void DHPt3PerpBisect(/*point4 p0, point4 p1, point4 result, int metric*/);
+typedef	double point4[4];
+void DHPt3PerpBisect(point4 p0, point4 p1, point4 result, int metric);
 
-extern int needstuneup();
-extern void tuneup();
-extern int is_new();
-extern int insert_or_match_mat();
-extern int push_new_stack();
-extern int enumpush();
+extern int needstuneup(Transform m1);
+extern void tuneup(Transform m1, int metric);
+extern int is_new(Transform t);
+extern int insert_or_match_mat(Transform mat, int mode);
+extern int push_new_stack(char *word);
+extern int enumpush(DiscGrpEl *pp);
 extern void init_stack();
 extern void make_new_old();
 extern int init_out_stack();

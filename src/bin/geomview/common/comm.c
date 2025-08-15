@@ -439,7 +439,7 @@ fatalsig(int sig)
   signal(sig, SIG_DFL);
 }
 
-typedef void (*mysigfunc_t)();
+typedef void (*mysigfunc_t)(int);
 
 static void
 catchsig(int sig, mysigfunc_t func)
@@ -742,7 +742,7 @@ emodule_run(emodule *em)
   i = em - VVEC(uistate.emod, emodule);
   if (i < 0 || i > VVCOUNT(uistate.emod))
     i = 0;
-  newem = ui_emodule_install(i, seqname, emodule_kill);
+  newem = ui_emodule_install(i, seqname, (PFI)emodule_kill);
 
   newem->link = PoolStreamOpen( seqname, fdopen(pfrom.r, "rb"), 0, &emoduleCommandOps );
   if (newem->link) {

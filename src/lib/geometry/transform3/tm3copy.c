@@ -46,10 +46,9 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Notes:	
  */
 void
-Tm3Copy( Tsrc, Tdst )
-    Transform3 Tsrc, Tdst;
+Tm3Copy( Transform3 Tsrc, Transform3 Tdst )
 {
-    memcpy( (char *)Tdst, (char *)Tsrc, sizeof(Transform3) );
+    memcpy( Tdst, Tsrc, sizeof(Transform3) );
 }
 
 /*-----------------------------------------------------------------------

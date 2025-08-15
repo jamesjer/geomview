@@ -90,7 +90,7 @@ struct Camera {
 /*
  * routine for updating transforms
  */
-void CamTransUpdate(Handle **, Camera *, Transform);
+void CamTransUpdate(Handle **, Ref *, void *);
 
 #endif /* !CAMERAP_H */
 

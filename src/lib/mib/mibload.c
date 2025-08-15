@@ -36,12 +36,9 @@ mib_Widget	*mib_root_Widget;
 Display		*dpy;
 GC		 mib_gc;
 static struct _mib_event_handle_funcs {
-  void		(*mib_pick_mib_Widget)(/* Widget, XtPointer,
-					  XButtonPressedEvent *, Boolean * */);
-  void		(*mib_move_mib_Widget)(/* Widget, XtPointer,
-					  XPointerMovedEvent *, Boolean * */);
-  void		(*mib_unpick_mib_Widget)(/* Widget, XtPointer,
-					    XButtonReleasedEvent *, Boolean * */);
+  XtEventHandler	mib_pick_mib_Widget;
+  XtEventHandler	mib_move_mib_Widget;
+  XtEventHandler	mib_unpick_mib_Widget;
 } mib_events;
 
 mib_widget_funcs mwfuncs[] =
@@ -822,11 +819,11 @@ void mib_reset_size(mib_Widget *temp)
 
 /*****************************************************************************/
 
-void mib_set_eventhandlers(void (*a)(), void (*b)(), void (*c)())
+void mib_set_eventhandlers(XtEventHandler a, XtEventHandler b, XtEventHandler c)
 {
-  mib_events.mib_pick_mib_Widget = (void (*)())a;
-  mib_events.mib_move_mib_Widget = (void (*)())b;
-  mib_events.mib_unpick_mib_Widget = (void (*)())c;
+  mib_events.mib_pick_mib_Widget = a;
+  mib_events.mib_move_mib_Widget = b;
+  mib_events.mib_unpick_mib_Widget = c;
 }
 
 /*****************************************************************************/

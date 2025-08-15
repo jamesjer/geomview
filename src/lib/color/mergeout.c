@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "color.h"
 
 void
-MergeOut( f, b, t )
-    ColorA *f, *b, *t;
+MergeOut( ColorA *f, ColorA *b, ColorA *t )
 {
     float a = 1.0 - b->a;
 
@@ -46,9 +45,7 @@ MergeOut( f, b, t )
 }
 
 void
-MergeOutN( f, b, t, n )
-    ColorA *f, *b, *t;
-    int n;
+MergeOutN( ColorA *f, ColorA *b, ColorA *t, int n )
 {
     float a;
     

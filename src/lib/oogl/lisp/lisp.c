@@ -304,12 +304,12 @@ static LObject *intparse(Lake *lake)
 LType LIntp = {
   "int",
   sizeof(int),
-  intfromobj,
-  int2obj,
-  intfree,
-  intwrite,
-  intmatch,
-  intpull,
+  (bool (*)(LObject *, void *))intfromobj,
+  (LObject *(*)(void *))int2obj,
+  (void (*)(void *))intfree,
+  (void (*)(FILE *, void *))intwrite,
+  (bool (*)(void *, void *))intmatch,
+  (void (*)(va_list *, void *))intpull,
   intparse,
   LTypeMagic
 };
@@ -414,12 +414,12 @@ static LObject *longparse(Lake *lake)
 LType LLongp = {
   "long",
   sizeof(long),
-  longfromobj,
-  long2obj,
-  longfree,
-  longwrite,
-  longmatch,
-  longpull,
+  (bool (*)(LObject *, void *))longfromobj,
+  (LObject *(*)(void *))long2obj,
+  (void (*)(void *))longfree,
+  (void (*)(FILE *, void *))longwrite,
+  (bool (*)(void *, void *))longmatch,
+  (void (*)(va_list *, void *))longpull,
   longparse,
   LTypeMagic
 };
@@ -515,12 +515,12 @@ static LObject *floatparse(Lake *lake)
 LType LFloatp = {
   "float",
   sizeof(float),
-  floatfromobj,
-  float2obj,
-  floatfree,
-  floatwrite,
-  floatmatch,
-  floatpull,
+  (bool (*)(LObject *, void *))floatfromobj,
+  (LObject *(*)(void *))float2obj,
+  (void (*)(void *))floatfree,
+  (void (*)(FILE *, void *))floatwrite,
+  (bool (*)(void *, void *))floatmatch,
+  (void (*)(va_list *, void *))floatpull,
   floatparse,
   LTypeMagic
 };
@@ -617,12 +617,12 @@ static LObject *doubleparse(Lake *lake)
 LType LDoublep = {
   "double",
   sizeof(double),
-  doublefromobj,
-  double2obj,
-  doublefree,
-  doublewrite,
-  doublematch,
-  doublepull,
+  (bool (*)(LObject *, void *))doublefromobj,
+  (LObject *(*)(void *))double2obj,
+  (void (*)(void *))doublefree,
+  (void (*)(FILE *, void *))doublewrite,
+  (bool (*)(void *, void *))doublematch,
+  (void (*)(va_list *, void *))doublepull,
   doubleparse,
   LTypeMagic
 };
@@ -688,12 +688,12 @@ static LObject *stringparse(Lake *lake)
 LType LStringp = {
   "string",
   sizeof(char *),
-  stringfromobj,
-  string2obj,
-  stringfree,
-  stringwrite,
-  stringmatch,
-  stringpull,
+  (bool (*)(LObject *, void *))stringfromobj,
+  (LObject *(*)(void *))string2obj,
+  (void (*)(void *))stringfree,
+  (void (*)(FILE *, void *))stringwrite,
+  (bool (*)(void *, void *))stringmatch,
+  (void (*)(va_list *, void *))stringpull,
   stringparse,
   LTypeMagic
 };
@@ -744,12 +744,12 @@ static LObject *symbolparse(Lake *lake)
 LType LSymbolp = {
   "symbol",
   sizeof(char *),
-  symbolfromobj,
-  symbol2obj,
-  stringfree,
-  symbolwrite,
-  stringmatch,
-  stringpull,
+  (bool (*)(LObject *, void *))symbolfromobj,
+  (LObject *(*)(void *))symbol2obj,
+  (void (*)(void *))stringfree,
+  (void (*)(FILE *, void *))symbolwrite,
+  (bool (*)(void *, void *))stringmatch,
+  (void (*)(va_list *, void *))stringpull,
   symbolparse,
   LTypeMagic
 };
@@ -875,12 +875,12 @@ void listpull(va_list *a_list, LList **x)
 LType LListp = {
   "list",
   sizeof(LList *),
-  listfromobj,
-  list2obj,
-  listfree,
-  listwrite,
-  listmatch,
-  listpull,
+  (bool (*)(LObject *, void *))listfromobj,
+  (LObject *(*)(void *))list2obj,
+  (void (*)(void *))listfree,
+  (void (*)(FILE *, void *))listwrite,
+  (bool (*)(void *, void *))listmatch,
+  (void (*)(va_list *, void *))listpull,
   LSexpr,
   LTypeMagic
 };
@@ -910,12 +910,12 @@ bool objmatch(LObject **a, LObject **b)
 LType LObjectp = {
   "lisp object",
   sizeof(LObject *),
-  objfromobj,
-  obj2obj,
+  (bool (*)(LObject *, void *))objfromobj,
+  (LObject *(*)(void *))obj2obj,
   NULL,
   NULL,
-  objmatch,
-  objpull,
+  (bool (*)(void *, void *))objmatch,
+  (void (*)(va_list *, void *))objpull,
   LSexpr,
   LTypeMagic
 };
@@ -976,10 +976,10 @@ static void lakewrite(FILE *fp, Lake **x)
 LType LLakep = {
   "lake",
   sizeof(Lake *),
-  lakefromobj,
-  lake2obj,
-  lakefree,
-  lakewrite,
+  (bool (*)(LObject *, void *))lakefromobj,
+  (LObject *(*)(void *))lake2obj,
+  (void (*)(void *))lakefree,
+  (void (*)(FILE *, void *))lakewrite,
   NULL,
   NULL,
   NULL,
@@ -1035,12 +1035,12 @@ void funcpull(va_list *a_list, int *x)
 LType LFuncp = {
   "lisp function",
   sizeof(int),
-  funcfromobj,
-  func2obj,
-  funcfree,
-  funcwrite,
-  funcmatch,
-  funcpull,
+  (bool (*)(LObject *, void *))funcfromobj,
+  (LObject *(*)(void *))func2obj,
+  (void (*)(void *))funcfree,
+  (void (*)(FILE *, void *))funcwrite,
+  (bool (*)(void *, void *))funcmatch,
+  (void (*)(va_list *, void *))funcpull,
   LSexpr,
   LTypeMagic
 };
@@ -2405,7 +2405,7 @@ static inline LObject *LSexpr0(Lake *lake, int listhow)
 	  LLISTVAL(obj)->car = head = LNew(LFUNC, &i);
 	}
 
-	if ( (*functable[i].fptr)(lake, LLISTVAL(obj)) == Lnil ) {
+	if ( ((LObject *(*)(Lake *, LList *))(functable[i].fptr))(lake, LLISTVAL(obj)) == Lnil ) {
 	  LFree(obj);
 	  obj = Lnil;
 	}
@@ -2489,7 +2489,7 @@ LObject *LEval(LObject *obj)
 #endif
 
     /* then call the function */
-    ans = fentry->fptr(NULL, list);
+    ans = ((LObject *(*)(void *, LList *))fentry->fptr)(NULL, list);
 
     /* deal with any interests in the function after calling the
      * function; otherwise the arguments are in an unevaluated state.
@@ -3136,10 +3136,10 @@ static void filterwrite(FILE *fp, LFilter **x)
 LType LFilterp = {
   "filter",
   sizeof(LFilter *),
-  filterfromobj,
-  filter2obj,
-  filterfree,
-  filterwrite,
+  (bool (*)(LObject *, void *))filterfromobj,
+  (LObject *(*)(void *))filter2obj,
+  (void (*)(void *))filterfree,
+  (void (*)(FILE *, void *))filterwrite,
   NULL,
   NULL,
   LSexpr,

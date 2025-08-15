@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "geomclass.h"
 
 char *
-GeomName( object ) 
-    Geom *object;
+GeomName( Geom *object ) 
 {
     if( object && object->Class->name ) {
 	return (*object->Class->name)();

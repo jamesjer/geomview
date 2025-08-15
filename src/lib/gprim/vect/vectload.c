@@ -72,7 +72,7 @@ VectFLoad(IOBFILE *file, char *fname)
 
     v = OOGLNewE(Vect, "VectFLoad: Vect");
 
-    GGeomInit(v, VectMethods(), VECTMAGIC, NULL);
+    GGeomInit((Geom *)v, VectMethods(), VECTMAGIC, NULL);
     v->geomflags = (dimn == 4) ? VERT_4D : 0;
     v->geomflags = 0;
     v->vnvert = NULL;

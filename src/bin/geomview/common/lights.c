@@ -126,9 +126,7 @@ void clight_init()
 }
 
 
-void colmult( c, scalar)
-     Color *c;
-     float scalar;
+void colmult( Color *c, float scalar)
 {
   c->r = c->r * scalar;
   c->g = c->g * scalar;
@@ -252,7 +250,7 @@ void show_lights()
   gs.geom = lr.list;
   gs.h = NULL;
   lr_id = gv_new_alien( name, &gs );
-  ui_add_mode(LIGHTEDIT, lightedit, T_NONE);
+  ui_add_mode(LIGHTEDIT, (PFI)lightedit, T_NONE);
   uistate.lights_shown = 1;
   gv_event_mode( LIGHTEDIT );
 }
@@ -305,9 +303,7 @@ static void build_light_rack(LmLighting *lgt)
 #define max(a,b) (a)>(b)?(a):(b)
 
 static void
-normalize_color( color, coeff )
-    Color *color;
-    float *coeff;
+normalize_color( Color *color, float *coeff )
 {
     *coeff = max(color->r, color->g);
     *coeff = max(color->b, *coeff);
@@ -434,7 +430,7 @@ printf("light moved to %s\n", Point3String(&(lr.lights[uistate.current_light]->p
       mousedisp(event, &dx, &dy, &dt, &drawerstate.winpos);
       if ( (dx != 0) || (dy != 0) ) {
 	Rotation(dx, dy, Tincr, &target);
-	drawer_updateproc( lr_id, updateproc );
+	drawer_updateproc( lr_id, (PFI)updateproc );
       }
       else
 	drawer_updateproc( lr_id, NULL );

@@ -63,11 +63,14 @@ mgpscontext *mgps_newcontext( mgpscontext *ctx );
 /* probably not here */
 int         mgdevice_PS();
 
-extern void mgps_polygon();
-extern void mgps_mesh();
-extern void mgps_line();
-extern void mgps_polyline();
-extern void mgps_polylist();
+struct Poly;
+struct Vertex;
+
+extern void mgps_polygon(int nv, HPoint3 *V, int nn, Point3 *N, int nc, ColorA *C);
+extern void mgps_mesh(int wrap, int nu, int nv, HPoint3 *p, Point3 *n, Point3 *nq, ColorA *c, TxST *ST, int mflags);
+extern void mgps_line(HPoint3 *p1, HPoint3 *p2);
+extern void mgps_polyline(int nv, HPoint3 *verts, int nc, ColorA *colors, int wrap);
+extern void mgps_polylist(int np, struct Poly *p, int nv, struct Vertex *v, int pl_flags);
 extern void mgps_quads();
 
 int _mgps_ctxset(int a1, va_list *alist);
@@ -78,9 +81,9 @@ struct mgfuncs mgpsfuncs = {
   MGD_PS,
   mgdevice_PS,
   mgps_feature,
-  (mgcontext *(*)())mgps_ctxcreate,
+  mgps_ctxcreate,
   mgps_ctxdelete,
-  (int (*)())mgps_ctxset,
+  mgps_ctxset,
   mgps_ctxget,
   mgps_ctxselect,
   mgps_sync,

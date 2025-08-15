@@ -43,6 +43,8 @@ typedef union {
   double d;
 } LCell;
 
+struct Lake;
+
 struct LType
 {
   /* name of type */
@@ -52,25 +54,25 @@ struct LType
   int size;
 
   /* extract cell value from obj */
-  bool (*fromobj)(/* LObject *obj, void *x */);
+  bool (*fromobj)(LObject *obj, void *x);
 
   /* create a new LObject of this type */
-  LObject *(*toobj)(/* void *x */);
+  LObject *(*toobj)(void *x);
 
   /* free a cell of this type */
-  void (*free)(/* void *x */);
+  void (*free)(void *x);
 
   /* write a cell value to a stream */
-  void (*write)(/* FILE *fp, void *x */);
+  void (*write)(FILE *fp, void *x);
 
   /* test equality of two cells of this type */
-  bool (*match)(/* void *a, void *b */);
+  bool (*match)(void *a, void *b);
 
   /* pull a cell value from a va_list */
-  void (*pull)(/* va_list *a_list, void *x */);
+  void (*pull)(va_list *a_list, void *x);
 
   /* parse an object of this type */
-  LObject *(*parse)(/* Lake *lake */);
+  LObject *(*parse)(struct Lake *lake);
 
   /* magic number; always set to LTypeMagic */
   int magic;
@@ -137,7 +139,7 @@ typedef struct LList {
   struct LList *cdr;
 } LList;
 
-typedef LObject *(*LObjectFunc)();
+typedef void *LObjectFunc;
 
 typedef struct LInterest {
   Lake *lake;

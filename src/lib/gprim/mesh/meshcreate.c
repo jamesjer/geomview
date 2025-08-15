@@ -51,7 +51,7 @@ MeshCreate (Mesh *exist, GeomClass *classp, va_list *a_list)
   if (exist == NULL) {
     mesh = OOGLNewE(Mesh, "MeshCreate mesh");
     memset(mesh, 0, sizeof(Mesh));
-    GGeomInit (mesh, classp, MESHMAGIC, NULL);
+    GGeomInit ((Geom *)mesh, classp, MESHMAGIC, NULL);
     mesh->bsptree = NULL;
     mesh->nu = 1;
     mesh->nv = 1;
@@ -135,7 +135,7 @@ MeshCreate (Mesh *exist, GeomClass *classp, va_list *a_list)
     break;
 
   default:
-    if (GeomDecorate (mesh, &copy, attr, a_list)) {
+    if (GeomDecorate ((Geom *)mesh, &copy, attr, a_list)) {
       GeomError (0, "MeshCreate: Undefined option: %d", attr);
       OOGLFree (mesh);
       return NULL;

@@ -64,7 +64,7 @@ typedef Geom *GeomBoundSphereFunc( Geom *object, Transform T,
                                    TransformN *TN, int * axes, int space );
 typedef Geom *GeomEvalFunc(  Geom *object, float u, float v );
 typedef Geom *GeomDiceFunc( Geom *object, int nu, int nv );
-typedef Geom *GeomSubdivideFunc( /* Geom *object */ );
+typedef Geom *GeomSubdivideFunc( Geom *object );
 
 typedef Geom *
 GeomPickFunc(Geom *, Pick *, Appearance *, Transform, TransformN *, int *axes);
@@ -83,7 +83,7 @@ enum {
 typedef int GeomExportFunc( Geom *object, Pool *p );
 typedef Geom *GeomImportFunc( Pool *p );
 typedef Geom *GeomUnexportFunc( Handle *h );
-typedef Geom *GeomScanFunc( Geom *g, int (*func)(/*Geom*,Handle**,void *arg*/), void *arg );
+typedef Geom *GeomScanFunc( Geom *g, int (*func)(Handle**,Geom*,void *arg), void *arg );
 typedef Geom *GeomAppendFunc( Geom *g, Handle *h, Geom *newitem );
 
 struct GeomClass
@@ -134,8 +134,8 @@ struct GeomClass
   GeomUnexportFunc *unexport;
 };
 
-extern GeomClass *GeomClassCreate();
-extern GeomClass *GeomSubClassCreate();
+extern GeomClass *GeomClassCreate(char *);
+extern GeomClass *GeomSubClassCreate(char *, char *);
 extern GeomClass *GeomClassLookup(char *classname);
 extern void      *GeomClassIterate();
 extern GeomClass *GeomNextClass( void *iter );

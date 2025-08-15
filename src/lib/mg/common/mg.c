@@ -1100,9 +1100,9 @@ mg_bsptree(struct BSPTree *bsptree)
     MGD_NODEV,								\
       mgdevice_NULL,          /* mg_setdevice        */			\
       mg_feature,             /* mg_feature          */			\
-      (mgcontext *(*)(void))mg_ctxcreate,         /* mg_ctxcreate        */ \
+      mg_ctxcreate,           /* mg_ctxcreate        */			\
       mg_ctxdelete,           /* mg_ctxdelete        */			\
-      (int (*)(void))mg_ctxset,          /* mg_ctxset           */	\
+      mg_ctxset,              /* mg_ctxset           */			\
       mg_ctxget,              /* mg_ctxget           */			\
       mg_ctxselect,           /* mg_ctxselect        */			\
       mg_sync,                /* mg_sync             */			\

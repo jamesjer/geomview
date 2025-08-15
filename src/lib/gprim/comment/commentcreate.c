@@ -58,7 +58,7 @@ CommentCopy(Comment *comment)
 
   if (datalength == 0) datalength = strlen(comment->data)+1;
   nc = OOGLNewE(Comment, "CommentCopy: Comment");
-  GGeomInit(nc, comment->Class, comment->magic, NULL);
+  GGeomInit((Geom *)nc, comment->Class, comment->magic, NULL);
   nc->name = OOGLNewNE(char, strlen(comment->name)+1, "Comment name");
   nc->type = OOGLNewNE(char, strlen(comment->type)+1, "Comment type");
   nc->data = OOGLNewNE(char, datalength, "Comment data");
@@ -78,7 +78,7 @@ CommentCreate (Comment *exist, GeomClass *classp, va_list *a_list)
 
     if (exist == NULL) {
 	comment = OOGLNewE(Comment, "CommentCreate comment");
-	GGeomInit (comment, classp, COMMENTMAGIC, NULL);
+	GGeomInit ((Geom *)comment, classp, COMMENTMAGIC, NULL);
 	comment->name = NULL;
 	comment->type = NULL;
 	comment->length = 0;
@@ -91,7 +91,7 @@ CommentCreate (Comment *exist, GeomClass *classp, va_list *a_list)
     while ((attr = va_arg (*a_list, int))) {
 	switch(attr) {
 	default:
-	    if (GeomDecorate(comment, &copy, attr, a_list)) {
+	    if (GeomDecorate((Geom *)comment, &copy, attr, a_list)) {
 		OOGLError (0, "CommentCreate: Undefined option: %d", attr);
 		if (exist == NULL) GeomDelete ((Geom *)comment);
 		return NULL;

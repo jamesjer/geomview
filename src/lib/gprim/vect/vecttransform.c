@@ -36,9 +36,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "vectP.h"
 
 Vect *
-VectTransform( v, T )
-     Vect *v;
-     Transform T;
+VectTransform( Vect *v, Transform T )
 {
   HPt3TransformN(T, v->p, v->p, v->nvert);
   return(v);
@@ -46,9 +44,7 @@ VectTransform( v, T )
 
 
 Vect *
-VectTransformTo( v, T )
-     Vect *v;
-     Transform T;
+VectTransformTo( Vect *v, Transform T )
 {
   return(VectTransform(v, T));
 }

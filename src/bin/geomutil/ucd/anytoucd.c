@@ -75,9 +75,7 @@ typedef struct polygon polygon;
 typedef struct line line;
 
 void
-myconvert(CP, cp)
-Poly *CP;
-polygon *cp;
+myconvert(Poly *CP, polygon *cp)
 {
     int i;
     cp->nv = CP->n_vertices;
@@ -87,9 +85,7 @@ polygon *cp;
 }
 
 polygon *
-chopup (pp, PP)
-polygon *pp;
-Poly *PP;
+chopup (polygon *pp, Poly *PP)
 {
     int n, i ;
     int convex, orient;

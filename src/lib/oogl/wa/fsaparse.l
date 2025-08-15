@@ -29,6 +29,8 @@ YYSTYPE yylval;
 
 %}
 
+%option nounput noinput
+
 DIGIT	[0-9]
 WS	[ \t\n,]
 LETTER	[A-Za-z]

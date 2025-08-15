@@ -36,7 +36,7 @@ static char copyright[] =
 
 static int adj[MAXSTATES];
 static int adj_index = 0;
-static void install_adjacency();
+static void install_adjacency(int);
 static void yyerror(char *s);
 extern int yylex(void);
 
@@ -176,8 +176,7 @@ static void yyerror(char *s)
 }
 
 static void
-  install_adjacency(n)
-int n;
+  install_adjacency(int n)
 {
   int i;
 
@@ -186,8 +185,7 @@ int n;
 }
 
 void
-parse_init(f)
-     wa *f;
+parse_init(wa *f)
 {
   fsa = f;
 
@@ -210,9 +208,7 @@ parse_init(f)
  *		automata.
  */
 int
-  fsaparse(fp, fsa)
-FILE *fp;
-wa *fsa;
+  fsaparse(FILE *fp, wa *fsa)
 {
   extern FILE *yyin;
   int ret;

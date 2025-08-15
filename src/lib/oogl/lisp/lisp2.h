@@ -50,25 +50,25 @@ struct LType {
   int size;
 
   /* extract cell value from obj */
-  int (*fromobj)(/* LObject *obj, void *x */);
+  int (*fromobj)(LObject *obj, void *x);
 
   /* create a new LObject of this type */
-  LObject *(*toobj)(/* void *x */);
+  LObject *(*toobj)(void *x);
 
   /* free a cell of this type */
-  void (*free)(/* void *x */);
+  void (*free)(void *x);
 
   /* write a cell value to a stream */
-  void (*write)(/* FILE *fp, void *x */);
+  void (*write)(FILE *fp, void *x);
 
   /* test equality of two cells of this type */
-  int (*match)(/* void *a, void *b */);
+  int (*match)(void *a, void *b);
 
   /* pull a cell value from a va_list */
-  void (*pull)(/* va_list *a_list, void *x */);
+  void (*pull)(va_list *a_list, void *x);
 
   /* parse an object of this type */
-  LObject *(*parse)(/* Lake *lake */);
+  LObject *(*parse)(Lake *lake);
 
   /* magic number; always set to LTypeMagic */
   int magic;

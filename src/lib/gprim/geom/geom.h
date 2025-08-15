@@ -74,7 +74,7 @@ extern Geom    *GeomTransformTo( Geom *obj, Transform T, TransformN *TN );
 extern int	GeomSet( Geom *g, /* int attr, */ ... /* , CR_END */ );
 extern int	GeomGet( Geom *g, int attr, void *attrp );
 
-extern void	GeomHandleScan( Geom *g, int (*func)(), void *arg );
+extern void	GeomHandleScan( Geom *g, int (*func)(Handle **, Geom *, void *), void *arg );
 
 extern Geom    *GeomDraw( Geom *obj );	/* Using current mg context */
 extern struct BSPTree *
@@ -166,10 +166,12 @@ extern int	 GeomUpdate( Geom *obj, int doImport );	/* Recursive bind */
 	Tm3Rotate(t, aa, axis);			\
 	GeomTransform(ggg, t); 	}
 
+struct Appearance;
+
 extern Geom *GeomCCreate(Geom *g, GeomClass *c, ...);
-extern int  GeomDecorate(/* Geom *g, int *copyp, int feature, va_list *ap */);
+extern int  GeomDecorate(Geom *g, int *copyp, int feature, va_list *ap);
 extern void GeomAcceptToken();
-extern void GGeomInit(/*Geom *g, GeomClass *Class, int magic, Appearance *ap*/);
+extern void GGeomInit(Geom *g, GeomClass *Class, int magic, struct Appearance *ap);
 
 extern void GeomKnownClassInit();
 extern void GeomAddTranslator(char *prefix, char *cmd);

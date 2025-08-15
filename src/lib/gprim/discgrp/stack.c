@@ -67,8 +67,7 @@ pop_old_stack()
 }
 
 int
-push_new_stack(word)
-char *word;
+push_new_stack(char *word)
 {
 	entry * oldstack;
 	if (new >= stack + numchunks * CHUNKSIZE)	

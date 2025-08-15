@@ -82,7 +82,7 @@ NPolyListCreate(NPolyList *exist, GeomClass *classp, va_list *a_list)
   if (exist == NULL) {
     pl = OOGLNewE(NPolyList,"NPolyListCreate npolylist");
     memset(pl, 0, sizeof(NPolyList));
-    GGeomInit(pl, classp, NPLMAGIC, NULL);
+    GGeomInit((Geom *)pl, classp, NPLMAGIC, NULL);
     pl->pdim = 4;	/* 3-D plus homogeneous component */
   } else {
     pl = exist;
@@ -146,7 +146,7 @@ NPolyListCreate(NPolyList *exist, GeomClass *classp, va_list *a_list)
       break;
 
     default:
-      if (GeomDecorate(pl, &copy, attr, a_list)) {
+      if (GeomDecorate((Geom *)pl, &copy, attr, a_list)) {
 	OOGLError(0,"Undefined PolyList option: %d", attr);
 	if (!exist) GeomDelete((Geom *)pl);
 	return NULL;

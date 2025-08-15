@@ -92,8 +92,7 @@ WEPolyhedronToVect(WEpolyhedron *poly, HPoint3 origin)
 /*static ColorA white = {1,1,1,1};*/
 
 Geom *
-  WEPolyhedronToPolyList(poly)
-WEpolyhedron *poly;
+  WEPolyhedronToPolyList(WEpolyhedron *poly)
 {
   ColorA *colors = NULL;
   HPoint3 *points = NULL;

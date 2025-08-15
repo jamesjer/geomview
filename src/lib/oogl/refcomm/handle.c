@@ -130,8 +130,9 @@ Handle *HandlePoolIterate(Pool *pool, Handle *pos)
 }
 
 void
-HandleUpdRef(Handle **hp, Ref *parent, Ref **objp)
+HandleUpdRef(Handle **hp, Ref *parent, void *info)
 {
+  Ref **objp = (Ref **)info;
   Handle *h;
 
   (void)parent;

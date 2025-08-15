@@ -35,12 +35,12 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "listP.h"
 
 void
-ListHandleScan( List *list, int (*func)(), void *arg )
+ListHandleScan( List *list, int (*func)(Handle **, List *, void *), void *arg )
 {
     while(list) {
 	if(list->carhandle)
 	    (*func)(&list->carhandle, list, arg);
-	GeomHandleScan( list->car, func, arg );
+	GeomHandleScan( list->car, (int (*)(Handle **, Geom *, void *))func, arg );
 	list = list->cdr;
     }
 }

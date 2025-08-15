@@ -112,7 +112,7 @@ typedef struct clip {
 				/* For a plane, the plane normal vector */
 				/* (or, other parameters for non-planar clip) */
 
-    float	(*clipfunc)();	/* Clipping function, whose value is zero
+    float	(*clipfunc)(struct clip *, float *);	/* Clipping function, whose value is zero
 				 * along the surface where we should clip.
 				 */
     int		nonlinear;	/* Is clipfunc an affine function of position?*/

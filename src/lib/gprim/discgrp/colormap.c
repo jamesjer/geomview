@@ -69,8 +69,7 @@ static int doneread = 0;
 static char default_name[] = "sample.cmap";
 
 int
-readcmap(cmapfname)
-char *cmapfname;
+readcmap(char *cmapfname)
 {
 	FILE *fp;
 	int size = 256;
@@ -107,8 +106,7 @@ ZXCV:
 }
 
 ColorA
-GetCmapEntry(n)
-int n;
+GetCmapEntry(int n)
 {
  	if (!doneread)	{
 	    char *cmapfile; 

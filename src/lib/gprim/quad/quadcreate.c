@@ -45,7 +45,7 @@ QuadCreate (Quad *exist, GeomClass *classp, va_list *a_list)
 
     if (exist == NULL) {
 	q = OOGLNewE(Quad, "QuadCreate: new Quad");
-        GGeomInit (q, classp, QUADMAGIC, NULL);
+        GGeomInit ((Geom *)q, classp, QUADMAGIC, NULL);
 	q->geomflags = q->maxquad = 0;
         q->p = (QuadP *)NULL;
         q->n = (QuadN *)NULL;
@@ -143,7 +143,7 @@ QuadCreate (Quad *exist, GeomClass *classp, va_list *a_list)
 	    break;
 
 	default:
-            if (GeomDecorate(q, &copy, attr, a_list)) {
+            if (GeomDecorate((Geom *)q, &copy, attr, a_list)) {
 	       OOGLError (0, "QuadCreate: Undefined option: %d",attr);
 	       if (!exist) GeomDelete((Geom *)q);
 	       return NULL;

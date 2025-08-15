@@ -100,7 +100,7 @@ List *ListCopy(List *list)
 	if (newcar == NULL)
 	    continue;
 	nl = OOGLNewE(List, "ListCopy: List");
-	GGeomInit(nl, list->Class, list->magic, NULL);
+	GGeomInit((Geom *)nl, list->Class, list->magic, NULL);
 	*tailp = nl;
 	tailp = &nl->cdr;
 	nl->car = newcar;
@@ -138,10 +138,10 @@ Geom *ListAppend(Geom *lg, Geom *g)
     if (l) {
 	while (l->cdr) l = l->cdr;
 	l->cdr = new;
-	GGeomInit(new, lg->Class, lg->magic, NULL);
+	GGeomInit((Geom *)new, lg->Class, lg->magic, NULL);
     } else {
 	l = new;
-	GGeomInit(new, ListClass, LISTMAGIC, NULL);
+	GGeomInit((Geom *)new, ListClass, LISTMAGIC, NULL);
     }
     new->carhandle = NULL;
 
@@ -158,7 +158,7 @@ List *ListCreate (List *exist, GeomClass *Classp, va_list *a_list )
 
     if (exist == NULL) {
 	list = OOGLNewE( List, "ListCreate: new List" );
-	GGeomInit(list, Classp, LISTMAGIC, NULL);
+	GGeomInit((Geom *)list, Classp, LISTMAGIC, NULL);
 	list->cdr = NULL;
 	list->carhandle = NULL;
 	list->car = NULL;
@@ -198,7 +198,7 @@ List *ListCreate (List *exist, GeomClass *Classp, va_list *a_list )
 	case CR_GEOM:	/* == CR_CAR */
 	    if (list->car != NULL || list->carhandle != NULL) {
 		l = OOGLNewE(List, "ListCreate: List");
-		GGeomInit(l, Classp, LISTMAGIC, NULL);
+		GGeomInit((Geom *)l, Classp, LISTMAGIC, NULL);
 		l->car = list->car;
 		l->carhandle = list->carhandle;
 		RefIncr((Ref *)list->carhandle);
@@ -245,7 +245,7 @@ List *ListCreate (List *exist, GeomClass *Classp, va_list *a_list )
 	    tree_changed = true;
 	    break;
 	default:
-	    if (GeomDecorate (list, &copy, attr, a_list)) {
+	    if (GeomDecorate ((Geom *)list, &copy, attr, a_list)) {
 		OOGLError (0, "ListCreate: Undefined attribute: %d", attr);
 
 	      fail:

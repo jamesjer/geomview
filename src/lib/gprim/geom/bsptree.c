@@ -983,10 +983,10 @@ void BSPTreeFreeTree(const BSPTree *_tree)
  * BSP-tree; so INSTs and LISTs must register a callback with their
  * handles.
  */
-void BSPTreeInvalidate(Handle **chp, Ref *unused, BSPTree *self)
+void BSPTreeInvalidate(Handle **chp, Ref *unused, void *self)
 {
   (void)unused;
-  BSPTreeFreeTree(self);
+  BSPTreeFreeTree((BSPTree *)self);
 }
 
 /* This is really easy, 'cause we are using an obstack. */

@@ -40,7 +40,8 @@ static WEpolyhedron	*wepoly1, **wepoly2;
 HPoint3 DGorigin = {0,0,0,1};
 HPoint3 DGrandom = {.1,.2,.3,.4};
 
-extern void do_weeks_code();
+extern void do_weeks_code(WEpolyhedron **wepolyhedron, point oo, proj_matrix *gen_list,
+                          int n, int met, int slice);
 
 static int
 is_id(Transform t)
@@ -245,7 +246,7 @@ DiscGrpExtractNhbrs( WEpolyhedron *wepoly )
     int 	i,j,k;
     WEface 		*fptr;	
     DiscGrpElList	*mylist;
-    ColorA		GetCmapEntry();
+    ColorA		GetCmapEntry(int n);
     
     if (!wepoly)	return(NULL);
 
@@ -320,7 +321,7 @@ DiscGrpDirDom(DiscGrp *dg)
 {
     Geom *oogldirdom;
     WEpolyhedron *dd;
-    extern Geom             *WEPolyhedronToPolyList();
+    extern Geom             *WEPolyhedronToPolyList(WEpolyhedron *poly);
     Geom *mylist, *smlist;
 
       if (dg->flag & DG_DDBEAM)	{

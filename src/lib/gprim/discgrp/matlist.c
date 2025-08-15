@@ -40,10 +40,6 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 	extern int debug, stringent, metric;
 	static float epsilon = .005;
 
-void traverse_list();
-int is_same();
-
-
 struct node {
 	Transform t;
 	struct node *l,*r, *p;	/* left, right, parent */
@@ -55,6 +51,9 @@ struct node {
 	} ;
 
 static struct node *head;
+
+void traverse_list(struct node *n);
+int is_same(Transform t0, Transform t1);
 
 double
 getnorm(int metric, Transform t)
@@ -94,14 +93,11 @@ alloc_node()
 }
 
 int
-insert_or_match_mat(mat, mode)
-Transform mat;
-int mode;	/* insert or match? */
+insert_or_match_mat(Transform mat, int mode /* insert or match? */)
 {
 	struct node *n = NULL, *p; 
 	float d;
 	struct node tnode;
-	double getnorm();
 
 	if (debug == 4)	traverse_list(head);
 
@@ -173,8 +169,7 @@ int mode;	/* insert or match? */
 }
 
 int
-is_same(t0, t1)
-Transform t0, t1;
+is_same(Transform t0, Transform t1)
 {
     int i, j, same = 1;
 
@@ -213,8 +208,7 @@ OUT:
 }
 
 int
-is_new(t)
-Transform t;
+is_new(Transform t)
 {
     if ( insert_or_match_mat(t, MATCH) )
 	    {
@@ -225,8 +219,7 @@ Transform t;
 
 
 void
-traverse_list(n)
-struct node *n;
+traverse_list(struct node *n)
 {
 	if (n == NULL)	return;
 	traverse_list(n->l);
@@ -235,8 +228,7 @@ struct node *n;
 }
 
 static void
-_delete_list(n)
-struct node *n;
+_delete_list(struct node *n)
 {
  	struct node *nt, *ot;
 	if (n == NULL) return;

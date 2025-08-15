@@ -59,7 +59,7 @@ TxFSave(Texture *tx, FILE *outf, char *fname)
   return ok ? tx : NULL;
 }
 
-void TxUpdateImage(Handle **hp, Ref *parentobj, Image **imgp)
+void TxUpdateImage(Handle **hp, Ref *parentobj, void *imgp)
 {
   Texture *tx = (Texture *)parentobj;
     
@@ -351,11 +351,12 @@ TxDelete(Texture *tx)
 
 HandleOps TextureOps = {
   "texture",
-  (int ((*)()))TxStreamIn,
-  (int ((*)()))TxStreamOut,
-  (void ((*)()))TxDelete,
+  (int ((*)(Pool *, Handle **, Ref **)))TxStreamIn,
+  (int ((*)(Pool *, Handle *, Ref *)))TxStreamOut,
+  (void ((*)(Ref *)))TxDelete,
   NULL,
   NULL,
+  {NULL, NULL}, {NULL, NULL}
 };
 
 static struct txkw {

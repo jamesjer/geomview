@@ -43,9 +43,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "vectP.h"
 
 Vect *
-VectFSave(v, f)
-	Vect *v;
-	FILE *f;
+VectFSave(Vect *v, FILE *f)
 {
 	int i;
 	HPoint3 *p;

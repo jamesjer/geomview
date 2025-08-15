@@ -35,7 +35,7 @@
 
 typedef struct _emodule {
 	char *name;
-	void (*func)();
+	void (*func)(void *);
 	char *text;
 	int pid;
 	Pool *link;

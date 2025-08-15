@@ -40,7 +40,7 @@ void mgrib_drawCline(HPoint3 *p1, HPoint3 *p2);
 void	mgrib_polygon( int nv, HPoint3 *v, int nn, Point3 *n,
 		       int nc,ColorA *c );
 void	mgrib_mesh(int wrap,int nu,int nv,HPoint3 *p, Point3 *n, Point3 *nq,
-		   ColorA *c );
+		   ColorA *c, TxST *ST, int mflags);
 void	mgrib_line( HPoint3 *p1, HPoint3 *p2 );
 void	mgrib_polyline( int nv, HPoint3 *verts, int nc, ColorA *colors,
 			int wrapped );
@@ -289,8 +289,7 @@ mgrib_drawCline(HPoint3 *p1, HPoint3 *p2)
 }
 
 int 
-bounded(p)
-     Point3 *p;
+bounded(Point3 *p)
 {
   if (! Pt3Equal(p,&Pt3Origin)) {
     if (p->x < MAXCLINE && p->y < MAXCLINE && p->z < MAXCLINE) 

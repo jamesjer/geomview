@@ -38,7 +38,7 @@ static GeomClass *aQuadMethods = NULL;
 /* these are known only to the library, not the user */
 extern Quad *QuadCopy( Quad * );
 extern Quad *QuadDelete( Quad * );
-extern Geom *QuadCreate ( va_list);
+extern Geom *QuadCreate ( Quad *, GeomClass *, va_list * );
 
 int QuadPresent = 1;
 

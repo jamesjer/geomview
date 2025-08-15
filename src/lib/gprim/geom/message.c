@@ -34,10 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "geomclass.h"
 
 Geom *
-GeomMessage( object, ac, av )
-    Geom *object;
-    int ac;
-    char *av[];
+GeomMessage( Geom *object, int ac, char *av[] )
 {
     if( object && object->Class->message )
 	(*object->Class->message)(object,ac,av);

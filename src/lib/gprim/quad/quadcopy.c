@@ -34,8 +34,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "quadP.h"
 
 Quad *
-QuadCopy(oq)
-	Quad *oq;
+QuadCopy(Quad *oq)
 {
 	Quad *q;
 

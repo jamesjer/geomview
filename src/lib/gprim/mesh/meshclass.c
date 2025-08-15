@@ -39,7 +39,7 @@ int MeshPresent = 1;
 
 static char meshName[] = "mesh";
 
-extern Mesh      *MeshCreate( va_list );
+extern Mesh      *MeshCreate( Mesh *, GeomClass *, va_list * );
 extern Mesh      *MeshDelete( Mesh * );
 extern Mesh      *MeshCopy( Mesh * );
 

@@ -68,12 +68,15 @@ const Appearance *mgrib_setappearance(const Appearance* app, int merge);
 int	    mgrib_setcamera( Camera* cam );
 mgribcontext *mgrib_newcontext( mgribcontext *ctx );
 
-extern void  mgrib_polygon();
-extern void  mgrib_mesh();
-extern void  mgrib_line();
-extern void  mgrib_polyline();
-extern void  mgrib_polylist();
-extern void  mgrib_bezier();
+struct Poly;
+struct Vertex;
+
+extern void  mgrib_polygon(int nv, HPoint3 *v, int nn, Point3 *n, int nc, ColorA *c);
+extern void  mgrib_mesh(int wrap,int nu,int nv,HPoint3 *p, Point3 *n, Point3 *nq, ColorA *c, TxST *ST, int mflags);
+extern void  mgrib_line(HPoint3 *p1, HPoint3 *p2);
+extern void  mgrib_polyline(int nv, HPoint3 *verts, int nc, ColorA *colors, int wrapped);
+extern void  mgrib_polylist(int np, struct Poly *p, int nv, struct Vertex *v, int plflags);
+extern void  mgrib_bezier(int du, int dv, int dimn, float *CtrlPnts, TxST *txmapst, ColorA *c);
 
 int _mgrib_ctxset(int a1, va_list *alist);
 
@@ -83,9 +86,9 @@ struct mgfuncs mgribfuncs = {
   MGD_RIB,
   mgdevice_RIB,
   mgrib_feature,
-  (mgcontext *(*)())mgrib_ctxcreate,
+  mgrib_ctxcreate,
   mgrib_ctxdelete,
-  (int (*)())mgrib_ctxset,
+  mgrib_ctxset,
   mgrib_ctxget,
   mgrib_ctxselect,
   mgrib_sync,

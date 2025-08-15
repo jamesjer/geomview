@@ -46,11 +46,11 @@ extern UIState uistate;
 
 static void select_object(Widget, XtPointer, XmListCallbackStruct *);
 static void select_module(Widget, XtPointer, XmListCallbackStruct *);
-static void file_menu_callbacks(Widget, char *);
-static void edit_menu_callbacks(Widget, char *);
-static void inspect_menu_callbacks(Widget, XtPointer);
-static void motion_menu_callbacks(Widget, char *);
-static void help_menu_callbacks(Widget, XtPointer);
+static void file_menu_callbacks(Widget, XtPointer, XtPointer);
+static void edit_menu_callbacks(Widget, XtPointer, XtPointer);
+static void inspect_menu_callbacks(Widget, XtPointer, XtPointer);
+static void motion_menu_callbacks(Widget, XtPointer, XtPointer);
+static void help_menu_callbacks(Widget, XtPointer, XtPointer);
 static void choose_space(Widget, int);
 static void BuildBrowserMenu();
 static int id2menuindex(int);
@@ -73,7 +73,7 @@ static MenuItem file_menu[] = {
   { "Save               ", &xmPushButtonGadgetClass, 'S', "Ctrl<Key>S","[ > ]",
         file_menu_callbacks, "S", (MenuItem *)NULL},
   { "_sepr", &xmSeparatorGadgetClass, (char)0, (char*)NULL, (char*)NULL,
-        (void (*)())NULL, (XtPointer)NULL, (MenuItem *)NULL },
+    (XtCallbackProc)NULL, (XtPointer)NULL, (MenuItem *)NULL },
   { "Exit                   ", &xmPushButtonGadgetClass, 'E', "Ctrl<Key>X","[ Q ]",
         file_menu_callbacks, "X", (MenuItem *)NULL},
   { NULL, NULL }
@@ -119,7 +119,7 @@ static MenuItem motion_menu[] = {
   { "Tools", &xmPushButtonGadgetClass, 'T', "Ctrl<Key>T", "[Pt]",
         motion_menu_callbacks, "T", (MenuItem *)NULL},
   { "_sepr", &xmSeparatorGadgetClass, (char)0, (char*)NULL, (char*)NULL,
-        (void (*)())NULL, (XtPointer)NULL, (MenuItem *)NULL },
+        (XtCallbackProc)NULL, (XtPointer)NULL, (MenuItem *)NULL },
   { "Inertia", &xmToggleButtonGadgetClass, 'I', "Alt<Key>I", "[ui]",
         motion_menu_callbacks, "1", (MenuItem *)NULL},
   { "Constrain motion", &xmToggleButtonGadgetClass, 'C', "Alt<Key>M", "[uc]",
@@ -170,8 +170,9 @@ void ui_refresh_mainpanel(int id)
 			NULL);
 }
 
-static void motion_menu_callbacks(Widget widget, char *text)
+static void motion_menu_callbacks(Widget widget, XtPointer client_data, XtPointer call_data)
 {
+  char *text = (char *)client_data;
   DrawerKeyword val = DRAWER_NOKEYWORD;
 
   switch (text[0])
@@ -293,7 +294,7 @@ LDEFINE(ui_motion, LVOID,
 
 char htmlbrowser[PATH_MAX] = { '\0', }, pdfviewer[PATH_MAX] = { '\0', };
 
-static void help_menu_callbacks(Widget widget, XtPointer ptr)
+static void help_menu_callbacks(Widget widget, XtPointer ptr, XtPointer call_data)
 {
   if ((int)(long)ptr == P_CREDITS) {
     ui_showpanel(P_CREDITS, 1);
@@ -495,10 +496,11 @@ void ui_load_mainpanel()
 
 /*****************************************************************************/
 
-static void file_menu_callbacks(Widget widget, char *text)
+static void file_menu_callbacks(Widget widget, XtPointer client_data, XtPointer call_data)
 {
   CameraStruct cs;
   DView *dv;
+  char *text = (char *)client_data;
 
   switch (text[0])
   {
@@ -527,8 +529,9 @@ static void file_menu_callbacks(Widget widget, char *text)
 
 /*****************************************************************************/
 
-static void edit_menu_callbacks(Widget widget, char *text)
+static void edit_menu_callbacks(Widget widget, XtPointer client_data, XtPointer call_data)
 {
+  char *text = (char *)client_data;
   switch (text[0])
   {
     case 'U':
@@ -548,7 +551,7 @@ static void edit_menu_callbacks(Widget widget, char *text)
 
 /*****************************************************************************/
 
-static void inspect_menu_callbacks(Widget widget, XtPointer code)
+static void inspect_menu_callbacks(Widget widget, XtPointer code, XtPointer call_data)
 {
   ui_showpanel((int)(long)code, 1);
 }
@@ -630,7 +633,7 @@ ui_keyboard(int ch)
     ui_keyboard('^'); ui_keyboard('?');
   } else {
     if(nextc >= (int)sizeof(kybd)-1) {
-	memcpy(kybd, kybd+1, sizeof(kybd)-2);
+	memmove(kybd, kybd+1, sizeof(kybd)-2);
 	nextc = sizeof(kybd)-2;
     } else if(nextc == 0) {
 	kybd[nextc++] = '[';

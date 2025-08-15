@@ -48,15 +48,15 @@ Mesh 		*BezierReDice( Bezier * );
 Bezier		*BezierDice( Bezier *, int nu, int nv );
 char           	*BezierListName();
 List 		*BezierListLoad();
-List		*BezierListFLoad();
-List 		*BezierListSave();
-List		*BezierListFSave();
+List		*BezierListFLoad(IOBFILE *file, char *fname);
+List 		*BezierListSave(List *bezierlist, char *fname);
+List		*BezierListFSave(List *bezierlist, FILE *f);
 char           	*BezierName();
-BBox           	*BezierBound();
+BBox           	*BezierBound(Bezier *bezier, Transform T, TransformN *TN);
 Geom 		*BezierBoundSphere( Bezier *,
 				    Transform T, TransformN *TN, int *axes,
 				    int );
-Bezier      	*BezierEvert();
+Bezier      	*BezierEvert(Bezier *bezier);
 Bezier      	*BezierDraw( Bezier *bezier );
 Bezier      	*BezierBSPTree(Bezier *bezier, BSPTree *tree, int action);
 Geom      	*BezierPick( Bezier *, Pick *, Appearance *, Transform, TransformN *, int *axes );

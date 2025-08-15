@@ -45,8 +45,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
  * Notes:	Sets Tres = Inverse[Tcon} * T * Tcon
  */
 void
-Tm3Conjugate( T, Tcon, Tres )
-    Transform3 T, Tcon, Tres;
+Tm3Conjugate( Transform3 T, Transform3 Tcon, Transform3 Tres )
 {
     Transform3 Tconinv;
 

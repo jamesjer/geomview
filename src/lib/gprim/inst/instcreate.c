@@ -61,7 +61,7 @@ Inst *InstCopy(Inst *inst)
   Inst *ni;
 
   ni = OOGLNewE(Inst, "InstCopy: Inst");
-  GGeomInit(ni, inst->Class, inst->magic, NULL);
+  GGeomInit((Geom *)ni, inst->Class, inst->magic, NULL);
   TmCopy(inst->axis, ni->axis);
   if (inst->NDaxis) {
     ni->NDaxis = NTransCreate(inst->NDaxis);
@@ -131,7 +131,7 @@ Inst *InstCreate(Inst *exist, GeomClass *classp, va_list *a_list)
 
   if (exist == NULL) {
     inst = OOGLNewE(Inst, "InstCreate inst");
-    GGeomInit (inst, classp, INSTMAGIC, NULL);
+    GGeomInit ((Geom *)inst, classp, INSTMAGIC, NULL);
     TmIdentity(inst->axis);
     inst->NDaxis = NULL;
     inst->geomhandle = NULL;
@@ -286,7 +286,7 @@ Inst *InstCreate(Inst *exist, GeomClass *classp, va_list *a_list)
       inst->location = va_arg(*a_list, int);
       break;
     default:
-      if(GeomDecorate(inst, &copy, attr, a_list)) {
+      if(GeomDecorate((Geom *)inst, &copy, attr, a_list)) {
 	OOGLError (0, "InstCreate: Undefined option: %d", attr);
 	if(exist == NULL) {
 	  GeomDelete ((Geom *)inst);

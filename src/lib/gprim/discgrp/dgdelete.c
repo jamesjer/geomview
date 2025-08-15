@@ -44,8 +44,7 @@ DiscGrpElListDelete (DiscGrpElList *exist)
 }
 
 DiscGrp *
-DiscGrpDelete(dg)
-DiscGrp           *dg;
+DiscGrpDelete(DiscGrp *dg)
 {
 	if (dg)
 	{

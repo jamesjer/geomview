@@ -112,8 +112,7 @@ draw_projected_vect(mgNDctx *NDctx,
 }
 
 Vect *
-VectDraw(v)
-     Vect *v;
+VectDraw(Vect *v)
 {
   HPoint3 *p;
   ColorA *c;

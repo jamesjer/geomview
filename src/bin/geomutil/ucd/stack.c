@@ -40,8 +40,7 @@ int initstack(void)
 }
 	
 int
-push(pp)
-Poly *pp;
+push(Poly *pp)
 {
     int i;
     if (stackptr >= &mystack[BlockSize*array_size])	{ 

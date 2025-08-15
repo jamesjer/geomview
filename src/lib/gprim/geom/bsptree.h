@@ -36,7 +36,7 @@ extern BSPTree *BSPTreeSet(BSPTree *tree, int attr1, ...);
  * BSP-tree; so INSTs and LISTs must register a callback with their
  * handles.
  */
-extern void BSPTreeInvalidate(Handle **chp, Ref *unused, BSPTree *tree);
+extern void BSPTreeInvalidate(Handle **chp, Ref *unused, void *tree);
 
 /* Attributes for BSPTreeSet */
 #define BSPTREE_ONESHOT 42001

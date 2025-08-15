@@ -84,7 +84,7 @@ VectCreate ( Vect *exist, GeomClass *classp, va_list *a_list )
 
     if (exist == NULL) {
 	vect = OOGLNewE(Vect, "new vect");
-        GGeomInit (vect, classp, VECTMAGIC, NULL);
+        GGeomInit ((Geom *)vect, classp, VECTMAGIC, NULL);
 	vect->nvec = 0;
 	vect->nvert = 0;
 	vect->ncolor = 0;
@@ -193,7 +193,7 @@ VectCreate ( Vect *exist, GeomClass *classp, va_list *a_list )
 	    break;
 
 	default:
-	    if (GeomDecorate (vect, &copy, attr, a_list)) {
+	    if (GeomDecorate ((Geom *)vect, &copy, attr, a_list)) {
 		OOGLError (0, "VectCreate: Undefined option: %d\n", attr);
 		OOGLFree (vect);
 		return NULL;
@@ -224,8 +224,7 @@ VectCreate ( Vect *exist, GeomClass *classp, va_list *a_list )
 }
 
 int
-VectSane(vect)
-	Vect *vect;
+VectSane(Vect *vect)
 {
 	int i;
 	int vleft, cleft;

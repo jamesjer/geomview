@@ -33,9 +33,7 @@ typedef	double  plane4[4];
 typedef	double  matrix4[4][4];
 
 void
-matvecmul4(m,v1,v2)
-matrix4 m;
-point4 v1,v2;
+matvecmul4(matrix4 m, point4 v1, point4 v2)
 {
     int i,j;
     double tmp[4], *tv1, *tv2;
@@ -50,9 +48,7 @@ point4 v1,v2;
 }
 
 void
-vecmatmul4(v1,m,v2)
-matrix4 m;
-point4 v1,v2;
+vecmatmul4(point4 v1, matrix4 m, point4 v2)
 {
     int i,j;
     double tmp[4], *tv1, *tv2;
@@ -67,9 +63,7 @@ point4 v1,v2;
 }
 
 void
-matmatmul4 (mat1, mat2, mat3)
-matrix4 mat1, mat2, mat3;
-
+matmatmul4 (matrix4 mat1, matrix4 mat2, matrix4 mat3)
 {
     int i, j, k;
     double tmp[4];

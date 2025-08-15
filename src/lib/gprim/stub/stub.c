@@ -36,16 +36,14 @@ static GeomClass *aStubMethods;
 
 
 void
-StubRoutine(prefix, rest, lib)
-    char *prefix, *rest, *lib;
+StubRoutine(char *prefix, char *rest, char *lib)
 {
     OOGLError(1, "Trying to use stub %s%s() routine!  Relink with lib%s.a",
 	prefix, rest, lib);
 }
 
 GeomClass *
-StubMethods(prefix, lib)
-    char *prefix, *lib;
+StubMethods(char *prefix, char *lib)
 {
     StubRoutine(prefix, "Methods", lib);
     if(aStubMethods == NULL) aStubMethods = GeomClassCreate("stub");

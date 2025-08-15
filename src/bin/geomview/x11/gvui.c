@@ -142,9 +142,7 @@ static void set_x_application_name()
 
 static int panelsready = 0;
 	
-void load_interface(argc, argv)
-unsigned int argc;
-char **argv;
+void load_interface(unsigned int argc, char **argv)
 {
   String fallbacks[] = {
     "gv*fontList:        -adobe-helvetica-medium-r-normal--14-*-*-*-p-*-iso8859-1",

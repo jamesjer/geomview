@@ -90,17 +90,17 @@ TransCreate(Transform T)
 
 HandleOps TransOps = {
 	"trans",
-	(int ((*)()))TransObjStreamIn,
-	(int ((*)()))TransObjStreamOut,
-	(void ((*)()))TransDelete,
-	NULL,
+	(int ((*)(Pool *, Handle **, Ref **)))TransObjStreamIn,
+	(int ((*)(Pool *, Handle *, Ref *)))TransObjStreamOut,
+	(void ((*)(Ref *)))TransDelete,
+	NULL, NULL, {NULL, NULL}, {NULL, NULL}
 };
 
-void TransUpdate(Handle **hp, Ref *ignored, Transform Tfixme)
+void TransUpdate(Handle **hp, Ref *ignored, void *info)
 {
+    TransformPtr Tfixme = (TransformPtr)info;
     Handle *h = *hp;
 
-    (void)ignored;
     if (h != NULL && h->object != NULL) {
 	TmCopy(((TransObj *)(h->object))->T, Tfixme);
     }

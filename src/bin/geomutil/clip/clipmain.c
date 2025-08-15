@@ -69,7 +69,7 @@ static int parsevector(char *str, float data[], int maxdata)
 }
 
 void
-setclipat(Clip *clip, char *pstr, int dim, float *surf, void (*prepfunc)())
+setclipat(Clip *clip, char *pstr, int dim, float *surf, void (*prepfunc)(Clip *))
 {
     float point[MAXDIM];
     float level;
@@ -192,8 +192,8 @@ int main(int argc, char *argv[])
 {
     Geom *g, *clipped;
     float surf[MAXDIM];
-    float (*func)() = NULL;
-    void (*prepfunc)() = NULL;
+    float (*func)(Clip *, float *) = NULL;
+    void (*prepfunc)(Clip *) = NULL;
     char *lestr = NULL, *gestr = NULL;
     char *type;
     int slices = 0;

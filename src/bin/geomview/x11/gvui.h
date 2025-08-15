@@ -92,7 +92,7 @@ void ui_raise_window( int camid );
 
 void   ui_load_mainpanel();
 
-void   ui_refresh_mainpanel();
+void   ui_refresh_mainpanel(int);
 void   ui_adjustpicklist(int);
 void   ui_adjustemodulelist(int);
 

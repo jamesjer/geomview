@@ -204,6 +204,6 @@ void CamDefault(Camera *cam);
 int CamStreamIn(Pool *p, Handle **hp, Camera **camp);
 int CamStreamOut(Pool *p, Handle *hp, Camera *cam);
 
-void CamHandleScan( Camera *cam, int (*func)(), void *arg );
+void CamHandleScan( Camera *cam, int (*func)(Handle **, Camera *, void *), void *arg );
 
 #endif /* !CAMERA_H */

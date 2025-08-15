@@ -48,8 +48,7 @@ init_out_stack()
 }
 	
 int
-enumpush(pp)
-DiscGrpEl *pp;
+enumpush(DiscGrpEl *pp)
 {
     if (stackptr >= &mystack[BlockSize*array_size])	{ 
 	if (debug) 

@@ -42,7 +42,7 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 #include "handleP.h"
 #include "projective.h"
 
-int fsaparse();
+int fsaparse(FILE *fp, wa *fsa);
 
 #define DG_GROUPNAME	1
 #define DG_COMMENT	2

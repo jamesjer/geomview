@@ -54,11 +54,12 @@ Copyright (C) 1998-2000 Stuart Levy, Tamara Munzner, Mark Phillips";
 
 HandleOps GeomOps = {
 	"geom",
-	(int ((*)()))GeomStreamIn,
-	(int ((*)()))GeomStreamOut,
-	(void ((*)()))GeomDelete,
+	(int ((*)(Pool *, Handle **, Ref **)))GeomStreamIn,
+	(int ((*)(Pool *, Handle *, Ref *)))GeomStreamOut,
+	(void ((*)(Ref *)))GeomDelete,
 	NULL,		/* resync */
 	NULL,		/* close pool */
+	{NULL, NULL}, {NULL, NULL}
 };
 
 Geom *
@@ -211,7 +212,7 @@ GeomInvokeTranslator(Pool *p, char *prefix, char *cmd, Handle **hp, Geom **gp)
     long pos = iobftell(pf) - strlen(prefix);
     int ok, oldstdin;
     Pool *tp;
-    void (*oldchld)();
+    void (*oldchld)(int);
 
 #if defined(unix) || defined(__unix)
     /* Rewind file descriptor to previous position */

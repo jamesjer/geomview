@@ -80,7 +80,7 @@ Skel *SkelCreate(Skel *exist, GeomClass *classp, va_list *a_list)
 
   if (exist == NULL) {
     s = OOGLNewE(Skel, "new skel");
-    GGeomInit (s, classp, SKELMAGIC, NULL);
+    GGeomInit ((Geom *)s, classp, SKELMAGIC, NULL);
     s->nlines = 0;
     s->nvert = 0;
     s->nvi = 0;
@@ -178,7 +178,7 @@ Skel *SkelCreate(Skel *exist, GeomClass *classp, va_list *a_list)
       break;
 
     default:
-      if (GeomDecorate (s, &copy, attr, a_list)) {
+      if (GeomDecorate ((Geom *)s, &copy, attr, a_list)) {
 	OOGLError (0, "VectCreate: Undefined option: %d\n", attr);
 	OOGLFree (vect);
 	return NULL;

@@ -26,16 +26,17 @@
 
 typedef double proj_matrix[4][4];
 typedef double point[4];
+#include "complex.h"
 
 #endif
 
 #if PROTOTYPES
 /* in sl2c_to_proj.c */
-extern void		sl2c_to_proj(/*sl2c_matrix, proj_matrix*/);
-extern void		proj_to_sl2c(/*proj_matrix, sl2c_matrix*/);
-extern void		proj_mult(/*proj_matrix, proj_matrix, proj_matrix*/);
-extern void		proj_copy(/*proj_matrix, proj_matrix*/);
-extern void		proj_invert(/*proj_matrix, proj_matrix*/);
+extern void		sl2c_to_proj(sl2c_matrix, proj_matrix);
+extern void		proj_to_sl2c(proj_matrix, sl2c_matrix);
+extern void		proj_mult(proj_matrix, proj_matrix, proj_matrix);
+extern void		proj_copy(proj_matrix, proj_matrix);
+extern void		proj_invert(proj_matrix, proj_matrix);
 #endif
 
 #endif

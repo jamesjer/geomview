@@ -91,8 +91,7 @@ static int ign_fscanf(FILE *file, const char *format, ...)
 #endif
 
 int 
-gettype(str)
-     char *str;
+gettype(char *str)
 {
     if (strcmp(str, "normal") == 0) return UCD_NORMAL; 
     else if (strcmp(str, "rgba") == 0) return UCD_RGBA; 
@@ -101,10 +100,7 @@ gettype(str)
 }
 
 int
-nodeidtoindex(id, v, num_nodes)
-     int id;
-     ucdvert *v;
-     int num_nodes;
+nodeidtoindex(int id, ucdvert *v, int num_nodes)
 {
     int i;
     for (i=0; i<num_nodes; ++i)	
@@ -113,10 +109,7 @@ nodeidtoindex(id, v, num_nodes)
 }
 
 int
-cellidtoindex(id, p, num_cells)
-     int id;
-     ucdpoly *p;
-     int num_cells;
+cellidtoindex(int id, ucdpoly *p, int num_cells)
 {
     int i, index;
     for (i=0, index=0; i<num_cells; index += p[i].faces, ++i)	

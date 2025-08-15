@@ -1297,15 +1297,16 @@ QvPointSet::ToWebOOGL(QvState *state)
 
 }
 
-static int knowngsfont(char *str)
+static int knowngsfont(const char *str)
 {
   if(str == NULL)
     return 0;
   if(access(str, 0) >= 0)
     return 1;
 
-  char buf[2048], *p, *tail;
-  char *gsfontpath = getenv("GS_FONTPATH");
+  char buf[2048];
+  const char *p, *tail;
+  const char *gsfontpath = getenv("GS_FONTPATH");
 
   if(gsfontpath == NULL)
     gsfontpath = "/usr/local/lib/ghostscript/fonts";
@@ -1327,7 +1328,7 @@ void QvAsciiText::ToWebOOGL(QvState *state)
   
   float fontsize = 1.0;
   // float linespace = 1.0;
-  char *font = NULL;
+  const char *font = NULL;
   // int bold = 0, italic = 0;
 
   QvElement *elt = state->getTopElement(QvState::FontStyleIndex);
@@ -1346,7 +1347,7 @@ void QvAsciiText::ToWebOOGL(QvState *state)
   float y = 0;
   char buf[2048], *q;
   const char *p;
-  char *just = "sw";
+  const char *just = "sw";
   FILE *f;
 
   switch(justification.value) {

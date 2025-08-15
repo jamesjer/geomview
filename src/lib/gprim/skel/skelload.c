@@ -99,7 +99,7 @@ Skel *SkelFLoad(IOBFILE *file, char *fname)
 
   s = OOGLNewE(Skel, "SkelFLoad: skel");
 
-  GGeomInit(s, SkelMethods(), SKELMAGIC, NULL);
+  GGeomInit((Geom *)s, SkelMethods(), SKELMAGIC, NULL);
   s->geomflags = (dimn == 4) ? VERT_4D : 0;
   if (vc) {
     s->geomflags |= VERT_C;
