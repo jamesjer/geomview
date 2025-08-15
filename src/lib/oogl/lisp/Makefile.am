@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 BUILT_SOURCES = clisp.c clisp.h
 EXTRA_DIST = Headers lisp2c $(BUILT_SOURCES)
 

@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 
 man_MANS = fsaparse.3gv
 

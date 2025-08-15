@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 EXTRA_DIST = Headers
 
 noinst_LTLIBRARIES = libtransformn.la

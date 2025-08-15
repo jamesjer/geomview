@@ -1,4 +1,4 @@
-INCLUDES = @default_includes@
+AM_CPPFLAGS = @default_includes@
 
 noinst_LIBRARIES = libQv.a
 

@@ -65,7 +65,7 @@ m4_if($2,enabled,
        m4_define([NEGVERB],[enable])
        m4_define([DEFAULT],[disabled])])
 AC_ARG_WITH($1,
-AC_HELP_STRING(--[]NEGDEFAULT[]-$1,
+AS_HELP_STRING([--NEGDEFAULT-$1],
 [NEGVERB use of package $1 (default: DEFAULT)]),
 	[if test -z "$[]UPNAME[_DISABLE]"; then
 	    case "$withval" in
@@ -94,14 +94,14 @@ AC_DEFUN([GEOMVIEW_CHECK_PKG_HDR_OPT],
 [m4_define([UPNAME], [m4_bpatsubst(m4_toupper([$1]),-,_)])
 AC_ARG_WITH($1-headers,
 m4_if($2,[],
-[AC_HELP_STRING([--with-$1-headers=DIR],
+[AS_HELP_STRING([--with-$1-headers=DIR],
 	       [use $1 include files below directory DIR (default: PREFIX/include/)])],
-[AC_HELP_STRING([--with-$1-headers=DIR],
+[AS_HELP_STRING([--with-$1-headers=DIR],
 	       [use $1 include files below directory DIR (default: $2)])]),
 [case "$withval" in
-    yes) AC_MSG_ERROR("option \"--with-$1-headers\" requires an argument")
+    yes) AC_MSG_ERROR([option "--with-$1-headers" requires an argument])
 	;;
-    no) AC_MSG_ERROR("option \"--with-$1-headers\" requires an argument")
+    no) AC_MSG_ERROR([option "--with-$1-headers" requires an argument])
 	;;
     *) UPNAME[_INCLUDE_PATH]="$withval"
 	;;
@@ -114,12 +114,12 @@ dnl
 AC_DEFUN([GEOMVIEW_CHECK_PKG_DIR_OPT],
 [m4_define([UPNAME], [m4_bpatsubst(m4_toupper([$1]),-,_)])
 AC_ARG_WITH($1-dir,
-AC_HELP_STRING([--with-$1-dir=DIR],
+AS_HELP_STRING([--with-$1-dir=DIR],
               [use $1 library (and headers) below directory DIR (no default)]),
 [case "$withval" in
-    yes) AC_MSG_ERROR("option \"--with-$1-dir\" requires an argument")
+    yes) AC_MSG_ERROR([option "--with-$1-dir" requires an argument])
 	;;
-    no) AC_MSG_ERROR("option \"--with-$1-dir\" requires an argument")
+    no) AC_MSG_ERROR([option "--with-$1-dir" requires an argument])
 	;;
     *) UPNAME[_LIB_PATH]="$withval"
        UPNAME[_INCLUDE_PATH]="$withval"
@@ -175,11 +175,11 @@ dnl
 dnl Optionally use an alternate name (e.g. MesaGL instead of GL etc.)
 dnl
 AC_ARG_WITH($1-name,
-AC_HELP_STRING([--with-$1-name=NAME], [use NAME as the name of the $1 library (without leading "lib" prefix and trailing suffix). Default: "$2"]),
+AS_HELP_STRING([--with-$1-name=NAME], [use NAME as the name of the $1 library (without leading "lib" prefix and trailing suffix). Default: "$2"]),
 [case "$withval" in
-    yes) AC_MSG_ERROR("option \"--with-$1-name\" requires an argument")
+    yes) AC_MSG_ERROR([option "--with-$1-name" requires an argument])
 	;;
-    no) AC_MSG_ERROR("option \"--with-$1-name\" requires an argument")
+    no) AC_MSG_ERROR([option "--with-$1-name" requires an argument])
 	;;
     *) UPNAME[_NAME]="$withval"
 	;;
@@ -196,14 +196,14 @@ dnl location of library
 dnl
 AC_ARG_WITH($1-lib,
 m4_if($3,[],
-[AC_HELP_STRING([--with-$1-lib=DIR],
+[AS_HELP_STRING([--with-$1-lib=DIR],
                [use $1 library below directory DIR (default: EPREFIX/lib/)])],
-[AC_HELP_STRING([--with-$1-lib=DIR],
+[AS_HELP_STRING([--with-$1-lib=DIR],
                [use $1 library below directory DIR (default: $3)])]),
 [case "$withval" in
-    yes) AC_MSG_ERROR("option \"--with-$1-lib\" requires an argument")
+    yes) AC_MSG_ERROR([option "--with-$1-lib" requires an argument])
 	;;
-    no) AC_MSG_ERROR("option \"--with-$1-lib\" requires an argument")
+    no) AC_MSG_ERROR([option "--with-$1-lib" requires an argument])
 	;;
     *) UPNAME[_LIB_PATH]="$withval"
 	;;
@@ -277,7 +277,7 @@ else
     dnl  check for the header file
     dnl
     [gv_ac_]UPNAME[_save_CPPFLAGS]="$CPPFLAGS"
-    m4_define([gv_ac_inctemp],[m4_bpatsubst([gv_ac_$5],[[].-[]],_)])
+    m4_define([gv_ac_inctemp],[m4_bpatsubst([m4_bpatsubst([gv_ac_$5],-,_)],.,_)])
     unset gv_ac_inctemp
     for incdir in "${UPNAME[_INCLUDE_PATH]}"; do
       if test -n "`eval eval eval echo ${incdir}`"; then
@@ -285,7 +285,7 @@ else
       fi
       AC_CHECK_HEADERS($5,[gv_ac_inctemp="$5"])
       if ! test "${gv_ac_inctemp}" = "$5"; then
-	eval "[unset ac_cv_header_]m4_bpatsubst([$5],[[].-[]],_)"
+	eval "[unset ac_cv_header_]m4_bpatsubst([m4_bpatsubst([$5],-,_)],.,_)"
       else
      	break
       fi

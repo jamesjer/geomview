@@ -260,11 +260,7 @@ IOBFILE *iobfileopen(FILE *istream)
     /* If we have read(2) and write(2), then we disable stdio
      * completely and use the system calls directly.
      */
-#if SETVBUF_REVERSED
-    setvbuf(istream, _IONBF, NULL, 0);
-#else
     setvbuf(istream, NULL, _IONBF, 0);
-#endif
 #if HAVE_FCNTL
     iobf->fflags = fcntl(iobf->fd, F_GETFL);
     if (iobf->fflags != -1 && (iobf->fflags & o_nonblock)) {

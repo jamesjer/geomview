@@ -37,7 +37,7 @@ AC_DEFUN([GV_PATH_PROG],
 m4_if($#,1,
      [m4_define([PROG],[$1])],[m4_define([PROG],[$2])])
 AC_ARG_WITH($1,
-  AC_HELP_STRING([--with-$1=PROGRAM],
+  AS_HELP_STRING([--with-$1=PROGRAM],
 [Set PROGRAM to the name of the `$1' program (usually `PROG').
 (default: autodetected)]),
   [case "${withval}" in
@@ -79,7 +79,7 @@ AC_DEFUN([GV_CHECK_PROG],
 m4_if($2,[],
      [m4_define([PROG],[$1])],[m4_define([PROG],[$2])])
 AC_ARG_WITH($1,
-  AC_HELP_STRING([--with-$1=PROGRAM],
+  AS_HELP_STRING([--with-$1=PROGRAM],
 [Set PROGRAM to the name of the `$1' program (usually `PROG').
 (default: autodetected)]),
   [case "${withval}" in

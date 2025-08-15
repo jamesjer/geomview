@@ -354,15 +354,8 @@ LDEFINE(input_translator, LVOID,
 static void
 comm_sigchld(int sig)
 {
-#if HAVE_WAITPID
   int status;
   int pid = waitpid(-1, &status, WNOHANG);
-#elif HAVE_WAIT3
-  union wait status;
-  int pid = wait3(&status, WNOHANG|WUNTRACED, NULL);
-#else
-# error FIXME
-#endif
 
   if (WIFEXITED(status) || WIFSIGNALED(status)) {
     emodule *em = VVEC(uistate.emod, emodule);

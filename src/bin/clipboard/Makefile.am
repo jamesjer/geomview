@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes) $(MOTIFINCLUDE)
+AM_CPPFLAGS = $(default_includes) $(MOTIFINCLUDE)
 
 LDADD =  $(OOGLLIB) $(MOTIFUILIB) $(MOTIFLIBS) $(XMULIBS) $(XLIBS)
 

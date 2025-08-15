@@ -27,17 +27,17 @@ dnl distribution terms that you use for the rest of that program.
 AC_DEFUN([GV_INIT_GEOMVIEW],
 [
   AC_MSG_RESULT([configuring $PACKAGE_NAME $PACKAGE_VERSION])
-  AC_PREREQ(2.59)
+  AC_PREREQ([2.72])
   AC_CANONICAL_TARGET([])
   AM_MAINTAINER_MODE
   AM_INIT_AUTOMAKE([dist-bzip2 1.9])
-  AC_CONFIG_HEADER([config.h])
+  AC_CONFIG_HEADERS([config.h])
   AC_CONFIG_MACRO_DIR([m4])
 
   AC_REQUIRE([GEOMVIEW_SET_PREFIX])
 
   AC_ARG_WITH(geomview,
-    AC_HELP_STRING([--with-geomview=PROGRAM],
+    AS_HELP_STRING([--with-geomview=PROGRAM],
 [Set PROGRAM to the name of the Geomview executable, possibly
 including the full path to the executable. If not disabled by the
 `--disable-geomview-query' switch then the installed
@@ -60,8 +60,7 @@ directories to use. (default: autodetected)]),
 	exit 1
   fi
   AC_ARG_ENABLE([local-emodule],
-    AC_HELP_STRING([--enable-local-emodule],
-
+    AS_HELP_STRING([--enable-local-emodule],
 [Install the emodule definition into `${HOME}/.geomview-EMODULENAME';
 that file will contain the full path to the emodule binary. Otherwise
 the emodule definition will be installed under either the location
@@ -81,7 +80,7 @@ returned by `geomview --print-emodule-dir' (if
   AC_SUBST(LOCAL_EMODULE)
   
   AC_ARG_ENABLE([geomview-query],
-    AC_HELP_STRING([--disable-geomview-query],
+    AS_HELP_STRING([--disable-geomview-query],
 [Normally the installed version of the Geomview executable is queried
 about the location of the system-wide emodule definition files
 (usually `PREFIX/libexec/geomview/') by runnding the Geomview
@@ -183,7 +182,6 @@ Your version of Geomview seems to be $gv_major.$gv_minor.$gv_rev.
   AC_C_INLINE
   AC_C_BIGENDIAN
   AC_C_CONST
-  AC_HEADER_STDC
   AC_HEADER_STDBOOL
   AC_CHECK_HEADERS([limits.h stdlib.h sys/param.h sys/types.h stdio.h math.h])
   AC_CHECK_LIB([m],[sqrt])
@@ -238,14 +236,9 @@ typedef bool _Bool;
 # endif
 #endif
 
-#if HAVE_ISO_C99
 # define VARARRAY(name, type, len) type name[len]
 # define VARARRAY2(name, type, len1, len2) type name[len1][len2]
-#else
-# define VARARRAY(name, type, len) type *name = alloca((len)*sizeof(type))
-# define VARARRAY2(name, type, len1, len2) \
-  type (*name)[len2] = alloca((len1)*(len2)*sizeof(type))
-#endif])
+])
 ])
 
 AC_DEFUN([_GV_PRINT_EXPAND],

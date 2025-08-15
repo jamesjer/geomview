@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 EXTRA_DIST = Headers\
  hg4.h hline3.h hplane3.h hpoint3.h line.h plane.h point.h tolerance.h
 

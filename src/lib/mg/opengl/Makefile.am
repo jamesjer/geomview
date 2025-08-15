@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes) $(OPENGLINCLUDE)
+AM_CPPFLAGS = $(default_includes) $(OPENGLINCLUDE)
 EXTRA_DIST = Headers
 
 noinst_LTLIBRARIES = libmgopengl.la

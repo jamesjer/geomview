@@ -2,7 +2,7 @@ dnl
 dnl
 dnl GEOM_LOG_MSG(MESSAGE)
 define(GEOM_LOG_MSG,
-[echo "configure:__oline__: $1" >&AC_FD_CC])
+[echo "configure:__oline__: $1" >&AS_MESSAGE_LOG_FD])
 dnl 
 dnl GEOM_FIND_L_OPTION(LIB, FUNC, DIRS, OTHERLIBS)
 dnl 
@@ -75,10 +75,10 @@ for geom_z in $geom_dirs ; do
   test -n "$geom_z" && geom_i_option="-I$geom_z"
   CPPFLAGS="$geom_i_option $geom_saved_CPPFLAGS"
   GEOM_LOG_MSG([checking for $geom_header with $geom_i_option])
-  AC_TRY_CPP([ #include <$geom_header> ],
+  AC_PREPROC_IFELSE([AC_LANG_SOURCE([[ #include <$geom_header> ]])],
 	     [ GEOM_I_OPTION="$geom_i_option"
-               break ]
-	     )
+               break ],
+	     [])
 done
 CPPFLAGS=$geom_saved_CPPFLAGS
 #if test "$GEOM_I_OPTION" = "0" ; then
@@ -130,7 +130,7 @@ dnl
 AC_DEFUN([GEOM_AC_PROG_CXX_WORKS],
 [AC_MSG_CHECKING([whether the C++ compiler ($CXX $CXXFLAGS $LDFLAGS) works])
 AC_LANG_SAVE
-AC_LANG_CPLUSPLUS
+AC_LANG([C++])
 AC_TRY_COMPILER([int main(){return(0);}], ac_cv_prog_cxx_works, ac_cv_prog_cxx_cross)
 AC_LANG_RESTORE
 AC_MSG_RESULT($ac_cv_prog_cxx_works)
@@ -151,7 +151,7 @@ else
 
   AC_PROG_CXX_GNU
 
-  if test $ac_cv_prog_gxx = yes; then
+  if test $ac_cv_cxx_compiler_gnu = yes; then
     GXX=yes
   else
     GXX=

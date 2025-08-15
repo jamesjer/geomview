@@ -1,11 +1,11 @@
-AC_PREREQ(2.59)
-AC_INIT(geomview, [1.9.5], Claus-Justus Heine <Claus.Heine@Mathematik.Uni-Freiburg.DE>)
+AC_PREREQ([2.72])
+AC_INIT([geomview],[1.9.5],[Claus-Justus Heine <Claus.Heine@Mathematik.Uni-Freiburg.DE>])
 AC_MSG_RESULT([configuring $PACKAGE_NAME $PACKAGE_VERSION])
 AC_CANONICAL_TARGET([])
 AM_INIT_AUTOMAKE([dist-bzip2 1.10])
 AM_MAINTAINER_MODE
 AC_CONFIG_SRCDIR([src/bin/geomview/x11/gvmain.c])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_SUBST(abs_top_builddir)
 AC_SUBST(abs_top_srcdir)
@@ -99,14 +99,8 @@ typedef bool _Bool;
 # endif
 #endif
 
-#if HAVE_ISO_C99
 # define VARARRAY(name, type, len) type name[len]
 # define VARARRAY2(name, type, len1, len2) type name[len1][len2]
-#else
-# define VARARRAY(name, type, len) type *name = alloca((len)*sizeof(type))
-# define VARARRAY2(name, type, len1, len2) \
-  type (*name)[len2] = alloca((len1)*(len2)*sizeof(type))
-#endif
 
 #if 0
 #ifdef HAVE_SYS_TYPES_H
@@ -172,14 +166,13 @@ else
   HAVE_CXX=true
 fi
 AC_PROG_CC
-GEOMVIEW_ISO_C99_CHECK
 AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_CPP
-AC_PROG_LEX
+AC_PROG_LEX([noyywrap])
 AC_PROG_YACC
 AM_CONDITIONAL([INSTALL_LIBGEOMVIEW],[true || test  "z${enable_shared}" = "zyes"])
-AC_PROG_LIBTOOL
+LT_INIT
 # Search path for "find" executable.  Use "find" unless
 # the bogus MS Windows version is first on the path, in 
 # which case we use the full pathname.  This AC_CHECK_PROG
@@ -229,7 +222,6 @@ AC_CHECK_LIB([m], [cos])
 # Checks for header files.
 AC_FUNC_ALLOCA
 AC_HEADER_DIRENT
-AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 
 AC_CHECK_HEADERS([errno.h fcntl.h getopt.h inttypes.h libgen.h libintl.h \
@@ -243,7 +235,6 @@ AC_C_CONST
 AC_HEADER_STDBOOL
 AC_C_INLINE
 AC_TYPE_SIZE_T
-AC_HEADER_TIME
 AC_STRUCT_TM
 AC_LANG_PUSH([C])
 AC_MSG_CHECKING([for M_PI])
@@ -274,24 +265,22 @@ AC_FUNC_OBSTACK
 #AC_FUNC_MALLOC  It is ok when malloc(0) returns NULL. Why not?
 #AC_FUNC_REALLOC It is ok when realloc(0, 0) returns NULL. Why not?
 AC_FUNC_SETPGRP
-AC_FUNC_SETVBUF_REVERSED
-AC_TYPE_SIGNAL
 AC_FUNC_STAT
 AC_FUNC_LSTAT
 #AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
 AC_FUNC_STRTOD
 AC_FUNC_VPRINTF
-AC_FUNC_WAIT3
 AC_CHECK_FUNCS([fmemopen],
   [AC_CHECK_DECLS([fmemopen])],
   [AC_LIBOBJ([fmemopen])])
 AC_REPLACE_FUNCS([acosh popen putenv strcasecmp strdup strncasecmp lstat stat])
-AC_CHECK_DECLS([putenv, strdup, acosh, strcasecmp, strncasecmp])
+AC_CHECK_DECLS([putenv, strdup, strcasecmp, strncasecmp])
+AC_DEFINE(HAVE_DECL_ACOSH, 1, [Define to 1 if you have the 'acosh' function.])
 AC_CHECK_FUNCS([fstat])
 AC_CHECK_FUNCS([vfscanf])
 AC_FUNC_SELECT_ARGTYPES
 AC_CHECK_FUNC([select],
-  [AC_DEFINE(HAVE_SELECT, 1, [Define to 1 if you have the `select' function.])
+  [AC_DEFINE(HAVE_SELECT, 1, [Define to 1 if you have the 'select' function.])
 AC_CHECK_DECLS([select],[],[],[
 #if HAVE_SYS_SELECT_H
 # include <sys/select.h>
@@ -510,7 +499,7 @@ Default to int])
 # Search for necessary programs.
 
 AC_ARG_WITH(htmlbrowser,
-  AC_HELP_STRING([--with-htmlbrowser=BROWSER],
+  AS_HELP_STRING([--with-htmlbrowser=BROWSER],
 [Use BROWSER for viewing the HTML version of the manual when the
 `Manual (HTML)' menu item is selected. This setting can be changed at
 runtime through the '(ui-html-browser BROWSER)' GCL-command.
@@ -525,7 +514,7 @@ if ! test "${HTMLBROWSER}" = "${DFLTHTMLBROWSER}"; then
 fi
 
 AC_ARG_WITH(pdfviewer,
-  AC_HELP_STRING([--with-pdfviewer=VIEWER],
+  AS_HELP_STRING([--with-pdfviewer=VIEWER],
 [Use BROWSER for viewing the PDF version of the manual when the
 `Manual (PDF)' menu item is selected. This setting can be changed at
 runtime through the '(ui-pdf-viewer VIEWER)' GCL-command.
@@ -545,13 +534,13 @@ fi
 
 # If --with-motif=DIR was specified, set MOTIF_DIR to DIR
 AC_ARG_WITH(motif,
-  AC_HELP_STRING([--with-motif=DIR],
+  AS_HELP_STRING([--with-motif=DIR],
 [Set DIR to motif installation prefix. It is not possible to compile Geomview
 without Motif.]),
   [MOTIF_DIR=$withval])
 
 AC_ARG_WITH(opengl,
-  AC_HELP_STRING([--with-opengl=DIR],
+  AS_HELP_STRING([--with-opengl=DIR],
 [Set DIR to opengl installation prefix. OpenGL is optional. The default is to
 auto-detect OpenGL and use it if available. Use `--without-opengl' to disable
 OpenGL.]),
@@ -833,7 +822,7 @@ AC_ARG_ENABLE(d1debug,
               )
 
 AC_ARG_ENABLE([motion-averaging],
-  AC_HELP_STRING([--enable-motion-averaging],
+  AS_HELP_STRING([--enable-motion-averaging],
                  [turn on experimental motion averaging (default is off)]),
   [if test "$enableval" = "no" ; then
      AC_DEFINE(EXPERIMENTAL_MOTION_AVERAGING, 0,
@@ -844,7 +833,7 @@ AC_ARG_ENABLE([motion-averaging],
   [AC_DEFINE(EXPERIMENTAL_MOTION_AVERAGING, 0)])
 
 dnl AC_ARG_ENABLE([bezier-spheres],
-dnl   AC_HELP_STRING([--disable-bezier-spheres],[Use a mesh based on a polar
+dnl   AS_HELP_STRING([--disable-bezier-spheres],[Use a mesh based on a polar
 dnl co-ordinate system instead of using Bezier-splines to approximate a sphere.
 dnl This simplifies drawing textured spheres if the texture co-ordinates live
 dnl in a polar co-ordinate system, e.g. when trying to paste a world-map onto
@@ -878,6 +867,7 @@ else
   return 0;])],[AC_MSG_RESULT([yes])
 AC_DEFINE(POPEN_ACCEPTS_RB, 1,
 [Define to 1 if popen(CMD, MODE) accepts "rb" for MODE])],
+[AC_MSG_RESULT([no])],
 [AC_MSG_RESULT([no])])
 AC_LANG_POP([C])
 

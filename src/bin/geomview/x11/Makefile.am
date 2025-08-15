@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes) $(MOTIFINCLUDE) $(OPENGLINCLUDE) $(X_CFLAGS) -I..
+AM_CPPFLAGS = $(default_includes) $(MOTIFINCLUDE) $(OPENGLINCLUDE) $(X_CFLAGS) -I..
 SUBDIRS = bitmaps interface
 
 gvx_LDADD = ../common/libgvcommon.a buildinfo.o \

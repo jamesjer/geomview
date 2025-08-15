@@ -1,4 +1,4 @@
-INCLUDES = @default_includes@ -I$(srcdir)/lib
+AM_CPPFLAGS = @default_includes@ -I$(srcdir)/lib
 
 SUBDIRS = lib
 

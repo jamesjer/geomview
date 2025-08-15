@@ -1,4 +1,4 @@
-INCLUDES = @default_includes@
+AM_CPPFLAGS = @default_includes@
 
 bin_PROGRAMS = math2oogl
 man_MANS = math2oogl.1gv

@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 
 man_MANS = anytopl.3gv plcombine.3gv plconsol.3gv
 

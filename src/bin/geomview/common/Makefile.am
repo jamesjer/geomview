@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes) -I..
+AM_CPPFLAGS = $(default_includes) -I..
 
 EXTRA_DIST = Headers
 

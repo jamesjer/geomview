@@ -1,4 +1,4 @@
-INCLUDES = @default_includes@
+AM_CPPFLAGS = @default_includes@
 
 bin_PROGRAMS = oogl2rib
 man_MANS = oogl2rib.1gv

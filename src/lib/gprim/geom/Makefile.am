@@ -2,7 +2,7 @@
 # $(OPENGLINCLUDE) is needed for bsptree.c to get the correct
 # location of the glu.h header file.
 #
-INCLUDES = $(default_includes) $(OPENGLINCLUDE)
+AM_CPPFLAGS = $(default_includes) $(OPENGLINCLUDE)
 EXTRA_DIST = Headers
 
 noinst_LTLIBRARIES = libgeom.la

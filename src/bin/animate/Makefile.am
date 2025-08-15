@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes) $(MOTIFINCLUDE)
+AM_CPPFLAGS = $(default_includes) $(MOTIFINCLUDE)
 SUBDIRS = interface
 
 EXTRA_DIST = animate.1gv

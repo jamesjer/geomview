@@ -1,4 +1,4 @@
-INCLUDES = $(default_includes)
+AM_CPPFLAGS = $(default_includes)
 EXTRA_DIST = Headers hpointn.h
 
 #noinst_LTLIBRARIES = libhpointn.la
