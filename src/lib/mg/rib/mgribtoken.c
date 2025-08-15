@@ -191,7 +191,7 @@ void mrti_delete(TokenBuffer *tkbuf)
 	if (_tokenbuffer == tkbuf) {
 	    _tokenbuffer = NULL;
 	}
-	memset(tkbuf, 0, sizeof(tkbuf));
+	memset(tkbuf, 0, sizeof(*tkbuf));
     }
 }
 
