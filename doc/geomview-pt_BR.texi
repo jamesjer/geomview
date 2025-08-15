@@ -80,7 +80,7 @@ Center na Universidade de Minesota (EUA), come@,{c}ando em 1991.  O Geomview pod
 como um visualizador independente para objetos est@'{a}ticos ou como um mecanismo de visualiza@,{c}@~{a}o para
 outros programas que produzem dinamicamente mudan@,{c}as geom@'{e}tricas.  Geomview roda sobre
 muitos tipos de computadores Unix, incluindo Linux, SGI, Sun, e HP. Geomview tamb@'{e}m
-executa com Cygwin. Esse manual descreve Geomview em sua vers@~{a}o 1.9. @refill
+executa com Cygwin. Esse manual descreve Geomview em sua vers@~{a}o 1.9.
 
 Geomview @'{e} um @dfn{software} livre, dispon@'{i}vel sob os termos da Licen@,{c}a P@'{u}blica Geral 
 Menor do GNU ; veja @ref{Copiando} para detalhes.
@@ -1436,7 +1436,6 @@ desses para navegar entre os arquivos naquele diret@'{o}rio.
 Para selecionar um arquivo, duplo-clique sobre o seu nome no navegador no canto superior direito,
 ou clique sobre o seu nome e pressione a tecla @key{Enter}, ou ainda digite o nome do arquivo
 dentro da caixa de texto na parte inferior do navegador e pressione a tecla @key{Enter}.
-@refill
 
 Se o arquivo selecionado contiver dados geom@'{e}tricos OOGL, esse arquivo ir@'{a} ser adicionado ao
 navegador de alvos (@emph{Targets}) do Geomview.  Se esse arquivo contiver comandos GCL em lugar de conter dados geom@'{e}tricos OOGL,
@@ -1487,7 +1486,6 @@ Os comandos GCL @code{load}, @code{geometry}, @code{new-geometry},
 e @code{read} permitem a voc@^{e} chamar um objeto dentro do Geomview;
 veja @ref{GCL}. Veja @ref{load, @code{(load @dots{})}}. Veja @ref{new-geometry,
 @code{(new-geometry @dots{})}}. Veja @ref{read, @code{(read @dots{})}}.
-@refill
 
 @end table
 
@@ -1501,7 +1499,7 @@ v@^{o}o da c@^{a}mera (@emph{Cam Fly}), zoom da c@^{a}mera (@emph{Cam Zoom}), ho
 @'{o}rbita de c@^{a}mera (@emph{Cam Orbit}).  O painel de ferramentas tem um bot@~{a}o para cada um desses
 modos; para trocar os modos, clique sobre o bot@~{a}o correspondente.  Voc@^{e} pode tamb@'{e}m
 selecionar um novo modo atrav@'{e}s do navegador de modos de movimento (@emph{Motion Mode}) no
-painel principal (@emph{Main}).@refill
+painel principal (@emph{Main}).
 
 Essa se@,{c}@~{a}o descreve a intera@,{c}@~{a}o b@'{a}sica com o mouse.  Para detalhes,
 veja @ref{Comandos}.
@@ -3473,7 +3471,7 @@ V@'{e}rtices s@~{a}o quadridimensionais, cada v@'{e}rtice consiste em 4 valores 
 A malha @'{e} ajustada na dire@,{c}@~{a}o u, de forma que o 
 (0,v)'@'{e}simo v@'{e}rtice est@'{a} conectado ao (@var{Nu}-1,v)'@'{e}simo para todo v.
 @item v
-A malha @'{e} ajustada na dire@,{c}@~{a}o v, de forma que o (u,0)'�esimo v@'{e}rtice est@'{a}
+A malha @'{e} ajustada na dire@,{c}@~{a}o v, de forma que o (u,0)'´esimo v@'{e}rtice est@'{a}
 conectado ao (u,@var{Nv}-1)'@'{e}simo para todo u.  Dessa forma uma malha
 u-ajustada ou v-ajustada @'{e} topologicamente um cilindro, enquanto uma malha uv-ajustada @'{e} um
 toro.
@@ -3794,7 +3792,7 @@ representar um ponto.
 
 Um arquivo @code{VECT} inicia-se com a palavra chave @code{VECT} ou com @code{4VECT}
 e tr@^{e}s inteiros: @var{NLinhas}, @var{NV@'{e}rtices}, e @var{NCores}.
-Aqui @var{NLinhas} @'{e} o n�umero de linhas poligonais no arquivo,
+Aqui @var{NLinhas} @'{e} o n´umero de linhas poligonais no arquivo,
 @var{NV@'{e}rtices} o n@'{u}mero total de vertices v@'{e}rtices, e @var{NCores} o
 n@'{u}mero de cores como explanado abaixo.
 
@@ -4371,10 +4369,10 @@ escolhas alternativas.
 @menu
 * Objetos de aparencia::        Objetos de apar@^{e}ncia.
 * image::                       Objetos de imagem.
-* transform::                   Matrizes de transforma@,{c}@~{a}o.
+* transform object::            Matrizes de transforma@,{c}@~{a}o.
 * ntransform::                  Matrizes de Transforma@,{c}@~{a}o N-dimensional.
 * Objeto camera::               C@^{a}meras.
-* window::                      Janelas.
+* window object::               Janelas.
 @end menu
 
 @comment ----------------------------------------------------------------
@@ -4385,7 +4383,7 @@ Apar@^{e}ncias s@~{a}o objetos OOGL com caracter@'{i}sticas pr@'{o}prias, que si
 outras se@,{c}@~{o}es manuseado detalhes de
 apar@^{e}ncia. Veja @ref{Aparencias}.
 
-@node image, transform, Objetos de aparencia, Objetos nao-geometricos
+@node image, transform object, Objetos de aparencia, Objetos nao-geometricos
 @subsection Objetos de imagem
 
 Objetos de imagem s@~{a}o usados para especificar dados de pixmap ou para texturas
@@ -4647,7 +4645,7 @@ canais RGB s@~{a}o initializados para 0, e um canal alfa omitido @'{e}
 inicializado para @code{maxval}, i.e. omitindo os dados do canal alfa para
 uma imagem RGBA @'{e} apenas o mesmo que definir uma imagem RGB.
 
-@node transform, ntransform, image, Objetos nao-geometricos
+@node transform object, ntransform, image, Objetos nao-geometricos
 @subsection Objetos de Transforma@,{c}@~{a}o
 
 Onde uma matriz simples 4x4 @'{e} esperada -- como no campo de @code{transform}
@@ -4726,7 +4724,7 @@ Alguns exemplos, em contextos onde eles podem ser usados:
 @end example
 
 @comment ----------------------------------------------------------------
-@node ntransform, Objeto camera, transform, Objetos nao-geometricos
+@node ntransform, Objeto camera, transform object, Objetos nao-geometricos
 @subsection Objetos ND-Transform
 
 Onde -- no contexto de visualiza@,{c}@~{a}o NDimensional -- uma matriz simples (N+1)x(N+1) @'{e}
@@ -4823,7 +4821,7 @@ Alguns exemplos, em contextos onde eles possivelmente podem ser usados:
 @end example
 
 @comment ----------------------------------------------------------------
-@node Objeto camera, window, ntransform, Objetos nao-geometricos
+@node Objeto camera, window object, ntransform, Objetos nao-geometricos
 @subsection c@^{a}mera
 
 Um objeto c@^{a}mera especifica as seguintes propriedades de uma c@^{a}mera:
@@ -4948,7 +4946,7 @@ A sintaxe para uma c@^{a}mera @'{e}:
 
 
 @comment ----------------------------------------------------------------
-@node window,  , Objeto camera, Objetos nao-geometricos
+@node window object,  , Objeto camera, Objetos nao-geometricos
 @subsection window
 
 Um objeto window especifica tamanho, posi@,{c}@~{a}o, e outras informa@,{c}@~{o}es
@@ -6531,7 +6529,7 @@ arg2 @dots{} )}, onde @code{func} @'{e} o nome da fun@,{c}@`{a}o e @code{arg1},
 @c @table @code
 
 @menu
-* shell::                       @code{(! COMANDOSHELL)}
+* shell-synonym::               @code{(! COMANDOSHELL)}
 * lt::                          @code{(< EXPR1 EXPR2)}
 * eq::                          @code{(= EXPR1 EXPR2)}
 * gt::                          @code{(> EXPR1 EXPR2)}
@@ -6539,9 +6537,9 @@ arg2 @dots{} )}, onde @code{func} @'{e} o nome da fun@,{c}@`{a}o e @code{arg1},
 * div::                         @code{(/ EXPR1 EXPR2)}
 * add::                         @code{(+ EXPR1 EXPR2)}
 * sub::                         @code{(- EXPR1 EXOR2)}
-* help::                        @code{(? COMANDO)}
-* morehelp::                    @code{(?? COMANDO)}
-* emodule-run::                 @code{(| NOME)}
+* help-synonym::                @code{(? COMANDO)}
+* morehelp-synonym::            @code{(?? COMANDO)}
+* emodule-run-synonym::         @code{(| NOME)}
 * all::                         @code{(all objetogeom@'{e}trico|c@^{a}mera|emodule)}
 * and::                         @code{(and EXPR1 EXPR2)}
 * ap-override::                 @code{(ap-override [on|off])}
@@ -6571,7 +6569,7 @@ arg2 @dots{} )}, onde @code{func} @'{e} o nome da fun@,{c}@`{a}o e @code{arg1},
 * echo::                        @code{(echo @dots{})}
 * emodule-clear::               @code{(emodule-clear)}
 * emodule-define::              @code{(emodule-define NOME COMANDOSHELL @dots{})}
-* emodule-defined::             @code{(emodule-defined @code{NOMEM�DULO})}
+* emodule-defined::             @code{(emodule-defined @code{NOMEMÓDULO})}
 * emodule-isrunning::           @code{(emodule-isrunning NOME)}
 * emodule-path::                @code{(emodule-path)}
 * emodule-run::                 @code{(| NOME)}
@@ -6700,7 +6698,7 @@ arg2 @dots{} )}, onde @code{func} @'{e} o nome da fun@,{c}@`{a}o e @code{arg1},
 
 Nota do tradutor: os termos ``express@~{a}o lambda" e ``express@~{a}o S" s@~{a}o espec@'{i}ficos da linguagem de programa@,{c}@~{a}o Lisp.
 
-@node shell, lt, GCL Reference, GCL Reference
+@node shell-synonym, lt, GCL Reference, GCL Reference
 @subsection !
 @findex !, shell
 @findex shell, !
@@ -6709,7 +6707,7 @@ Nota do tradutor: os termos ``express@~{a}o lambda" e ``express@~{a}o S" s@~{a}o
 @'{e} um sin@^{o}nimo de @code{shell}. Veja @ref{shell}.
 @end table
 
-@node lt, eq, shell, GCL Reference
+@node lt, eq, shell-synonym, GCL Reference
 @subsection <
 @findex <
 @table @code
@@ -6760,7 +6758,7 @@ Divide @var{EXPR1} por @var{EXPR2} e retorna o resultado.
 Adiciona @var{EXPR1} a @var{EXPR2} e retorna o resultado.
 @end table
 
-@node sub, help, add, GCL Reference
+@node sub, help-synonym, add, GCL Reference
 @subsection -
 @findex -
 @table @code
@@ -6768,7 +6766,7 @@ Adiciona @var{EXPR1} a @var{EXPR2} e retorna o resultado.
 Subtrai @var{EXPR2} da @var{EXPR1} e retorna o resultado.
 @end table
 
-@node help, morehelp, sub, GCL Reference
+@node help-synonym, morehelp-synonym, sub, GCL Reference
 @subsection ?
 @findex ?
 @table @code
@@ -6779,7 +6777,7 @@ Ajuda de comando em uma linha; lista nomes somente se multiplos comandos coincid
 @code{?} @'{e} um sin@^{o}nimo para @ref{help, @code{(help @dots{})}}
 @end table
 
-@node morehelp, emodule-run, help, GCL Reference
+@node morehelp-synonym, emodule-run-synonym, help-synonym, GCL Reference
 @subsection ??
 @findex ??
 @table @code
@@ -6789,7 +6787,7 @@ Mostra mais informa@,{c}@~{a}o que @code{(? comando)}. @code{??} @'{e} um sin@^{
 para @ref{morehelp, @code{morehelp}}.
 @end table
 
-@node emodule-run, all, morehelp, GCL Reference
+@node emodule-run-synonym, all, morehelp-synonym, GCL Reference
 @subsection |
 @findex |, emodule-run
 @findex emodule-run, |
@@ -6798,7 +6796,7 @@ para @ref{morehelp, @code{morehelp}}.
 @code{|} @'{e}m um sin@^{o}nimo para @code{emodule-run}.
 @end table
 
-@node all, and, emodule-run, GCL Reference
+@node all, and, emodule-run-synonym, GCL Reference
 @subsection all
 @findex all
 @table @code
@@ -7256,7 +7254,7 @@ Alguns termos n@~{a}o s@~{a}o de significado t@~{a}o @'{o}bvio.
 @item
 @code{"[f] Cam Fly"} Voo de c@^{a}mera
 @item
-@code{"[o] Cam Orbit"} Órbita de c@^{a}mera
+@code{"[o] Cam Orbit"} Ãrbita de c@^{a}mera
 @item
 @code{"[le] Edit Lights"} Editar luzes
 @end enumerate
@@ -7376,7 +7374,7 @@ nome de um controlador n@~{a}o global, i.e. um que n@~{a}o tenha sido criado por
 @findex help
 @table @code
 @item (help [comando])
-O comando pode incluir @code{*}s como caracteres coringa; veja tamb@'{e}m @ref{help,
+O comando pode incluir @code{*}s como caracteres coringa; veja tamb@'{e}m @ref{help-synonym,
 @code{(?? @dots{})}}  Ajuda de comando em uma linha; lista nomes somente se multiplos
 comandos coincidirem.
 @end table
@@ -8853,7 +8851,7 @@ modelo de bola conformal.
 
 No espa@,{c}o esf@'{e}rico, o modelo @emph{Projective} fornece uma vis@~{a}o de metade
 da esfera tridimensional embutida no espa@,{c}o de Euclides tridimensional.  Movimentos esf@'{e}ricos fornecem
-sobem para transforma@,{c}òes projetivas no modelo @emph{Projective}, e
+sobem para transforma@,{c}Ã²es projetivas no modelo @emph{Projective}, e
 para transforma@,{c}@~{o}es de 
 @tex
 M\"{o}bius
@@ -8920,7 +8918,7 @@ no formato OOGL.  Para us@'{a}-lo, digite o comando @code{<< OOGL.m} para
 Mathematica carregar o pacote.  O
 comando @code{WriteOOGL[@var{arquivo},@var{nomegrafico}]} escreve uma descri@,{c}@~{a}o
 OOGL do bojeto gr@'{a}fico 3D @var{nomegrafico} para o arquivo chamado
-@var{arquivo}.@refill
+@var{arquivo}.
 
 Esse pacote tamb@'{e}m fornece o comando @code{Geomview} que envia um
 objeto gr@'{a}fico 3D para o Geomview.  A primeira vez que voc@^{e} usa o comando
@@ -9089,7 +9087,7 @@ para renderiza@,{c}@~{a}o do objeto geom@'{e}trico fornecido, usando uma posi@,{
 e o sombreador ``plastic''. Em uma janela de shell, digite @code{render
 cube.ri}b paa gerar o arquivo de imagem @file{mma.tiff}. Certamente, voc@^{e}
 precisa ter o RenderMan instalado para o comando funcionar. Um atalho para renderizar
-a partir de dentro do Mathematica @'{e} @code{WriteRIB["!render", algumacoisa]}.@refill
+a partir de dentro do Mathematica @'{e} @code{WriteRIB["!render", algumacoisa]}.
 
 @code{WriteRI}b trabalha primeiramente convertendo o objeto gr@'{a}fico do
 Mathematicao para o formato OOGL usando @code{WriteOOGL} e ent@~{a}o chamando um o programa
@@ -9178,11 +9176,11 @@ In[3] := Geomview[%3, DisplayHost->"riemann"]
 @end example
 @noindent
 O comando acima mostra o gr@'{a}fico @code{%3} no computador remoto chamado
-@code{riemann}.@refill
+@code{riemann}.
 
 @code{Geomview} reconhece a sequ@^{e}ncia de caracteres @code{"local"} como um valor para
 @code{$DisplayHost}; faz com que os gr@'{a}ficos sejam mostrados na m@'{a}quina
-local.@refill
+local.
 
 Al@'{e}m do nome da m@'{a}quina que voc@^{e} pode deseja executar Geomview
 , @code{Geomview} precisa saber o tipo daquela m@'{a}quina (o ajuste
@@ -9191,7 +9189,7 @@ Por padr@~{a}o, @code{Geomview} assume que @'{e} do mesmo tipo de
 computador que voc@^{e} est@'{a} executando o Mathematica.  A op@,{c}@~{a}o
 @code{MachType} permite a voc@^{e} explicitamente especificar o tipo do computador
 @code{DisplayHost}; deve ser um entre as sequ@^{e}ncias de caracteres @code{"sgi"} ou
-@code{"next"} ou @code{"x11"}.@refill
+@code{"next"} ou @code{"x11"}.
 
 Voc@^{e} pode usar @code{SetOptions} para mudar o @code{DisplayHost} padr@~{a}o
 e a @code{MachType} padr@~{a}o.  Por exemplo,
@@ -9200,7 +9198,7 @@ In[4] := SetOptions[Geomview, DisplayHost->"riemann", MachType->"sgi"]
 @end example
 @noindent
 faz com que @code{Geomview} execute o Geomview em uma esta@,{c}@~{a}o de trabalho SGI chamada
-@code{riemann}.@refill
+@code{riemann}.
 
 @comment ----------------------------------------------------------------
 @node Chunks,  , Networked Geomview, Remote Display
@@ -9211,7 +9209,7 @@ Mathematica em um computador que n@~{a}o tem Geomview instalado.
 @code{WriteChunk[@var{nomearquivo},
 @var{nomegrafico}]} gera um arquivo chamado @var{nomearquivo} que cont@'{e}m o
 objeto gr@'{a}fico @var{nomegrafico} no formato aceito pelo
-@file{math2oogl}.@refill
+@file{math2oogl}.
 
 Voc@^{e} pode transferir aquele arquivo para um computador que tem Geomview instalado
 nele e ent@~{a}o usar os programas @file{math2oogl}, @file{oogl2ri}b, e
@@ -9284,7 +9282,7 @@ Nos comandos @code{WriteOOGL} e @code{WriteRI}b, nome de arquivo pode
 ou ser uma sequ@^{e}ncia de caracteres contendo um nome de arquivo, um objeto @code{OutputStream},
 ou uma sequ@^{e}ncia de caracteres iniciando com uma @code{!} para enviar a sa@'{i}da para um comando.
 Objeto pode ser um objeto @code{Graphics3D}, um objeto
-@code{SurfaceGraphics}, ou uma lista desse.@refill
+@code{SurfaceGraphics}, ou uma lista desse.
 
 O pacote trabalha melhor com o Mathematica 2.0 ou mais recente.  Com a vers@~{a}o 1.2,
 o visualizador Geomview funciona somente na m@'{a}quina local. 
